@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "1096465139471",
+    "firebase_url": "https://fitness-chat.firebaseio.com",
+    "project_id": "fitness-chat",
+    "storage_bucket": "fitness-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096465139471:android:b5d75907de594a2d",
+        "android_client_info": {
+          "package_name": "com.google.firebase.codelab.friendlychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096465139471-pb0d38eq20mran7h36p3ta5olc72r0qj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.codelab.friendlychat",
+            "certificate_hash": "137CDBCD14A00B7A99D4F72062277B4171FF5D5B"
+          }
+        },
+        {
+          "client_id": "1096465139471-ne9gufqh704uqgprpjbuvkc6vnkho3vs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.codelab.friendlychat",
+            "certificate_hash": "6257A4FD18C2448C63E01E8BCEC7520FFD926B36"
+          }
+        },
+        {
+          "client_id": "1096465139471-8jfenv88v176co9egnkot09cbf1m28kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUf7Hsp0CaCS-Lf3I_eizZ2iMzs4aqG7Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096465139471-8jfenv88v176co9egnkot09cbf1m28kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

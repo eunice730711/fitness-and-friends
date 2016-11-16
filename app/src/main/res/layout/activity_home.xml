@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    tools:context="com.google.firebase.codelab.friendlychat.Home">
+
+
+    <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    tools:ignore="UselessParent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true">
+
+    <Button
+        android:text="@string/home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/buttonHome"
+        android:textStyle="normal|bold"
+        android:textColor="#1e065b"
+        android:textSize="20sp"
+        android:background="#ffffff"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:layout_weight="1"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:text="@string/schedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/buttonSchedule"
+        android:textColor="#454447"
+        android:textSize="20sp"
+        android:background="#ffffff"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:layout_weight="1"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:text="@string/talk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/buttonTalk"
+        android:textColor="#454447"
+        android:textSize="20sp"
+        android:background="#ffffff"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:layout_weight="1"
+        tools:ignore="ButtonStyle" />
+</LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+
+
+
+</RelativeLayout>
+
+

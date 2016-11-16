@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:text="Time"
+            android:layout_height="36dp"
+            android:id="@+id/textView_1"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_width="123dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=""
+            android:ems="10"
+            android:id="@+id/Edit_Time" />
+
+        <TextView
+            android:text="Position"
+            android:layout_width="123dp"
+            android:layout_height="36dp"
+            android:id="@+id/textView_2"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_weight="0.00" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=""
+            android:ems="10"
+            android:id="@+id/Edit_Pos" />
+
+        <TextView
+            android:text="Type"
+            android:layout_height="36dp"
+            android:id="@+id/textView_3"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_width="123dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=""
+            android:ems="10"
+            android:id="@+id/Edit_Type" />
+
+
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,1 +1,1 @@
-# fitness-and-friends
+# fitness_friends
