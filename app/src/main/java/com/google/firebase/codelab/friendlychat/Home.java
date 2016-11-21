@@ -42,6 +42,29 @@ public class Home extends AppCompatActivity {
                 Home.this.finish();
             }
         });
+        //  the activity for setting userprofile and requesting friend by id
+        Button btn_text = (Button) findViewById(R.id.btn_test);
+        btn_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent();
+                intent2.setClass(Home.this, SearchUser.class);
+                startActivity(intent2);
+                Home.this.finish();
+            }
+        });
+
+
+        Button btn_notification = (Button) findViewById(R.id.btn_notification);
+        btn_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent();
+                intent2.setClass(Home.this, Notification.class);
+                startActivity(intent2);
+                Home.this.finish();
+            }
+        });
 
     }
 }

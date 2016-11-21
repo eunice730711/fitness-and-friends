@@ -8,23 +8,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/N1">
+
         <!-- android:theme="@style/AppTheme"> -->
 
         <activity android:name=".SignInActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Home" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -46,7 +47,13 @@
         <activity android:name=".scheduleChose" />
         <activity android:name=".scheduleRunDay" />
         <activity android:name=".scheduleRunLevel" />
-        <activity android:name=".scheduleRunMedDistance"></activity>
+        <activity android:name=".scheduleRunMedDistance" />
+        <activity android:name=".SearchUser" />
+        <activity android:name=".Notification" />
+        <activity android:name=".item_notificaion" />
+        <activity android:name=".item_notification" />
+        <activity android:name=".item_requestFriend" />
+        <activity android:name=".search"></activity>
     </application>
 
 </manifest>

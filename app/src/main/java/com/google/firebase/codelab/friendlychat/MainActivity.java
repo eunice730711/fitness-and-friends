@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements
                 }
             }
         };
+
 /*
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
