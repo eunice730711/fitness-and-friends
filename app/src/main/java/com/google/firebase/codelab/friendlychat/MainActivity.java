@@ -271,13 +271,13 @@ public class MainActivity extends AppCompatActivity implements
 
         });
         */
-        Button buttonTalk = (Button) findViewById(R.id.buttonTalk);
-        buttonTalk.setOnClickListener(new View.OnClickListener() {
+        Button buttonHome = (Button) findViewById(R.id.buttonHome);
+        buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent();
-                intent2.setClass(MainActivity.this, Home.class);
-                startActivity(intent2);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, Home.class);
+                startActivity(intent);
                 MainActivity.this.finish();
             }
         });

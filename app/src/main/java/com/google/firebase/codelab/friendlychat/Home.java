@@ -50,7 +50,6 @@ public class Home extends AppCompatActivity {
                 Intent intent2 = new Intent();
                 intent2.setClass(Home.this, SearchUser.class);
                 startActivity(intent2);
-                Home.this.finish();
             }
         });
 
@@ -62,7 +61,6 @@ public class Home extends AppCompatActivity {
                 Intent intent2 = new Intent();
                 intent2.setClass(Home.this, Notification.class);
                 startActivity(intent2);
-                Home.this.finish();
             }
         });
 
