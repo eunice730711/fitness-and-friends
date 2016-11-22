@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,13 +54,31 @@ public class PostJoinActivity extends AppCompatActivity {
         }
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new MyPagerAdapter());
+
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        mViewPager.setAdapter(adapter);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mMessageEditText = (EditText)findViewById(R.id.Post_Input_content);
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
-        Button button = (Button)findViewById(R.id.Post_Button);
+            }
+        });
+
+
+
+        /*
+        setContentView(R.layout.tab_fragment_2);
+        mMessageEditText = (EditText)findViewById(R.id.Join);
+        Button button_J = (Button)findViewById(R.id.Join_Button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +97,10 @@ public class PostJoinActivity extends AppCompatActivity {
 
             }
         });
+        */
 
     }
+    /*
     class MyPagerAdapter extends PagerAdapter {
         private int pageCount = 2;
         @Override
@@ -103,6 +122,7 @@ public class PostJoinActivity extends AppCompatActivity {
         public Object instantiateItem(ViewGroup container, int position) {
             View view = getLayoutInflater().inflate(R.layout.my_viewpager, container, false);
             container.addView(view);
+
 
             if(position==0)
             {
@@ -134,8 +154,9 @@ public class PostJoinActivity extends AppCompatActivity {
                 EditText E_Type=(EditText)view.findViewById(R.id.Edit_Type);
                 E_Type.setVisibility(View.VISIBLE);
             }
-            //TextView title = (TextView) view.findViewById(R.id.textView_item_title);
-            //title.setText("" + (position + 1));
+
+            TextView T_Time=(TextView)view.findViewById(R.id.textView_1);
+            T_Time.setText("" + (position + 1));
             return view;
         }
 
@@ -144,7 +165,9 @@ public class PostJoinActivity extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+
     }
+    */
 
 
 
