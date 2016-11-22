@@ -9,11 +9,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class scheduleRunLevel extends AppCompatActivity {
-
+    Result r;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_run_level);
+
+        Intent intent = this.getIntent();
+        r = (Result)intent.getSerializableExtra("run");
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -34,6 +37,13 @@ public class scheduleRunLevel extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleRunLevel.this, scheduleRunDay.class);
+
+                r.setLevel(1);
+                r.setDistance(0);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("final",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleRunLevel.this.finish();
             }
@@ -45,6 +55,12 @@ public class scheduleRunLevel extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleRunLevel.this, scheduleRunMedDistance.class);
+
+                r.setLevel(2);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("medium",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleRunLevel.this.finish();
             }

@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class scheduleRunMedDistance extends AppCompatActivity {
-
+    Result r;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_run_med_distance);
+
+        Intent intent = this.getIntent();
+        r = (Result)intent.getSerializableExtra("medium");
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
@@ -32,6 +36,12 @@ public class scheduleRunMedDistance extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleRunMedDistance.this, scheduleRunDay.class);
+
+                r.setDistance(1);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("final",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleRunMedDistance.this.finish();
             }
@@ -43,6 +53,12 @@ public class scheduleRunMedDistance extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleRunMedDistance.this, scheduleRunDay.class);
+
+                r.setDistance(2);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("final",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleRunMedDistance.this.finish();
             }
@@ -54,6 +70,12 @@ public class scheduleRunMedDistance extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleRunMedDistance.this, scheduleRunDay.class);
+
+                r.setDistance(3);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("final",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleRunMedDistance.this.finish();
             }
@@ -65,6 +87,12 @@ public class scheduleRunMedDistance extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleRunMedDistance.this, scheduleRunDay.class);
+
+                r.setDistance(4);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("final",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleRunMedDistance.this.finish();
             }
@@ -76,6 +104,12 @@ public class scheduleRunMedDistance extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleRunMedDistance.this, scheduleRunDay.class);
+
+                r.setDistance(5);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("final",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleRunMedDistance.this.finish();
             }

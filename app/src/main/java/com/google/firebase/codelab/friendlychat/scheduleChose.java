@@ -35,6 +35,13 @@ public class scheduleChose extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(scheduleChose.this, scheduleRunLevel.class);
+
+                Result r = new Result();
+                Bundle bundle = new Bundle();
+                r.setType(1);
+                bundle.putSerializable("run",r);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
                 scheduleChose.this.finish();
             }
