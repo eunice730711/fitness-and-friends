@@ -31,24 +31,27 @@
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/beginner"
             android:id="@+id/buttonRookie"
-            android:layout_weight="1" />
+            app:srcCompat="@drawable/beginner"
+            android:layout_weight="1"
+            android:background="@color/colorTitle" />
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/medium"
             android:id="@+id/buttonMed"
+            app:srcCompat="@drawable/medium"
             tools:ignore="ContentDescription"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@color/colorTitle" />
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/advanced"
             android:id="@+id/buttonAdv"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorTitle" />
     </LinearLayout>
 
 </RelativeLayout>
