@@ -1,6 +1,7 @@
 package com.google.firebase.codelab.friendlychat;
 
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,61 +22,59 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.google.firebase.codelab.friendlychat.R.id.messengerImageView;
 import static com.google.firebase.codelab.friendlychat.R.id.txt_searchId;
 
 
 public class Notification extends AppCompatActivity {
     public DatabaseReference mDatabase;
     public UserProfile userProfile;
-    private RecyclerView mMessageRecyclerView;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<RequestFriend, RequestViewHolder>
             mFirebaseAdapter;
-
     public static class RequestViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_request;
         public Button btn_accept, btn_refect;
-        public CircleImageView messengerImageView;
+        public CircleImageView requestImageView;
         public UserProfile userProfile;
         public RequestFriend requestFriend;
-        public RequestViewHolder(View v) {
+        public RequestViewHolder( View v) {
             super(v);
             txt_request = (TextView) itemView.findViewById(R.id.txt_request);
             btn_accept = (Button) itemView.findViewById(R.id.btn_accept);
             btn_refect = (Button) itemView.findViewById(R.id.btn_reject);
-            messengerImageView = (CircleImageView) itemView.findViewById(R.id.requestImageView);
+            requestImageView = (CircleImageView) itemView.findViewById(R.id.requestImageView);
 
             btn_accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
                     int index = txt_request.getText().toString().indexOf("送");
-                    String userid1 = txt_request.getText().subSequence(0,index).toString();
-                    Friend friend = new Friend(userid1,userProfile.getUserid());
-                    mDatabase.child("Friend").push().setValue(friend);
+                    String friendid = txt_request.getText().subSequence(0,index).toString();
+                    HashMap<String, String> friend = new HashMap<String, String>();
+                    friend.put("friendid",friendid);
+                    mDatabase.child("Friend").child(userProfile.getUserid()).getRef().setValue(friend);
+                    // 刪除好友邀請
+                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).getRef().
+                            equalTo(requestFriend.getRequester()).getRef().removeValue();
+                    Toast.makeText(v.getContext(), "恭喜你們已成為好友", Toast.LENGTH_LONG).show();
+
                 }
             });
 
             btn_refect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // 刪除好友邀請
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                RequestFriend requestFriend = dataSnapshot.getValue(RequestFriend.class);
-                                if( requestFriend.getRequester().compareTo(requestFriend.getRequester())==0){
-                                    dataSnapshot.getRef().removeValue();
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
+                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).getRef().
+                            equalTo(requestFriend.getRequester()).getRef().removeValue();
                 }
             });
         }
@@ -87,8 +86,10 @@ public class Notification extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mMessageRecyclerView = (RecyclerView) findViewById(R.id.messageRecyclerView);
-
+        mRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         getUserProfile();
 
 
@@ -132,7 +133,6 @@ public class Notification extends AppCompatActivity {
                 viewHolder.userProfile = userProfile;
             }
         };
-        mMessageRecyclerView.setAdapter(mFirebaseAdapter);
-        mMessageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mFirebaseAdapter);
     }
 }

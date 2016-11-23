@@ -8,12 +8,14 @@ public class UserProfile {
     public String username;
     public String userid;
     public String instanceid;
+    public double totaldistance;
     public UserProfile(){}
 
     public UserProfile(String username, String userid, String instanceid){
         this.username = username;
         this.userid = userid;
         this.instanceid = instanceid;
+        this.totaldistance = 0;
     }
 
     public String getUsername(){return username;}
@@ -28,5 +30,6 @@ public class UserProfile {
 
     public void setInstanceid(String instanceid){this.instanceid = instanceid;}
 
+    public double updateDistance(double oneDistance){ this.totaldistance += oneDistance; return this.totaldistance;}
 
 }
