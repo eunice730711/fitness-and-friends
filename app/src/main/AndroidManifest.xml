@@ -54,7 +54,9 @@
         <activity android:name=".SearchUser" />
         <activity android:name=".Notification" />
         <activity android:name=".Running" />
-        <activity android:name=".FriendList"></activity>
+        <activity android:name=".FriendList" />
+        <activity android:name=".Register" />
+        <activity android:name=".MyProfile"></activity>
     </application>
 
 </manifest>

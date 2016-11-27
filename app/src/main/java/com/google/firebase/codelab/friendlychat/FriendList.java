@@ -1,7 +1,7 @@
 package com.google.firebase.codelab.friendlychat;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,18 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.util.HashMap;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
-import static android.R.attr.queryActionMsg;
-import static android.R.attr.value;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_accept;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_friend;
-import static com.google.firebase.codelab.friendlychat.R.id.messengerImageView;
-import static com.google.firebase.codelab.friendlychat.R.id.txt_friendName;
-import static com.google.firebase.codelab.friendlychat.R.id.txt_request;
+//import static com.google.firebase.codelab.friendlychat.R.id.btn_friend;
 
 public class FriendList extends AppCompatActivity {
     public DatabaseReference mDatabase;
