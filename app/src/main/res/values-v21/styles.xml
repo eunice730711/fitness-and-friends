@@ -11,8 +11,8 @@
         <item name="android:textColorSecondaryInverse">#1e065b</item>
         <item name="android:colorForeground">#1e065b</item>
         <item name="colorAccent">#1e065b</item>
-        <item name="colorPrimary">#FF5722</item>
-        <item name="colorPrimaryDark">#FF5722</item>
+        <item name="colorPrimary">#1e065b</item>
+        <item name="colorPrimaryDark">#1e065b</item>
         <item name="android:textColorPrimary">#1e065b</item>
 
     </style>

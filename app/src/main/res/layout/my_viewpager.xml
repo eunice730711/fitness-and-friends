@@ -26,7 +26,7 @@
             android:id="@+id/Edit_Time" />
 
         <TextView
-            android:text="Position"
+            android:text="Location"
             android:layout_width="123dp"
             android:layout_height="36dp"
             android:id="@+id/textView_2"

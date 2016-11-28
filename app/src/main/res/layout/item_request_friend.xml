@@ -36,13 +36,13 @@
             android:layout_marginLeft="150dp">
 
             <Button
-            android:text="成為好友"
+            android:text="Add friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/btn_accept" />
             <Button
-                android:text="不了謝謝"
+                android:text="No thanks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

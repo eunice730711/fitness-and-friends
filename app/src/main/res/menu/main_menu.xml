@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/myfriends"
-        android:icon="@drawable/friends"
+        android:icon="@drawable/friendstwo"
         android:title="@string/showfriends"
         app:showAsAction="ifRoom"/>
 

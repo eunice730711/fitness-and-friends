@@ -12,7 +12,7 @@
     <!-- Fill in Userprofile -->
 
     <TextView
-        android:text="註冊"
+        android:text="Registration"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -164,7 +164,7 @@
 
 
     <Button
-        android:text="setUserProfile"
+        android:text="set User Profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
