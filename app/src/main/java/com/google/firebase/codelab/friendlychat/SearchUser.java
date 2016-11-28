@@ -31,20 +31,6 @@ public class SearchUser extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         init();
 
-        //
-
-        btn_setProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userid = txt_userid.getText().toString();
-                String username= txt_username.getText().toString();
-                String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-
-                UserProfile test = new UserProfile(username, userid,refreshedToken);
-                mDatabase.child("UserProfile").push().setValue(test);
-            }
-        });
-
         // send requesting friend by ID
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +38,7 @@ public class SearchUser extends AppCompatActivity {
                 // retrieve data olny one time
                 String userId = txt_searchId.getText().toString();
                 mDatabase.child("UserProfile").orderByChild("userid").equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         // do some stuff once
@@ -66,22 +53,16 @@ public class SearchUser extends AppCompatActivity {
                             String userId = txt_searchId.getText().toString();
 
                             // 送出邀請
-
-                            // prevent there are the same requesting friends
-
-                            mDatabase.child("RequestFriend").orderByChild("user").equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            mDatabase.child("RequestFriend").orderByChild("user").equalTo(userId).getRef()
+                                    .child("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
-                                    boolean already = false;
-                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                        RequestFriend requestFriend = dataSnapshot.getValue(RequestFriend.class);
-                                        if (requestFriend.getRequester().compareTo(userProfile.getUserid())==0) {
-                                            Toast.makeText(SearchUser.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_LONG).show();
-                                            already = true;
-                                            break;
-                                        }
-                                    }
-                                    if( !already ){
+                                    // 避免重複送出邀請
+                                    String userId2 = txt_searchId.getText().toString();
+
+                                    if ( snapshot.exists())
+                                        Toast.makeText(SearchUser.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_LONG).show();
+                                    else{
                                         // 送出邀請
                                         String userId = txt_searchId.getText().toString();
                                         RequestFriend requestFriend = new RequestFriend(userId, userProfile.getUserid());
@@ -90,17 +71,9 @@ public class SearchUser extends AppCompatActivity {
                                     }
                                 }
                                 @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                }
+                                public void onCancelled(DatabaseError databaseError) {}
                             });
                         }
-                        /*
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            UserProfile profile = dataSnapshot.getValue(UserProfile.class);
-
-                            Log.d("FireBaseTraining", "name = " + profile.getUsername()+"\n id = "+profile.getId());
-
-                        }*/
                     }
 
                     @Override
@@ -130,17 +103,17 @@ public class SearchUser extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            userProfile = dataSnapshot.getValue(UserProfile.class);
-                                Log.d("userid",userProfile.getUserid());
-                        }
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    userProfile = dataSnapshot.getValue(UserProfile.class);
+                    Log.d("userid",userProfile.getUserid());
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        }
+    }
 
 
 

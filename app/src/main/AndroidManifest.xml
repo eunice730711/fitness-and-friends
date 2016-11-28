@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.google.firebase.codelab.friendlychat">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,10 +53,13 @@
         <activity android:name=".scheduleRunMedDistance" />
         <activity android:name=".SearchUser" />
         <activity android:name=".Notification" />
-        <activity android:name=".item_notificaion" />
-        <activity android:name=".item_notification" />
-        <activity android:name=".item_requestFriend" />
-        <activity android:name=".search"></activity>
+        <activity android:name=".Running" />
+        <activity android:name=".FriendList" />
+        <activity android:name=".Register" />
+        <activity android:name=".MyProfile" />
+        <activity android:name=".WeekPlan" />
+        <activity android:name=".Join_fragment" />
+        <activity android:name=".Post_fragment"></activity>
     </application>
 
 </manifest>

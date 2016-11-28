@@ -1,9 +1,8 @@
 package com.google.firebase.codelab.friendlychat;
 
 
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,61 +19,59 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.HashMap;
 
-import static com.google.firebase.codelab.friendlychat.R.id.txt_searchId;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Notification extends AppCompatActivity {
     public DatabaseReference mDatabase;
     public UserProfile userProfile;
-    private RecyclerView mMessageRecyclerView;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<RequestFriend, RequestViewHolder>
             mFirebaseAdapter;
-
     public static class RequestViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_request;
         public Button btn_accept, btn_refect;
-        public CircleImageView messengerImageView;
+        public CircleImageView requestImageView;
         public UserProfile userProfile;
         public RequestFriend requestFriend;
-        public RequestViewHolder(View v) {
+        public RequestViewHolder( View v) {
             super(v);
             txt_request = (TextView) itemView.findViewById(R.id.txt_request);
             btn_accept = (Button) itemView.findViewById(R.id.btn_accept);
             btn_refect = (Button) itemView.findViewById(R.id.btn_reject);
-            messengerImageView = (CircleImageView) itemView.findViewById(R.id.requestImageView);
+            requestImageView = (CircleImageView) itemView.findViewById(R.id.requestImageView);
 
             btn_accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                    int index = txt_request.getText().toString().indexOf("送")-1;
+                    String friendid = txt_request.getText().subSequence(0,index).toString();
+                    HashMap<String, String> friend = new HashMap<String, String>();
+                    HashMap<String, String> friend2 = new HashMap<String, String>();
 
-                    int index = txt_request.getText().toString().indexOf("送");
-                    String userid1 = txt_request.getText().subSequence(0,index).toString();
-                    Friend friend = new Friend(userid1,userProfile.getUserid());
-                    mDatabase.child("Friend").push().setValue(friend);
+                    friend.put("friendid",friendid);
+                    friend2.put("friendid",userProfile.getUserid());
+                    mDatabase.child("Friend").child(userProfile.getUserid()).getRef().setValue(friend);
+                    mDatabase.child("Friend").child(friendid).getRef().setValue(friend2);
+                    // 刪除好友邀請
+                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).getRef().
+                            equalTo(requestFriend.getRequester()).getRef().removeValue();
+                    Toast.makeText(v.getContext(), "恭喜你們已成為好友", Toast.LENGTH_LONG).show();
+
                 }
             });
 
             btn_refect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // 刪除好友邀請
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                RequestFriend requestFriend = dataSnapshot.getValue(RequestFriend.class);
-                                if( requestFriend.getRequester().compareTo(requestFriend.getRequester())==0){
-                                    dataSnapshot.getRef().removeValue();
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
+                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).getRef().
+                            equalTo(requestFriend.getRequester()).getRef().removeValue();
                 }
             });
         }
@@ -87,8 +83,10 @@ public class Notification extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mMessageRecyclerView = (RecyclerView) findViewById(R.id.messageRecyclerView);
-
+        mRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         getUserProfile();
 
 
@@ -132,7 +130,6 @@ public class Notification extends AppCompatActivity {
                 viewHolder.userProfile = userProfile;
             }
         };
-        mMessageRecyclerView.setAdapter(mFirebaseAdapter);
-        mMessageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mFirebaseAdapter);
     }
 }

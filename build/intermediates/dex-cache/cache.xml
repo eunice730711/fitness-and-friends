@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <items version="2" >
 
     <item
@@ -318,3 +319,626 @@
     </item>
 
 </items>
+||||||| merged common ancestors
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="58c9f5ee817fdb8b658fd7455fadfb74119f7ee9">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-base-9.4.0_647be4a801d9fade15c5b1acf0638109a230c97d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.2.1_e036a9e466d3c2d26e12343973128aaf5f57358f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-config\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="dab6944860c986980dcc6002a5ca2f127b587317">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-config-9.4.0_6720201dd4bf491150d5d4f124325080a4ba9fa4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database-connection\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="0e4d53465cc141bec58f18a894e4c4e80633fa32">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-connection-9.4.0_9bba0896d4671c17720a10db5437ba608220a0e0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="18b5697c65c4fe5b7381613b8b8ae9ac52e26fa7">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-9.4.0_569b136c6f8eae044d1ab89bb981f2ab2cbcf7be\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.2.1_a48fbcbadf6de171b854b73cbf23e3e1bd5dbc12\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.2.1\support-annotations-23.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.2.1_b22e6112536ba319167973a85cacb3b183cb0b95\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.6.1\86b122e640af09b0723e1fa44083c354ba6d9089\glide-3.6.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.6.1_cde8a39bbff4cd34d4677d592cbc07423d378753\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\libs\internal_impl-23.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.2.1_67fd2648516c8bd2dc66c1cb9eb20f1a94e6e76b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3b7173b3df4c7029699919414400041f64519e34">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-iid-9.4.0_c8918cb454e2486b876018a3b6a7a93345e08134\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-9.4.0_8f1e26274f7f30e3b013e0c28574d4fa2194f32a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="736d8893fb702f128a153c9d87c9c29724d37872">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appinvite-9.4.0_0a3cf53c3d64285143c804ff3226260d996d5294\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\1.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\de.hdodenhof-circleimageview-1.3.0_e884a119e2aae0f952f40c781d7b7783424c62f3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.2.1_17735aeb3a2a5a3d2b938b2ff9e157380e765a0d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.firebaseui\firebase-ui-database\0.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="c76f6507a42aec274953e882bf3c49a570843ef5">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.firebaseui-firebase-ui-database-0.4.0_7949359bbd11cd67946efcdb4297faa2f1c63133\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="a440fb3fec30ff925e9f601cc458fb6671834cb2">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-impl-9.4.0_b44815dcc733d9a33e529d08e10160100c8ab025\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth-common\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="34762013d39dbe6c656050589c44e8b61b9a2c5d">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-common-9.4.0_6099a8feef755f86281c45855f28064ecb82c465\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="84bf369090a8f7e293817efbd6ccf31ada1be32b">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-9.4.0_19febf57765fa132d39ffad216e75b2873d1c69f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="d463d8eec1e6c1feef2cec6675ccb47e37c12ee1">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-ads-9.4.0_cd5c8611ac00f3d0e8a5e194e5cd8ce98540e366\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-9.4.0_4baf2a0a7a659cf76b7148bb5abcb1ac4020d377\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="88848548ab56d4fbf3d2d1b0c85bf1ff9b4c1f4b">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-9.4.0_8668e3403b1a8417478f98b0189d5f7991e6979c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.android.support\design\23.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="1aa5b025efe97f5006f5be16d6ca67c6c3c0c0d8">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.2.0_acc225ae84a98cbcd2a0b694f509093b197c4af8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="0f4908cfb2600ad36c6816f16237151aa81cfdc3">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_8650c74f78cec1bf1fab0219bc7065e3affdb41a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth-module\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="6bc41d9d6fd12d2ef23c785a259011001f4a1a5b">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-module-9.4.0_ea9706747a525463983ea842d87adad939cbeaee\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gass\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b15f898c9047f9d612a63000126b485dd024eaac">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-gass-9.4.0_48d17b6ce70d99638d928cdbbd203b8c6e3470fa\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-messaging\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4b6d9b70f93bbeb872d0948bc064ae3f3f2bcbac">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-messaging-9.4.0_f8a7ca91f55c7fd26d0dae7d02a8149b0c49adef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads-lite\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="147edbec6bcea71fd675ecc63cae3319637ec2b4">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-ads-lite-9.4.0_4704f59a23a37e3d93dcd7fd8935796293878498\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-crash\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b9d48baf96c7e187991a9befa833bebd181960a9">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-crash-9.4.0_5795f269cd04be453b9b66fddaeee6e7f2915d97\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.2.1_d6b3f5fdb53d6a8f415b0281e14e7d11d273bca4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-clearcut\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="dd763e0269f2854f5828ae62dd968b80bff6a0db">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-clearcut-9.4.0_07c355498bb8cb26773acdb5596d2072348dcd8c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.2.1_380c19b212048c75cc2a4678e770dd15435de018\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4b630471536351be7c3c3100735c75b7ad2cbd84">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-9.4.0_5bb7d9a9a627f015652b666facb78c91e0b1585a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.4.0_1f1c6927ea5a2a58f915ddd15d7d7033a6e04200\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4348dd26d83b56c2058b768222c3271bce911724">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-9.4.0_ba3bdf2df447e3c1978d133c1040509279485231\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="96e24eae2235cb35de7de6e35e1ba19af5bc5b4b">
+        <dex dex="C:\Users\Andersen\AndroidStudioProjects\new\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_86bdf552b071a1c0085e46e92a6286f8e1d68d95\classes.dex" />
+    </item>
+
+</items>
+=======
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="58c9f5ee817fdb8b658fd7455fadfb74119f7ee9">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-base-9.4.0_c5cc2a069bbed2da3f505eeb4b18f305ac5ecc87.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-crash/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b9d48baf96c7e187991a9befa833bebd181960a9">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-crash-9.4.0_ab5034886816fa3d8634aa22e54aae8590c1766d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-9.4.0_e7d5b33cea1632415c883a722b9cb74a2049019f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_e02296b0794a9ff1f4a82ebb00c322ad76e9a8ff.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.2.1_0a8f5bcf377e2fdbca411e35423760b839986837.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-module/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="6bc41d9d6fd12d2ef23c785a259011001f4a1a5b">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-auth-module-9.4.0_7578842b20593a25bcd274843307ee928923dd2d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.android.support/design/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="1aa5b025efe97f5006f5be16d6ca67c6c3c0c0d8">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.2.0_da83ace739ea389781906ebeee2022947d3152b9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-common/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="34762013d39dbe6c656050589c44e8b61b9a2c5d">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-auth-common-9.4.0_f529762f57eeb7459dc550c1dc28335af23fbc37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="84bf369090a8f7e293817efbd6ccf31ada1be32b">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-database-9.4.0_39181fcc115a7cea20428a8215349d93840fd894.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database-connection/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="0e4d53465cc141bec58f18a894e4c4e80633fa32">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-database-connection-9.4.0_b859f7ead657989ea12f4a19ebd264d664c4d275.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.2.1_92b96abd2d9b34a9d4d03519f6db713d085c8c48.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="88848548ab56d4fbf3d2d1b0c85bf1ff9b4c1f4b">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-9.4.0_fc26f7464721c1098fc5455f0f4f5dca266726c9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="147edbec6bcea71fd675ecc63cae3319637ec2b4">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-lite-9.4.0_cfcb93bdcc18a4d9a8ca0248bc813443d8bc0d0f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.2.1_7d28d03975ab66eb1aed42a6342b153bf62bda58.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-9.4.0_14ab0c2a9905ea563564fdc90edd21008a403a87.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-config/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="dab6944860c986980dcc6002a5ca2f127b587317">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-config-9.4.0_ac5a58570b41572038742d2760110bb20ee4bc37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4b6d9b70f93bbeb872d0948bc064ae3f3f2bcbac">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-messaging-9.4.0_d4d2c91dde81f383c3ceaeedfd81d7a9a86eff9d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4b630471536351be7c3c3100735c75b7ad2cbd84">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-auth-9.4.0_2b464c3a1cbda26ae3d4ae1a6ec74096c0d70bc0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3b7173b3df4c7029699919414400041f64519e34">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-iid-9.4.0_9ccd2b385e7449bc9192736802e62c1feb7f03b5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_852028efb88c1f45dd38f1e4d82c7ed618b700c2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b15f898c9047f9d612a63000126b485dd024eaac">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-gass-9.4.0_3206a190d53986fd1ce1572d4042d6d624d3c39f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="dd763e0269f2854f5828ae62dd968b80bff6a0db">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-clearcut-9.4.0_a1b14a7ca462bac2fd19b472a6b80d0ab53751c3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-9.4.0_ae31dc622826925ab17b35f4e5c92f295d7c30f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="736d8893fb702f128a153c9d87c9c29724d37872">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-appinvite-9.4.0_e12531280c0b1b5a03b0e362372020afae6c8b8b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="d463d8eec1e6c1feef2cec6675ccb47e37c12ee1">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-9.4.0_a4c8bed583db682234b7b5dd8fe255192d53e15a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/de.hdodenhof-circleimageview-1.3.0_cb9f0ace9a5bd0f539611e3e9ed13d6ee6c5acb8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.2.1_f66965df2c0ee5f8e42b0ca64066de78ea308e71.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/glide-3.6.1_510f4edcddf6da18bc4b9b5509e02919727b7300.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.firebaseui/firebase-ui-database/0.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="c76f6507a42aec274953e882bf3c49a570843ef5">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.firebaseui-firebase-ui-database-0.4.0_c6f5bcc7e6fd92b03530792c152faf4ecb4d6236.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="18b5697c65c4fe5b7381613b8b8ae9ac52e26fa7">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-common-9.4.0_3856e1ad1702dd06bb83686160bdae6999e552ff.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.1_337d73a003386d1561fa29381a8c8cc5c65d94ed.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="a440fb3fec30ff925e9f601cc458fb6671834cb2">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-impl-9.4.0_4f2d3f21864ac81b30b4151717ac361ecdd607e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4348dd26d83b56c2058b768222c3271bce911724">
+        <dex dex="/Users/Emily/Desktop/fitness-and-friends/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-9.4.0_9bd86796a3e2228e4b82842bb8bc5bd0e1f945b5.jar" />
+    </item>
+
+</items>
+>>>>>>> origin/friend
