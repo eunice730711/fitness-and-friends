@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:text="TextView"
+            android:layout_height="34dp"
+            android:id="@+id/Week_x"
+            android:textStyle="normal|bold"
+            android:textSize="18sp"
+            android:gravity="center_vertical|center"
+            android:layout_weight="1"
+            android:layout_width="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:text="無"
+            android:layout_height="28dp"
+            android:id="@+id/runContent"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_toEndOf="@+id/Week_x"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="10dp"
+            android:layout_alignBottom="@+id/Week_x"
+            android:textSize="18sp"
+            android:layout_width="220dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Day_done"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -17,51 +17,78 @@
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    tools:ignore="UselessParent"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true">
-
-    <Button
-        android:text="@string/home"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/buttonHome"
-        android:textColor="#454447"
-        android:textSize="20sp"
-        android:background="#ffffff"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:layout_weight="1"
-        tools:ignore="ButtonStyle" />
+        android:layout_below="@+id/my_toolbar"
+        android:weightSum="1"
+        android:id="@+id/linearLayout"
+        android:layout_above="@+id/linearLayout2">
 
-    <Button
-        android:text="@string/schedule"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/buttonSchedule"
-        android:textStyle="normal|bold"
-        android:textColor="#1e065b"
-        android:textSize="20sp"
-        android:background="#ffffff"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:layout_weight="1"
-        tools:ignore="ButtonStyle" />
+        <ImageView
+            android:layout_width="match_parent"
+            app:srcCompat="@mipmap/pic_schedule"
+            android:id="@+id/imageView"
+            android:scaleType="fitCenter"
+            android:layout_weight="1.00"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:text="@string/talk"
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/ListView"
+            android:layout_below="@+id/imageView"
+            android:layout_weight="0.30" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/buttonTalk"
-        android:textColor="#454447"
-        android:textSize="20sp"
-        android:background="#ffffff"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:layout_weight="1"
-        tools:ignore="ButtonStyle" />
-</LinearLayout>
+        android:layout_height="50dp"
+        tools:ignore="UselessParent"
+        android:id="@+id/linearLayout2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:text="@string/home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonHome"
+            android:textColor="#454447"
+            android:textSize="20sp"
+            android:background="#ffffff"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:layout_weight="1"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:text="@string/schedule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonSchedule"
+            android:textStyle="normal|bold"
+            android:textColor="#1e065b"
+            android:textSize="20sp"
+            android:background="#ffffff"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:layout_weight="1"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:text="@string/talk"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonTalk"
+            android:textColor="#454447"
+            android:textSize="20sp"
+            android:background="#ffffff"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:layout_weight="1"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
 
 
 

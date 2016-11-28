@@ -56,7 +56,8 @@
         <activity android:name=".Running" />
         <activity android:name=".FriendList" />
         <activity android:name=".Register" />
-        <activity android:name=".MyProfile"></activity>
+        <activity android:name=".MyProfile" />
+        <activity android:name=".WeekPlan"></activity>
     </application>
 
 </manifest>
