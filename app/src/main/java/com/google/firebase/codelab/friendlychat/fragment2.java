@@ -1,5 +1,9 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,14 +23,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static com.google.firebase.codelab.friendlychat.MainActivity.MESSAGES_CHILD;
 
 public class fragment2 extends Fragment {
 
+    private DatePickerDialog date_pick;
+    private TimePickerDialog time_pick;
+
     private EditText mMessageEditText;
-    private EditText J_time;
+    private TextView J_date;
+    private TextView J_time;
     private EditText J_pos;
     private EditText J_type;
     private FirebaseAuth mFirebaseAuth;
@@ -32,10 +45,11 @@ public class fragment2 extends Fragment {
     private String mPhotoUrl;
     private DatabaseReference mFirebaseDatabaseReference;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View returnView = inflater.inflate(R.layout.tab_fragment_2, container, false);
-
+        GregorianCalendar calendar = new GregorianCalendar();
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mUsername = mFirebaseUser.getDisplayName();
@@ -43,10 +57,43 @@ public class fragment2 extends Fragment {
             mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
         }
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        J_date = (TextView)returnView.findViewById(R.id.Edit_Date);
+        date_pick = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                J_date.setText(year + "/" +monthOfYear + "/" + dayOfMonth);
+            }
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        J_time = (TextView) returnView.findViewById(R.id.Edit_Time);
+        time_pick = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                J_time.setText(hourOfDay + ":" + minute);
+                // J_time.setText((hourOfDay > 12 ? hourOfDay- 12 :hourOfDay) + ":" +minute + " "+(hourOfDay > 12 ? "PM": "AM"));
+            }
+        },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),
+                false);
+
+
         mMessageEditText = (EditText)returnView.findViewById(R.id.Join);
-        J_time = (EditText)returnView.findViewById(R.id.Edit_Time);
+
         J_pos = (EditText)returnView.findViewById(R.id.Edit_Pos);
         J_type = (EditText)returnView.findViewById(R.id.Edit_Type);
+        Button b_date = (Button)returnView.findViewById(R.id.set_date);
+        b_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date_pick.show();
+            }
+        });
+        Button b_time = (Button)returnView.findViewById(R.id.set_time);
+        b_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                time_pick.show();
+            }
+        });
         Button button = (Button)returnView.findViewById(R.id.Join_Button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,18 +103,23 @@ public class fragment2 extends Fragment {
 
                 JoinMessage joinMessage = new
                         JoinMessage(mMessageEditText.getText().toString(),
-                        mUsername,
-                        mPhotoUrl,nowTime,nowDate,J_time.getText().toString(),J_pos.getText().toString(),J_type.getText().toString());
+                        mUsername, mPhotoUrl,nowTime,nowDate,J_date.getText().toString(),
+                        J_time.getText().toString(),J_pos.getText().toString(),J_type.getText().toString());
                 mFirebaseDatabaseReference.child("Join")
                         .push().setValue(joinMessage);
                 mMessageEditText.setText("");
                 mFirebaseDatabaseReference.push().setValue(mMessageEditText);
                 mMessageEditText.getText().clear();
-                //startNextPage();
+                startNextPage();
 
             }
         });
 
         return returnView;
+    }
+    private void startNextPage(){
+        Intent intent = new Intent();
+        intent.setClass(getActivity() , MainActivity.class);
+        startActivity(intent);
     }
 }

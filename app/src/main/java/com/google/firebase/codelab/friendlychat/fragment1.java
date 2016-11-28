@@ -60,12 +60,18 @@ public class fragment1 extends Fragment {
                 mMessageEditText.setText("");
                 mFirebaseDatabaseReference.push().setValue(mMessageEditText);
                 mMessageEditText.getText().clear();
-                //startNextPage();
+                startNextPage();
 
             }
         });
 
         return returnView;
     }
+    private void startNextPage(){
+        Intent intent = new Intent();
+        intent.setClass(getActivity() , MainActivity.class);
+        startActivity(intent);
+    }
+
 
 }

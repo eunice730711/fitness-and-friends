@@ -10,22 +10,24 @@ public class JoinMessage {
     private String photoUrl;
     private String time;
     private String date;
-    private String J_time;
-    private String J_pos;
-    private String J_type;
+    private String Jdate;
+    private String Jtime;
+    private String Jpos;
+    private String Jtype;
 
     public JoinMessage(){
     }
 
-    public JoinMessage(String text, String name, String photoUrl, String time, String date, String j_time, String j_pos, String j_type) {
+    public JoinMessage(String text, String name, String photoUrl, String time, String date, String j_date, String j_time, String j_pos, String j_type) {
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
         this.time = time;
         this.date = date;
-        this.J_time = j_time;
-        this.J_pos = j_pos;
-        this.J_type = j_type;
+        this.Jdate = j_date;
+        this.Jtime = j_time;
+        this.Jpos = j_pos;
+        this.Jtype = j_type;
     }
     public String getText() {
         return text;
@@ -55,7 +57,7 @@ public class JoinMessage {
         return time;
     }
 
-    public void setPTime(String time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -65,29 +67,29 @@ public class JoinMessage {
         this.date = date;
     }
 
-    public String getJ_time() {
-        return J_time;
+    public String getJdate() { return Jdate; }
+
+    public void setJdate(String J_date) {
+        this.Jdate = J_date;
     }
 
-    public void setJ_time(String J_time) {
-        this.J_time = J_time;
+    public String getJtime() { return Jtime; }
+
+    public void setJtime(String J_time) {
+        this.Jtime = J_time;
     }
 
-    public String getJ_pos() {
-        return J_pos;
+    public String getJpos() {
+        return Jpos;
     }
 
-    public void setJ_pos(String J_pos) {
-        this.J_pos = J_pos;
+    public void setJpos(String J_pos) { this.Jpos = J_pos; }
+
+    public String getJtype() {
+        return Jtype;
     }
 
-    public String getJ_type() {
-        return J_type;
-    }
-
-    public void setJ_type(String J_type) {
-        this.J_pos = J_type;
-    }
+    public void setJtype(String J_type) { this.Jtype = J_type; }
 
 
 

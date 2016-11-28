@@ -57,7 +57,9 @@
         <activity android:name=".FriendList" />
         <activity android:name=".Register" />
         <activity android:name=".MyProfile" />
-        <activity android:name=".WeekPlan"></activity>
+        <activity android:name=".WeekPlan" />
+        <activity android:name=".Join_fragment" />
+        <activity android:name=".Post_fragment"></activity>
     </application>
 
 </manifest>
