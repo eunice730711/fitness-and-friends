@@ -36,35 +36,40 @@
             app:srcCompat="@drawable/onesix"
             android:id="@+id/buttonOneSix"
             android:layout_weight="1"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:background="@color/colorTitle" />
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:srcCompat="@drawable/three"
             android:id="@+id/buttonThree"
             android:layout_weight="1"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:background="@color/colorTitle" />
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:srcCompat="@drawable/five"
             android:id="@+id/buttonFive"
             android:layout_weight="1"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:background="@color/colorTitle" />
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:srcCompat="@drawable/seven"
             android:id="@+id/buttonSeven"
             android:layout_weight="1"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:background="@color/colorTitle" />
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:srcCompat="@drawable/ten"
             android:id="@+id/buttonTen"
             android:layout_weight="1"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:background="@color/colorTitle" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -30,9 +30,9 @@
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:srcCompat="@drawable/run"
         android:id="@+id/buttonRun"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:background="@drawable/run" />
 
     <ImageButton
         android:layout_width="match_parent"
