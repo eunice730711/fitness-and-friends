@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="0dp"
     tools:context="com.google.firebase.codelab.friendlychat.Register">
 
     <!-- Fill in Userprofile -->
-
-    <TextView
-        android:text="Registration"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:textSize="20dp"
-        android:paddingTop="20px"
-        android:paddingLeft="20px"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_alignParentTop="true"
-        android:id="@+id/textView6" />
-
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="User Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="100px"
+        android:paddingTop="170px"
         android:paddingLeft="20px"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -164,15 +165,28 @@
 
 
     <Button
-        android:text="set User Profile"
+        android:text="Set up"
+        android:textColor="#737373"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="73dp"
-        android:id="@+id/btn_setProfile" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_setProfile"
+        android:background="@drawable/button_style"
+        android:layout_marginBottom="20dp" />
 
-
-
+    <TextView
+        android:text="Registration"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:paddingTop="20px"
+        android:paddingLeft="20px"
+        android:id="@+id/textView6"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
 
 </RelativeLayout>

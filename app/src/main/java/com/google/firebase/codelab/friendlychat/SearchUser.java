@@ -45,7 +45,7 @@ public class SearchUser extends AppCompatActivity {
 
                         // check if it doesn't exsit
                         if( !snapshot.exists()){
-                            Toast.makeText(SearchUser.this, "該 ID 不存在", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SearchUser.this, "Cannot find ID", Toast.LENGTH_LONG).show();
 
                         }
                         else{
@@ -67,7 +67,7 @@ public class SearchUser extends AppCompatActivity {
                                         String userId = txt_searchId.getText().toString();
                                         RequestFriend requestFriend = new RequestFriend(userId, userProfile.getUserid());
                                         mDatabase.child("RequestFriend").push().setValue(requestFriend);
-                                        Toast.makeText(SearchUser.this, "好友邀請已送出", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SearchUser.this, "Friend request has been sent", Toast.LENGTH_LONG).show();
                                     }
                                 }
                                 @Override

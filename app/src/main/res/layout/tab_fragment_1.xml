@@ -13,11 +13,15 @@
         android:layout_weight="1.03" />
 
     <Button
-        android:text="Sent"
+        android:text="Send"
+        android:textColor="#737373"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Post_Button"
         android:layout_alignParentStart="true"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.04"
+        android:background="@drawable/button_style"
+        android:layout_marginBottom="20dp" />
 
 </LinearLayout>

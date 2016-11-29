@@ -58,7 +58,7 @@
             android:id="@+id/buttonHome"
             android:textColor="#454447"
             android:textSize="20sp"
-            android:background="#ffffff"
+            android:background="#FFFFFFFF"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:layout_weight="1"
             tools:ignore="ButtonStyle" />
@@ -70,7 +70,7 @@
             android:id="@+id/buttonSchedule"
             android:textColor="#454447"
             android:textSize="20sp"
-            android:background="#ffffff"
+            android:background="#FFFFFFFF"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:layout_weight="1"
             tools:ignore="ButtonStyle" />
@@ -83,7 +83,7 @@
             android:textColor="#1e065b"
             android:textSize="20sp"
             android:textStyle="normal|bold"
-            android:background="#ffffff"
+            android:background="#FFFFFFFF"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:layout_weight="1"
             tools:ignore="ButtonStyle" />

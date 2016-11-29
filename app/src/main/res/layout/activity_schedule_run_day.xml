@@ -21,71 +21,103 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
+    <Button
+        android:text="Done"
+        android:textColor="#737373"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/my_toolbar">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button5"
+        android:background="@drawable/button_style"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
 
 
-        <TextView
-            android:text="Days you wish to workout"
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            tools:textSize="30sp"
-            android:textColor="#454447"/>
+            android:layout_height="match_parent"
 
-        <CheckBox
-            android:text="@string/monday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/c1" />
+            android:layout_below="@+id/my_toolbar">
 
-        <CheckBox
-            android:text="@string/tuesday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/c2" />
 
-        <CheckBox
-            android:text="@string/wednesday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/c3" />
+            <TextView
+                android:text="Days you wish to workout."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                tools:textSize="30dp"
+                android:textColor="#454447"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp" />
 
-        <CheckBox
-            android:text="@string/thursday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/c4" />
+            <CheckBox
+                android:text="@string/monday"
+                android:textSize="20dp"
+                android:layout_width="157dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/c1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp" />
 
-        <CheckBox
-            android:text="@string/friday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/c5" />
+            <CheckBox
+                android:text="@string/tuesday"
+                android:textSize="20dp"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/c2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"/>
 
-        <CheckBox
-            android:text="@string/saturday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/c6" />
+            <CheckBox
+                android:text="@string/wednesday"
+                android:textSize="20dp"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/c3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"/>
 
-        <CheckBox
-            android:text="@string/sunday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/c7" />
+            <CheckBox
+                android:text="@string/thursday"
+                android:textSize="20dp"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/c4"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"/>
 
-        <Button
-            android:text="Done"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button5"
-            android:visibility="gone"/>
+            <CheckBox
+                android:text="@string/friday"
+                android:textSize="20dp"
+                android:layout_width="164dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/c5"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"/>
 
-    </LinearLayout>
+            <CheckBox
+                android:text="@string/saturday"
+                android:textSize="20dp"
+                android:layout_width="172dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/c6"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"/>
+
+            <CheckBox
+                android:text="@string/sunday"
+                android:textSize="20dp"
+                android:layout_width="164dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/c7"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+
 </RelativeLayout>
