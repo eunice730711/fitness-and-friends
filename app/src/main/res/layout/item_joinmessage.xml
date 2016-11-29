@@ -111,7 +111,8 @@
             android:id="@+id/checkBox"
             style="@android:style/Widget.Holo.Light.CompoundButton.CheckBox"
             android:checked="false"
-            android:duplicateParentState="false" />
+            android:duplicateParentState="false"
+            android:layout_marginTop="20dp" />
         <Button
             android:text="e"
             android:layout_width="30dp"
