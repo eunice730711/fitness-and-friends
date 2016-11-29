@@ -55,6 +55,8 @@ public class Running extends FragmentActivity
     public UserProfile userProfile;
     private String refreshedToken;
 
+    private Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +92,16 @@ public class Running extends FragmentActivity
             locationServiceInitial();
 
         } else {
-            Toast.makeText(this, "請開啟定位服務", Toast.LENGTH_LONG).show();
+
+            if(toast == null){
+                toast = Toast.makeText(this,"請開啟定位服務" ,Toast.LENGTH_SHORT);
+            }
+            else{
+                toast.setText("請開啟定位服務");
+            }
+            toast.show();
+
+            //Toast.makeText(this, "請開啟定位服務", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));	//開啟設定頁面
         }
 
@@ -150,7 +161,16 @@ public class Running extends FragmentActivity
             cur_lng = longitude;
         }
         else {
-            Toast.makeText(this, "無法定位座標", Toast.LENGTH_LONG).show();
+
+            if(toast == null){
+                toast = Toast.makeText(this,"無法定位座標" ,Toast.LENGTH_SHORT);
+            }
+            else{
+                toast.setText("無法定位座標");
+            }
+            toast.show();
+
+            //Toast.makeText(this, "無法定位座標", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -198,7 +218,16 @@ public class Running extends FragmentActivity
                     Log.d("userid",userProfile.getUserid());
 
                     dataSnapshot.getRef().child("totaldistance").setValue(userProfile.updateDistance(distance));
-                    Toast.makeText(Running.this, "恭喜你已完成本次跑步", Toast.LENGTH_LONG).show();
+
+                    if(toast == null){
+                        toast = Toast.makeText(Running.this,"恭喜你已完成本次跑步" ,Toast.LENGTH_SHORT);
+                    }
+                    else{
+                        toast.setText("恭喜你已完成本次跑步");
+                    }
+                    toast.show();
+
+                    //Toast.makeText(Running.this, "恭喜你已完成本次跑步", Toast.LENGTH_LONG).show();
                 }
             }
 
