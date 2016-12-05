@@ -10,20 +10,18 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/Post"
-        android:layout_weight="2.1" />
+        android:layout_weight="1"/>
 
     <Button
         android:text="Send"
         android:textColor="#737373"
         android:textSize="30sp"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Post_Button"
-        android:layout_alignParentStart="true"
-        android:layout_weight="0.04"
         android:background="@drawable/button_style"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginBottom="20dp" />
 
 </LinearLayout>
