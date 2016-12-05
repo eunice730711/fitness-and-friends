@@ -51,42 +51,29 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 
-        <Button
-            android:text="@string/home"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/buttonHome"
-            android:textColor="#454447"
-            android:textSize="20sp"
-            android:background="#FFFFFFFF"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:layout_weight="1"
-            tools:ignore="ButtonStyle" />
+            android:id="@+id/ihome"
+            android:background="#ffffff"
+            android:src="@drawable/home_button_non_active"
+            android:layout_weight="1"/>
 
-        <Button
-            android:text="@string/schedule"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/buttonSchedule"
-            android:textColor="#454447"
-            android:textSize="20sp"
-            android:background="#FFFFFFFF"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:layout_weight="1"
-            tools:ignore="ButtonStyle" />
+            android:id="@+id/ischedule"
+            android:background="#ffffff"
+            android:src="@drawable/schedule_button_non_active"
+            android:layout_weight="1"/>
 
-        <Button
-            android:text="@string/talk"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/buttonTalk"
-            android:textColor="#1e065b"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:background="#FFFFFFFF"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:layout_weight="1"
-            tools:ignore="ButtonStyle" />
+            android:id="@+id/italk"
+            android:background="#ffffff"
+            android:src="@drawable/talk_button_active"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <!--
@@ -111,7 +98,16 @@
         android:background="?attr/colorPrimaryDark"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Talk"
+            android:textSize="20dp"
+            android:textColor="#29e5b6"
+            android:textStyle="normal|bold"
+            android:layout_gravity="center" />
+    </android.support.v7.widget.Toolbar>
 
     <Button
         android:id="@+id/sendButton"

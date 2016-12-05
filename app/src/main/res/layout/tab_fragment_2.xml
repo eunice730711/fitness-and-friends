@@ -119,10 +119,10 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/Join"
-        android:layout_weight="1.03"
+        android:layout_weight="1.4"
         android:textAppearance="@style/TextAppearance.AppCompat" />
     <Button
-        android:text="Sent"
+        android:text="Send"
         android:textColor="#737373"
         android:textSize="30sp"
         android:layout_width="match_parent"

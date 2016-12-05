@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,28 +26,31 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        myToolbar.setNavigationIcon(R.drawable.home_menu);
+        getSupportActionBar().setTitle("");
 
-        Button buttonTalk = (Button) findViewById(R.id.buttonTalk);
-        buttonTalk.setOnClickListener(new View.OnClickListener() {
+        ImageButton ischedule = (ImageButton) findViewById(R.id.ischedule);
+        ischedule.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent();
-                intent2.setClass(Home.this, MainActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent();
+                intent.setClass(Home.this, schedule.class);
+                startActivity(intent);
                 Home.this.finish();
             }
         });
 
-        Button buttonSchedule = (Button) findViewById(R.id.buttonSchedule);
-        buttonSchedule.setOnClickListener(new View.OnClickListener() {
+        ImageButton italk = (ImageButton) findViewById(R.id.italk);
+        italk.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent();
-                intent2.setClass(Home.this, schedule.class);
-                startActivity(intent2);
+                Intent intent = new Intent();
+                intent.setClass(Home.this, MainActivity.class);
+                startActivity(intent);
                 Home.this.finish();
             }
         });
+
         //  the activity for setting userprofile and requesting friend by id
 //        Button btn_text = (Button) findViewById(R.id.btn_test);
 //        btn_text.setOnClickListener(new View.OnClickListener() {

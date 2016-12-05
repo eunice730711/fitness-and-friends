@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -116,8 +117,8 @@ public class schedule extends AppCompatActivity {
 
 
 
-        buttonHome = (Button) findViewById(R.id.buttonHome);
-        buttonHome.setOnClickListener(new View.OnClickListener() {
+        ImageButton ihome = (ImageButton) findViewById(R.id.ihome);
+        ihome.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -127,13 +128,13 @@ public class schedule extends AppCompatActivity {
             }
         });
 
-        buttonTalk = (Button) findViewById(R.id.buttonTalk);
-        buttonTalk.setOnClickListener(new View.OnClickListener() {
+        ImageButton italk = (ImageButton) findViewById(R.id.italk);
+        italk.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent();
-                intent2.setClass(schedule.this, MainActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent();
+                intent.setClass(schedule.this, MainActivity.class);
+                startActivity(intent);
                 schedule.this.finish();
             }
         });
@@ -160,7 +161,14 @@ public class schedule extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 fileIO.DeleteFile();
                                 Intent intent1 = new Intent();
-                                intent1.setClass(schedule.this, scheduleChose.class);
+                                intent1.setClass(schedule.this, scheduleRunLevel.class);
+
+                                Result r = new Result();
+                                Bundle bundle = new Bundle();
+                                r.setType(1);
+                                bundle.putSerializable("run",r);
+                                intent1.putExtras(bundle);
+
                                 startActivity(intent1);
                                 schedule.this.finish();
                             }
@@ -181,7 +189,14 @@ public class schedule extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 fileIO.DeleteFile();
                                 Intent intent1 = new Intent();
-                                intent1.setClass(schedule.this, scheduleChose.class);
+                                intent1.setClass(schedule.this, scheduleRunLevel.class);
+
+                                Result r = new Result();
+                                Bundle bundle = new Bundle();
+                                r.setType(1);
+                                bundle.putSerializable("run",r);
+                                intent1.putExtras(bundle);
+
                                 startActivity(intent1);
                                 schedule.this.finish();
                             }
@@ -189,7 +204,14 @@ public class schedule extends AppCompatActivity {
                         .setPositiveButton("接續", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent1 = new Intent();
-                                intent1.setClass(schedule.this, scheduleChose.class);
+                                intent1.setClass(schedule.this, scheduleRunLevel.class);
+
+                                Result r = new Result();
+                                Bundle bundle = new Bundle();
+                                r.setType(1);
+                                bundle.putSerializable("run",r);
+                                intent1.putExtras(bundle);
+
                                 startActivity(intent1);
                                 schedule.this.finish();
                             }
@@ -199,7 +221,14 @@ public class schedule extends AppCompatActivity {
             }
             else{
                 Intent intent1 = new Intent();
-                intent1.setClass(this, scheduleChose.class);
+                intent1.setClass(this, scheduleRunLevel.class);
+
+                Result r = new Result();
+                Bundle bundle = new Bundle();
+                r.setType(1);
+                bundle.putSerializable("run",r);
+                intent1.putExtras(bundle);
+
                 startActivity(intent1);
                 schedule.this.finish();
             }

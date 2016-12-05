@@ -8,4 +8,5 @@
     <color name="home">#3A006F</color>
     <color name="theme">#1e065b</color>
     <color name="gray">#999999</color>
+    <color name="transparent">#00000000</color>
 </resources>

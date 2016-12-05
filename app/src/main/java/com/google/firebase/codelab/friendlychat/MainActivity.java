@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
@@ -169,8 +170,9 @@ public class MainActivity extends AppCompatActivity implements
                 startNextPage();
             }
         });
-        Button buttonHome = (Button) findViewById(R.id.buttonHome);
-        buttonHome.setOnClickListener(new View.OnClickListener() {
+
+        ImageButton ihome = (ImageButton) findViewById(R.id.ihome);
+        ihome.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -180,13 +182,13 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        Button buttonSchedule = (Button) findViewById(R.id.buttonSchedule);
-        buttonSchedule.setOnClickListener(new View.OnClickListener() {
+        ImageButton ischedule = (ImageButton) findViewById(R.id.ischedule);
+        ischedule.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent();
-                intent2.setClass(MainActivity.this, schedule.class);
-                startActivity(intent2);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, schedule.class);
+                startActivity(intent);
                 MainActivity.this.finish();
             }
         });

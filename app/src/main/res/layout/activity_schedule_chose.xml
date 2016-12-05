@@ -37,7 +37,7 @@
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@color/colorPrimaryDark"
+        app:srcCompat="@color/transparent"
         android:id="@+id/imageButton2"
         android:layout_weight="1"
         tools:ignore="ContentDescription" />
@@ -45,7 +45,7 @@
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@color/colorPrimaryDark"
+        app:srcCompat="@color/transparent"
         android:id="@+id/imageButton3"
         android:layout_weight="1"
         tools:ignore="ContentDescription" />

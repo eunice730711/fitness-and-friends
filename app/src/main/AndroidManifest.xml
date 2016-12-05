@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                 android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +60,8 @@
         <activity android:name=".MyProfile" />
         <activity android:name=".WeekPlan" />
         <activity android:name=".Join_fragment" />
-        <activity android:name=".Post_fragment"></activity>
+        <activity android:name=".Post_fragment" />
+
     </application>
 
 </manifest>

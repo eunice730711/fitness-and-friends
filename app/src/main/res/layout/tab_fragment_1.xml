@@ -10,7 +10,7 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/Post"
-        android:layout_weight="1.03" />
+        android:layout_weight="2.1" />
 
     <Button
         android:text="Send"
