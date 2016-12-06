@@ -82,4 +82,13 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="no change"
+        android:id="@+id/change"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/btn_start" />
 </RelativeLayout>
