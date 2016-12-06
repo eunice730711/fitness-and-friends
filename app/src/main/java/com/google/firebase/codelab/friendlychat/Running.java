@@ -89,7 +89,6 @@ public class Running extends FragmentActivity
 
         if (status.isProviderEnabled(LocationManager.GPS_PROVIDER) || status.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             //如果GPS或網路定位開啟，呼叫locationServiceInitial()更新位置
-            // 進行GPS定位
             locationServiceInitial();
 
         } else {
@@ -138,8 +137,9 @@ public class Running extends FragmentActivity
 
         try {
             criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_FINE);//設置為最大精度
 
+            criteria.setAccuracy(Criteria.ACCURACY_FINE);//設置為最大精度
+            criteria.setSpeedAccuracy(Criteria.ACCURACY_HIGH);
             //location = lms.getLastKnownLocation(LocationManager.GPS_PROVIDER);	//使用GPS定位座標
             getLocation();
 
@@ -150,6 +150,7 @@ public class Running extends FragmentActivity
         }
 
     }
+    // 每十毫秒會更新GPS
     private void getLocation() {	//將定位資訊顯示在畫面中
 
             try {
