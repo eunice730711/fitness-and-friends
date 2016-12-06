@@ -44,7 +44,7 @@ public class Running extends FragmentActivity
     private double distance = 0;
     private boolean flag_start = false;
     private int msec=0,sec=0,min=0,hour=0;
-    Timer timer;
+    private Timer timer;
     private TextView txt_time, txt_distance, txt_loc;
     private Button btn_start, btn_finish;
     private LocationManager lms;
@@ -54,9 +54,8 @@ public class Running extends FragmentActivity
     public DatabaseReference mDatabase;
     public UserProfile userProfile;
     private String refreshedToken;
-
+    private Location location;
     private Toast toast;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +77,11 @@ public class Running extends FragmentActivity
                 new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // 當按下start按鈕後，finish按鈕才會有反應
                         if( flag_start ==true ){
                             flag_start = false;
                             getUserProfile();
-
+                            // 結束時，對使用者的總里程數累加
                         }
 
                     }
@@ -89,6 +89,7 @@ public class Running extends FragmentActivity
 
         if (status.isProviderEnabled(LocationManager.GPS_PROVIDER) || status.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             //如果GPS或網路定位開啟，呼叫locationServiceInitial()更新位置
+            // 進行GPS定位
             locationServiceInitial();
 
         } else {
@@ -111,7 +112,7 @@ public class Running extends FragmentActivity
     @Override
     public void onLocationChanged(Location location) {	//當地點改變時
         // TODO Auto-generated method stub
-        //Toast.makeText(this, "location change", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "location change", Toast.LENGTH_LONG).show();
 
     }
 
@@ -134,14 +135,13 @@ public class Running extends FragmentActivity
     }
     private void locationServiceInitial() {
         lms = (LocationManager) getSystemService(LOCATION_SERVICE);	//取得系統定位服務
-        Location location;
+
         try {
             criteria = new Criteria();
             criteria.setAccuracy(Criteria.ACCURACY_FINE);//設置為最大精度
-            location = status
-                    .getLastKnownLocation(status.getBestProvider(criteria, true));
+
             //location = lms.getLastKnownLocation(LocationManager.GPS_PROVIDER);	//使用GPS定位座標
-            getLocation(location);
+            getLocation();
 
 
         } catch (SecurityException e) {
@@ -150,7 +150,15 @@ public class Running extends FragmentActivity
         }
 
     }
-    private void getLocation(Location location) {	//將定位資訊顯示在畫面中
+    private void getLocation() {	//將定位資訊顯示在畫面中
+
+            try {
+                location = status
+                        .getLastKnownLocation(status.getBestProvider(criteria, true));
+            }catch (SecurityException e) {
+                Toast.makeText(this, "requestLocationUpdate fails", Toast.LENGTH_SHORT).show();
+
+            }
         if(location != null) {
             Double longitude = location.getLongitude();	//取得經度
             Double latitude = location.getLatitude();	//取得緯度
@@ -174,11 +182,11 @@ public class Running extends FragmentActivity
         }
     }
 
-    private double getDistance(double new_lat, double new_lng) {
-        double radLat1 = (new_lat * Math.PI / 180.0);
+    private double getDistance(double last_lat, double last_lng) {
+        double radLat1 = (last_lat * Math.PI / 180.0);
         double radLat2 = (cur_lat * Math.PI / 180.0);
         double a = radLat1 - radLat2;
-        double b = (new_lng - cur_lng) * Math.PI / 180.0;
+        double b = (last_lng - cur_lng) * Math.PI / 180.0;
         double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2)
                 + Math.cos(radLat1) * Math.cos(radLat2)
                 * Math.pow(Math.sin(b / 2), 2)));
@@ -198,6 +206,7 @@ public class Running extends FragmentActivity
                     Log.d("userid",userProfile.getUserid());
                     // it's a bug for null because the listener is unstable
 
+                    // 修改里程數
                     updateDistance();
                 }
             }
@@ -245,6 +254,7 @@ public class Running extends FragmentActivity
         txt_distance = (TextView) findViewById(R.id.txt_distance);
         txt_loc = (TextView) findViewById(R.id.txt_loc);
 
+        // 設定計時器，每10毫秒會對碼表修正時間
         timer =new Timer();
         timer.schedule(task, 0,10);
         locations = new ArrayList<String>();
@@ -275,8 +285,12 @@ public class Running extends FragmentActivity
                     txt_time.setText(String.valueOf(s));
                     if(msec <=100) {
                         double last_lat = cur_lat, last_lng = cur_lng;
-                        locationServiceInitial();
-
+                        // 進行GPS定位
+                        getLocation();
+                        if( last_lat != cur_lat || last_lng !=cur_lng){
+                            TextView t = (TextView)findViewById(R.id.change);
+                            t.setText("changed!!!");
+                        }
                         String loc = cur_lng + "," + cur_lat;
                         locations.add(loc);
                         distance += getDistance(last_lat, last_lng);
