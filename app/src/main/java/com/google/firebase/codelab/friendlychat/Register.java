@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -20,13 +22,21 @@ import com.google.firebase.iid.FirebaseInstanceId;
 public class Register extends AppCompatActivity {
 
     public DatabaseReference mDatabase;
+
+    public static final String ANONYMOUS = "anonymous";
     private Button btn_send, btn_setProfile;
     private EditText txt_userid, txt_username, txt_searchId, txt_usercity, txt_userbirthday, txt_selfintroduction;
     private TextView txt_usergender;
+    private String personEmail, personId, PhotoUrl, personName;
     private RadioGroup usergender;
     private RadioButton checkedRadioButton;
     public UserProfile userProfile;
     private String refreshedToken;
+
+    // Firebase instance variables
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,50 @@ public class Register extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         myToolbar.setTitle("Registration");
+
+        //-------------------------Get Google Account Information
+        personName = ANONYMOUS;
+        personEmail = ANONYMOUS;
+
+        // Initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+
+        // Get google profile image
+        //userImageView = (CircleImageView) findViewById(R.id.userImageView);
+
+        if (mFirebaseUser == null) {
+            // Not signed in, launch the Sign In activity
+            startActivity(new Intent(this, SignInActivity.class));
+            return;
+        } else {
+            // Get Google account information: Name, gmail and photo
+            personName = mFirebaseUser.getDisplayName();
+            personEmail = mFirebaseUser.getEmail();
+            if (mFirebaseUser.getPhotoUrl() != null) {
+                PhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+//                Glide.with(FriendProfile.this)
+//                        .load(mFirebaseUser.getPhotoUrl())
+//                        .into(userImageView);
+            }
+            else
+            {
+//                PhotoUrl = "http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png";
+//                userImageView.setImageDrawable(ContextCompat
+//                        .getDrawable(FriendProfile.this,
+//                                R.drawable.ic_account_circle_black_36dp));
+            }
+        }
+//        txt_usergmail = (TextView) findViewById(R.id.txt_usergmail);
+//        txt_googlename = (TextView) findViewById(R.id.txt_googlename);
+//
+//        txt_usergmail.setText(personEmail);
+//        txt_googlename.setText(personName);
+
+        //-----------------------google profile information finish
+
+
 
         init();
 
@@ -51,9 +105,7 @@ public class Register extends AppCompatActivity {
                 if (isChecked)
                 {
                     // Changes the textview's text to "Checked: example radiobutton text"
-                    //txt_usergender.setText(checkedRadioButton.getText());
                     txt_usergender.setText(checkedRadioButton.getText());
-                    //txt_usergender =
                 }
             }
         });
@@ -67,11 +119,13 @@ public class Register extends AppCompatActivity {
                 String userbirthday = txt_userbirthday.getText().toString();
                 String usergender = txt_usergender.getText().toString();
                 String selfintroduction = txt_selfintroduction.getText().toString();
-//
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
-                UserProfile test = new UserProfile(username, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction);
+                // Throw data to UserProfile
+                UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl);
+                // Upload data on firebase
                 mDatabase.child("UserProfile").push().setValue(test);
+                // Move on to the next page(Home)
                 Intent intent2 = new Intent();
                 intent2.setClass(Register.this, Home.class);
                 startActivity(intent2);
@@ -79,18 +133,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
-
     }
-//    private void init(){
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        btn_setProfile = (Button) findViewById(R.id.btn_setProfile);
-//        txt_userid = (EditText) findViewById(R.id.txt_id);
-//        txt_username = (EditText) findViewById(R.id.txt_username);
-//        txt_searchId = (EditText) findViewById(R.id.txt_searchId);
-//        refreshedToken = FirebaseInstanceId.getInstance().getToken();
-//
-//        //getUserProfile();
-//    }
 
     private void init(){
         mDatabase = FirebaseDatabase.getInstance().getReference();

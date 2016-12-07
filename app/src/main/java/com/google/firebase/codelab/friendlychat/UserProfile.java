@@ -13,10 +13,13 @@ public class UserProfile {
     public String usergender;
     public String userbirthday;
     public String selfintroduction;
+    public String useremail;
+    public String userphoto;
+
 
     public UserProfile(){}
 
-    public UserProfile(String username, String userid, String instanceid, String usercity, String userbirthday, String usergender, String selfintroduction){
+    public UserProfile(String username, String userid, String instanceid, String usercity, String userbirthday, String usergender, String selfintroduction, String useremail, String photo){
         this.username = username;
         this.userid = userid;
         this.instanceid = instanceid;
@@ -25,6 +28,8 @@ public class UserProfile {
         this.userbirthday = userbirthday;
         this.usergender = usergender;
         this.selfintroduction = selfintroduction;
+        this.useremail = useremail;
+        this.userphoto = photo;
     }
 
     public String getUsername(){return username;}
@@ -48,5 +53,9 @@ public class UserProfile {
     public String getUserbirthday(){return userbirthday;}
 
     public String getSelfintroduction(){return selfintroduction;}
+
+    public String getUseremail(){return useremail;}
+
+    public String getUserphoto(){return userphoto;}
 
 }
