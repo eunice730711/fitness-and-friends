@@ -28,7 +28,7 @@
     android:layout_height="wrap_content"
     android:text="Registration"
     android:textSize="20dp"
-    android:textColor="#29e5b6"
+    android:textColor="#ffffff"
     android:textStyle="normal|bold"
     android:layout_gravity="center" />
     </android.support.v7.widget.Toolbar>
