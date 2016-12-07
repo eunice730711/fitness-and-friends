@@ -14,8 +14,14 @@
         <item name="colorPrimary">#202128</item>
         <item name="colorPrimaryDark">#202128</item>
         <item name="android:textColorPrimary">#202128</item>
+            </style>
 
-
+    <style name="home_theme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorSecondaryInverse">#202128</item>
+        <item name="android:colorForeground">#202128</item>
+        <item name="colorAccent">#202128</item>
+        <item name="colorPrimary">#202128</item>
+        <item name="colorPrimaryDark">#202128</item>
+        <item name="android:textColorPrimary">#202128</item>
     </style>
-
 </resources>

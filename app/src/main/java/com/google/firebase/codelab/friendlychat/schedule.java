@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class schedule extends AppCompatActivity {
-    private Button buttonHome,buttonTalk;
 
     private ListView weekListview;
     List<String> weekList = new ArrayList<String>();
