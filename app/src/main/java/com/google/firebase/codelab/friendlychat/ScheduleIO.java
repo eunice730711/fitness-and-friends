@@ -3,13 +3,25 @@ package com.google.firebase.codelab.friendlychat;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.google.firebase.codelab.friendlychat.Day.DatetoString;
+import static com.google.firebase.codelab.friendlychat.Day.Stringtodate;
 
 /**
  * Created by JCLIN on 2016/11/28.
@@ -17,6 +29,8 @@ import java.util.List;
 
 public class ScheduleIO {
     private Context c;
+
+    public ScheduleIO(){}
 
     public ScheduleIO(Context c) {
         this.c = c;
@@ -40,10 +54,13 @@ public class ScheduleIO {
 
             for(int i = 0; i<data.size() ; i++){
                 for(int j = 0 ; j<data.get(i).getDays().size() ; j++){
-                    output = output + data.get(i).getDays().get(j).getTime() + " "
+                    String outputDate = DatetoString(data.get(i).getDays().get(j).getDate(),0);
+                    output = output
+                            + data.get(i).getDays().get(j).getTime() + " "
                             + data.get(i).getDays().get(j).getDist() + " "
                             + data.get(i).getDays().get(j).getChoose() + " "
-                            + data.get(i).getDays().get(j).getComplete() + " ";
+                            + data.get(i).getDays().get(j).getComplete() + " "
+                            + outputDate + " ";
                 }
                 output += "\n";
             }
@@ -100,7 +117,7 @@ public class ScheduleIO {
                 w.setWeek(i+1);
 
                 String[] splittedStr = line.split(" ");
-                for (int j=0; j<splittedStr.length; j+=4){
+                for (int j=0; j<splittedStr.length; j+=5){
                     Day day = new Day();
                     day.setTime(Integer.valueOf(splittedStr[j]));
                     day.setDist(Double.valueOf(splittedStr[j+1]));
@@ -116,6 +133,7 @@ public class ScheduleIO {
                     else{
                         day.setComplete(false);
                     }
+                    day.setDate(Stringtodate(splittedStr[j+4]));
 
                     list_day.add(day);
                 }
@@ -140,6 +158,47 @@ public class ScheduleIO {
 
     public void DeleteFile(){
         c.deleteFile("schedule.txt");
+    }
+
+
+    public void WriteFirebase(List<WeekContent> data){
+
+        final UserSchedule userSchedule = new UserSchedule();
+
+        //firebase初始化
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        //user 的schedule 初始化
+        userSchedule.setGoogleEmail(mFirebaseUser.getEmail());
+        userSchedule.setPlan(data);
+
+        //找firebase中的email節點
+        mFirebaseDatabaseReference.child("UserSchedule").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                boolean newpush = true;
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Object o  = dataSnapshot.getValue(Object.class);
+                    String email = ((HashMap<String,String>)o).get("googleEmail");
+                    if( email.equals(userSchedule.getGoogleEmail())) {
+                        dataSnapshot.getRef().setValue(userSchedule);
+                        newpush = false;
+                        break;
+                    }
+                }
+                if(newpush){
+                    snapshot.getRef().push().setValue(userSchedule);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+
     }
 
 

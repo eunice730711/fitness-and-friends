@@ -40,17 +40,16 @@
             app:srcCompat="@mipmap/pic_schedule"
             android:id="@+id/imageView"
             android:scaleType="fitCenter"
-            android:layout_weight="1.00"
-            android:layout_height="wrap_content" />
+            android:layout_height="88dp" />
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:id="@+id/ListView"
-            android:layout_below="@+id/imageView"
-            android:layout_weight="0.30" />
+            android:layout_below="@+id/imageView" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"

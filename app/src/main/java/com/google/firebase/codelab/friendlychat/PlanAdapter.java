@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.google.firebase.codelab.friendlychat.Day.DatetoString;
+
 /**
  * Created by JCLIN on 2016/11/28.
  */
@@ -66,12 +68,15 @@ public class PlanAdapter extends BaseAdapter {
         String medium = "跑步距離 :   " ;
         TextView textView = (TextView) view.findViewById(R.id.runContent);
         TextView textView_w = (TextView) view.findViewById(R.id.Week_x);
+        TextView textView_date = (TextView) view.findViewById(R.id.plan_date);
 
         CheckBox done = (CheckBox) view.findViewById(R.id.Day_done);
 
         textView_w.setText(weekname.get(i));
+        textView_date.setText(DatetoString(dayList.get(i).getDate(),1));
 
         if(dayList.get(i).getChoose()){
+
 
             if(level == 1){
                 textView.setText(beginner + dayList.get(i).getTime() + "   mins ");
