@@ -32,6 +32,7 @@ public class Register extends AppCompatActivity {
     private RadioButton checkedRadioButton;
     public UserProfile userProfile;
     private String refreshedToken;
+    private ProfileIO profileIO;
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
@@ -123,6 +124,14 @@ public class Register extends AppCompatActivity {
 
                 // Throw data to UserProfile
                 UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl);
+
+                // Write file in local
+                profileIO = new ProfileIO(Register.this);
+                profileIO.WriteFile(test);
+                // Read user profile from file!
+                // UserProfile read = new UserProfile();
+                // read = profileIO.ReadFile();
+
                 // Upload data on firebase
                 mDatabase.child("UserProfile").push().setValue(test);
                 // Move on to the next page(Home)
