@@ -27,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 // 顯示該使用者的好友列表
 public class FriendList extends AppCompatActivity {
     public DatabaseReference mDatabase;
-    public UserProfile userProfile;
+    public UserProfile userProfile, result;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<Object,FriendListViewHolder>
@@ -62,34 +62,28 @@ public class FriendList extends AppCompatActivity {
         public void deleteFriend(){
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             // 從自己的好友資料庫刪除對方
-            mDatabase.child("Friend").child(userProfile.getUserid()).orderByChild("friendid").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            mDatabase.child("Friend").child(userProfile.getUserid()).orderByChild("friendid").equalTo(friendid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Object o  = dataSnapshot.getValue(Object.class);
-                        String id = ((HashMap<String,String>)o).get("friendid");
+
                         // 找到viewholder對應的 requester
-                        if( id.compareTo(friendid)==0) {
-                            dataSnapshot.getRef().removeValue();
-                            break;
-                        }
+                        dataSnapshot.getRef().removeValue();
+
                     }
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {}
             });
             //從對方的好友資料庫刪除自己
-            mDatabase.child("Friend").child(friendid).orderByChild("friendid").addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabase.child("Friend").child(friendid).orderByChild("friendid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Object o  = dataSnapshot.getValue(Object.class);
-                        String id = ((HashMap<String,String>)o).get("friendid");
+
                         // 找到viewholder對應的 requester
-                        if( id.compareTo(userProfile.getUserid())==0) {
-                            dataSnapshot.getRef().removeValue();
-                            break;
-                        }
+                        dataSnapshot.getRef().removeValue();
                     }
                 }
                 @Override
@@ -116,6 +110,8 @@ public class FriendList extends AppCompatActivity {
     }
     private void getFriendList(){
         getUserProfile();
+        //userProfile = get("alan");
+        //show();
     }
     private void getUserProfile() {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
@@ -128,7 +124,7 @@ public class FriendList extends AppCompatActivity {
                     userProfile = dataSnapshot.getValue(UserProfile.class);
                     Log.d("username", userProfile.getUsername());
 
-                    // 在取得使用者資料後才對資料庫存取
+                    // 在取得使用者資料後才對好友資料庫存取
                     show();
 
                 }
@@ -139,7 +135,7 @@ public class FriendList extends AppCompatActivity {
     }
     private void show(){
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
+        // 取得好友名單並且列出
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Object,
                 FriendListViewHolder>(
                 Object.class,
@@ -155,12 +151,29 @@ public class FriendList extends AppCompatActivity {
                         viewHolder.friendid = ((HashMap)o).get("friendid").toString();
                         viewHolder.userProfile = userProfile;
 
-
             }
         };
         mRecyclerView.setAdapter(mFirebaseAdapter);
 
     }
 
+    public UserProfile get(String id) {
+        result = null;
+        mDatabase.child("UserProfile").orderByChild("userid").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    result = dataSnapshot.getValue(UserProfile.class);
+                    break;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        while( result ==null);
+        return result;
+    }
 
 }
