@@ -2,13 +2,19 @@ package com.google.firebase.codelab.friendlychat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +26,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 public class Home extends AppCompatActivity {
     public UserProfile userProfile;
     public TextView txt_distance;
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +37,29 @@ public class Home extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         myToolbar.setNavigationIcon(R.drawable.home_menu);
         getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        addDrawerItems();
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+            }
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        mActionBarDrawerToggle.syncState();
+        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+
+
+
+
 
         ImageButton ischedule = (ImageButton) findViewById(R.id.ischedule);
         ischedule.setOnClickListener(new ImageButton.OnClickListener() {
@@ -95,6 +127,14 @@ public class Home extends AppCompatActivity {
         txt_distance = (TextView)findViewById(R.id.txt_homeditatnce);
         updateDistance();
     }
+    private void addDrawerItems() {
+        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+    }
+
+
+
 
     private void updateDistance(){
         getUserProfile();

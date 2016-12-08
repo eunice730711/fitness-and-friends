@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -22,8 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".MainActivity"
-                 android:label="">
+        <activity
+            android:name=".MainActivity"
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,7 +63,7 @@
         <activity android:name=".WeekPlan" />
         <activity android:name=".Join_fragment" />
         <activity android:name=".Post_fragment" />
-
+        <activity android:name=".FriendProfile"></activity>
     </application>
 
 </manifest>

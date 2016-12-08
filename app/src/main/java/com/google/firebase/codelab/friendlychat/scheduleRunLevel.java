@@ -25,7 +25,7 @@ public class scheduleRunLevel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent();
-                intent1.setClass(scheduleRunLevel.this, scheduleChose.class);
+                intent1.setClass(scheduleRunLevel.this, schedule.class);
                 startActivity(intent1);
                 scheduleRunLevel.this.finish();
             }
