@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -198,9 +199,27 @@ public class ScheduleIO {
             public void onCancelled(DatabaseError databaseError) {}
         });
 
-
     }
 
+    public Day TodayJob(){
+
+        List<WeekContent> list_week = new ArrayList<WeekContent>();
+        Day today = new Day();
+        list_week = ReadFile();
+        Calendar calendar = Calendar.getInstance();
+
+        for(int i=0; i<list_week.size(); i++){
+            for(int j=0; j<list_week.get(i).getDays().size(); j++){
+
+                String date = DatetoString(list_week.get(i).getDays().get(j).getDate(),0);
+                String now = DatetoString(calendar.getTime(),0);
+                if(date.equals(now)){
+                    return list_week.get(i).getDays().get(j);
+                }
+            }
+        }
+        return today;
+    }
 
 
 }

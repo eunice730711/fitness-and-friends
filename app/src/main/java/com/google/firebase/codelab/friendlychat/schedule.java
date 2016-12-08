@@ -63,7 +63,7 @@ public class schedule extends AppCompatActivity {
 
         }
         else{
-            myplan = fileIO.ReadFile();
+            myplan = fileIO.ReadFile(); 
         }
 
         if(myplan.size() == 5){
