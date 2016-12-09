@@ -103,28 +103,9 @@ public class SearchUser extends AppCompatActivity {
         txt_username = (EditText) findViewById(R.id.txt_username);
         txt_searchId = (EditText) findViewById(R.id.txt_searchId);
         refreshedToken = FirebaseInstanceId.getInstance().getToken();
-
-        getUserProfile();
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO(SearchUser.this);
+        userProfile = profileIO.ReadFile();
     }
-
-    private  void getUserProfile(){
-        // get the userProfile by instanceId
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    userProfile = dataSnapshot.getValue(UserProfile.class);
-                    Log.d("userid",userProfile.getUserid());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-
 
 }
