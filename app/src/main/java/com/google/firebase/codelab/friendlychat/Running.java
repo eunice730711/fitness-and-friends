@@ -1,17 +1,19 @@
 package com.google.firebase.codelab.friendlychat;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.app.AlertDialog.Builder;
+import android.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +37,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.R.attr.data;
+import static android.R.id.message;
 import static android.net.wifi.SupplicantState.COMPLETED;
+import static android.os.Build.VERSION_CODES.M;
 import static com.google.android.gms.auth.api.credentials.PasswordSpecification.da;
 
 public class Running extends FragmentActivity
@@ -202,7 +206,10 @@ public class Running extends FragmentActivity
     }
 
     private void update(){
-        getUserProfile();
+        // 修改里程數
+        updateDistance();
+        // 上傳本次紀錄
+        updateRecord();
         //
         if(toast == null){
             toast = Toast.makeText(Running.this,"恭喜你已完成本次跑步" ,Toast.LENGTH_SHORT);
@@ -213,31 +220,6 @@ public class Running extends FragmentActivity
         toast.show();
 
         //Toast.makeText(Running.this, "恭喜你已完成本次跑步", Toast.LENGTH_LONG).show();
-    }
-
-    private  void getUserProfile(){
-        // get the userProfile by unique email
-        mDatabase.child("UserProfile").orderByChild("email").equalTo(personEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    userProfile = dataSnapshot.getValue(UserProfile.class);
-                    Log.d("userid",userProfile.getUserid());
-                    // it's a bug for null because the listener is unstable
-
-                    // 修改里程數
-                    updateDistance();
-                    // 上傳本次紀錄
-                    updateRecord();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 
     private void updateDistance(){
@@ -282,8 +264,36 @@ public class Running extends FragmentActivity
             }
         });
     }
+    private AlertDialog GoalAlertDialog(){
+        //產生一個Builder物件
+        Builder builder = new AlertDialog.Builder(Running.this);
+        //設定Dialog的標題
+        builder.setTitle("Today goal");
+        //設定Dialog的內容
+        String message=null;
+        ScheduleIO scheduleIO = new ScheduleIO(Running.this);
+        Day day = scheduleIO.TodayJob();
+        if( day ==null){
+            message = "It's free today.";
+        }
+        else
+            message = String.valueOf(day.getDist()) +" km";
+        builder.setMessage(message);
+
+        //設定Positive按鈕資料
+        builder.setPositiveButton("GO!!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //按下按鈕時顯示快顯
+            }
+        });
+        //利用Builder物件建立AlertDialog
+        return builder.create();
+    }
 
     private void init(){
+        AlertDialog alertDialog = GoalAlertDialog();
+        alertDialog.show();
         txt_time = (TextView) findViewById(R.id.txt_time_value);
         btn_finish = (Button) findViewById(R.id.btn_finish);
         btn_start = (Button) findViewById(R.id.btn_start);
@@ -296,16 +306,9 @@ public class Running extends FragmentActivity
         locations = new ArrayList<String>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //-------------------------Get Google Account Information
-        personEmail = ANONYMOUS;
-        // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
-        if (mFirebaseUser != null) {
-            // Get Google account information: Name, gmail and photo
-            personEmail = mFirebaseUser.getEmail();
-        }
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO(Running.this);
+        userProfile = profileIO.ReadFile();
     }
 
     private Handler handler = new Handler(){
