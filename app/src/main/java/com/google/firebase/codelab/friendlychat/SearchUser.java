@@ -62,12 +62,12 @@ public class SearchUser extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot snapshot) {
                                     // 避免重複送出邀請
                                     String userId2 = txt_searchId.getText().toString();
-                                    // to do
-                                    /*Intent i = new Intent(this, ToClass.class);
-                                    i.putExtra("friendid", userId2);
-                                    startActivity(i);
-                                    */
+                                    // 傳送好友ID 到好友頁面
+                                    Intent intent = new Intent(SearchUser.this, FriendProfile.class);
+                                    intent.putExtra("friendid", userId2);
+                                    startActivity(intent);
 
+/*
                                     if ( snapshot.exists())
                                         Toast.makeText(SearchUser.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_SHORT).show();
                                     else{
@@ -78,7 +78,7 @@ public class SearchUser extends AppCompatActivity {
                                         mDatabase.child("RequestFriend").child(userId).push().setValue(map);
                                         Toast.makeText(SearchUser.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
                                     }
-
+*/
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {}
