@@ -39,6 +39,9 @@ public class Home extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO(Home.this);
+        userProfile = profileIO.ReadFile();
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
@@ -161,14 +164,11 @@ public class Home extends AppCompatActivity {
 
 
     private void updateDistance(){
-        getUserProfile();
-    }
-    private void getUserProfile() {
+
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        // get the userProfile by instanceId
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
+        // get the userProfile by userid
+        mDatabase.child("UserProfile").orderByChild("userid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 /*
