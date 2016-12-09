@@ -1,6 +1,7 @@
 package com.google.firebase.codelab.friendlychat;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
 
 
 public class SearchUser extends AppCompatActivity {
@@ -53,22 +56,29 @@ public class SearchUser extends AppCompatActivity {
                             String userId = txt_searchId.getText().toString();
 
                             // 送出邀請
-                            mDatabase.child("RequestFriend").orderByChild("user").equalTo(userId).getRef()
-                                    .child("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                            mDatabase.child("RequestFriend").child(userId).getRef()
+                                    .orderByChild("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
                                     // 避免重複送出邀請
                                     String userId2 = txt_searchId.getText().toString();
+                                    // to do
+                                    /*Intent i = new Intent(this, ToClass.class);
+                                    i.putExtra("friendid", userId2);
+                                    startActivity(i);
+                                    */
 
                                     if ( snapshot.exists())
-                                        Toast.makeText(SearchUser.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SearchUser.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_SHORT).show();
                                     else{
                                         // 送出邀請
                                         String userId = txt_searchId.getText().toString();
-                                        RequestFriend requestFriend = new RequestFriend(userId, userProfile.getUserid());
-                                        mDatabase.child("RequestFriend").push().setValue(requestFriend);
-                                        Toast.makeText(SearchUser.this, "Friend request has been sent", Toast.LENGTH_LONG).show();
+                                        HashMap<String,String> map = new HashMap<String, String>();
+                                        map.put("requester",userProfile.getUserid());
+                                        mDatabase.child("RequestFriend").child(userId).push().setValue(map);
+                                        Toast.makeText(SearchUser.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
                                     }
+
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {}

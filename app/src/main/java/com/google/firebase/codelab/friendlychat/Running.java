@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,6 +43,8 @@ public class Running extends FragmentActivity
         LocationListener {
     /** Called when the activity is first created. */
     private final double EARTH_RADIUS = 6378137.0;
+    public static final String ANONYMOUS = "anonymous";
+    private String personEmail;
     private double cur_lat, cur_lng;
     private double distance = 0;
     private boolean flag_start = false;
@@ -47,15 +52,16 @@ public class Running extends FragmentActivity
     private Timer timer;
     private TextView txt_time, txt_distance, txt_loc;
     private Button btn_start, btn_finish;
-    private LocationManager lms;
     private ArrayList<String> locations;
     private  LocationManager status;
     private Criteria criteria;
     public DatabaseReference mDatabase;
     public UserProfile userProfile;
-    private String refreshedToken;
     private Location location;
     private Toast toast;
+    //private Firebase mRef;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +86,7 @@ public class Running extends FragmentActivity
                         // 當按下start按鈕後，finish按鈕才會有反應
                         if( flag_start ==true ){
                             flag_start = false;
-                            getUserProfile();
+                            update();
                             // 結束時，對使用者的總里程數累加
                         }
 
@@ -133,7 +139,6 @@ public class Running extends FragmentActivity
         //status=TEMPORARILY_UNAVAILABLE 供應商暫停服務
     }
     private void locationServiceInitial() {
-        lms = (LocationManager) getSystemService(LOCATION_SERVICE);	//取得系統定位服務
 
         try {
             criteria = new Criteria();
@@ -196,9 +201,23 @@ public class Running extends FragmentActivity
         return s;
     }
 
+    private void update(){
+        getUserProfile();
+        //
+        if(toast == null){
+            toast = Toast.makeText(Running.this,"恭喜你已完成本次跑步" ,Toast.LENGTH_SHORT);
+        }
+        else{
+            toast.setText("恭喜你已完成本次跑步");
+        }
+        toast.show();
+
+        //Toast.makeText(Running.this, "恭喜你已完成本次跑步", Toast.LENGTH_LONG).show();
+    }
+
     private  void getUserProfile(){
-        // get the userProfile by instanceId
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
+        // get the userProfile by unique email
+        mDatabase.child("UserProfile").orderByChild("email").equalTo(personEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
@@ -209,6 +228,9 @@ public class Running extends FragmentActivity
 
                     // 修改里程數
                     updateDistance();
+                    // 上傳本次紀錄
+                    updateRecord();
+
                 }
             }
 
@@ -219,7 +241,8 @@ public class Running extends FragmentActivity
     }
 
     private void updateDistance(){
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        mDatabase.child("UserProfile").orderByChild("userid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
@@ -227,17 +250,9 @@ public class Running extends FragmentActivity
                     userProfile = dataSnapshot.getValue(UserProfile.class);
                     Log.d("userid",userProfile.getUserid());
 
+                    // 更新總距離
                     dataSnapshot.getRef().child("totaldistance").setValue(userProfile.updateDistance(distance));
 
-                    if(toast == null){
-                        toast = Toast.makeText(Running.this,"恭喜你已完成本次跑步" ,Toast.LENGTH_SHORT);
-                    }
-                    else{
-                        toast.setText("恭喜你已完成本次跑步");
-                    }
-                    toast.show();
-
-                    //Toast.makeText(Running.this, "恭喜你已完成本次跑步", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -245,8 +260,28 @@ public class Running extends FragmentActivity
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
     }
 
+    private void updateRecord(){
+        mDatabase.child("Record").child(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Map<String, Object> map = new HashMap();
+                // to do 要改成取得當天日期的函式
+                map.put("date","1999/07/20");
+                map.put("distance", String.valueOf(distance));
+                // 每次跑步紀錄的時間以分鐘為單位
+                map.put("time", String.valueOf(hour*60+min));
+                snapshot.getRef().push().updateChildren(map);
+                Log.e("log",snapshot.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
 
     private void init(){
         txt_time = (TextView) findViewById(R.id.txt_time_value);
@@ -261,7 +296,16 @@ public class Running extends FragmentActivity
         locations = new ArrayList<String>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        //-------------------------Get Google Account Information
+        personEmail = ANONYMOUS;
+        // Initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if (mFirebaseUser != null) {
+            // Get Google account information: Name, gmail and photo
+            personEmail = mFirebaseUser.getEmail();
+        }
     }
 
     private Handler handler = new Handler(){

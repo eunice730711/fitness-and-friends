@@ -124,6 +124,30 @@ public class Home extends AppCompatActivity {
 //                startActivity(intent2);
 //            }
 //        });
+        /*
+        Button btn_delete = (Button) findViewById(R.id.deleteALL);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+                mDatabase.child("UserProfile").orderByChild("instanceid").addListenerForSingleValueEvent(new ValueEventListener() {
+                //mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            dataSnapshot.getRef().removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+            }
+        });
+        */
         txt_distance = (TextView)findViewById(R.id.txt_homeditatnce);
         updateDistance();
     }

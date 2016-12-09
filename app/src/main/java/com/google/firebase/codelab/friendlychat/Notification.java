@@ -23,20 +23,22 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.R.attr.id;
+
 
 public class Notification extends AppCompatActivity {
     public DatabaseReference mDatabase;
     public UserProfile userProfile;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
-    private FirebaseRecyclerAdapter<RequestFriend, RequestViewHolder>
+    private FirebaseRecyclerAdapter<Object, RequestViewHolder>
             mFirebaseAdapter;
     public static class RequestViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_request;
         public Button btn_accept, btn_refect;
         public CircleImageView requestImageView;
         public UserProfile userProfile;
-        public RequestFriend requestFriend;
+        public String requester;
         public RequestViewHolder( View v) {
             super(v);
             txt_request = (TextView) itemView.findViewById(R.id.txt_request);
@@ -49,17 +51,17 @@ public class Notification extends AppCompatActivity {
                 public void onClick(View v) {
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                     int index = txt_request.getText().toString().indexOf("送")-1;
-                    String friendid = txt_request.getText().subSequence(0,index).toString();
+                    requester = txt_request.getText().subSequence(0,index).toString();
                     HashMap<String, String> friend = new HashMap<String, String>();
                     HashMap<String, String> friend2 = new HashMap<String, String>();
 
-                    friend.put("friendid",friendid);
+                    friend.put("friendid",requester);
                     friend2.put("friendid",userProfile.getUserid());
-                    mDatabase.child("Friend").child(userProfile.getUserid()).getRef().setValue(friend);
-                    mDatabase.child("Friend").child(friendid).getRef().setValue(friend2);
+                    // 對好友資料庫進行寫入，建立兩人好友關係
+                    mDatabase.child("Friend").child(userProfile.getUserid()).getRef().push().setValue(friend);
+                    mDatabase.child("Friend").child(requester).getRef().push().setValue(friend2);
                     // 刪除好友邀請
-                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).getRef().
-                            equalTo(requestFriend.getRequester()).getRef().removeValue();
+                    deleteRequester();
                     Toast.makeText(v.getContext(), "恭喜你們已成為好友", Toast.LENGTH_LONG).show();
 
                 }
@@ -69,10 +71,30 @@ public class Notification extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // 刪除好友邀請
-                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child("RequestFriend").orderByChild("user").equalTo(requestFriend.getUser()).getRef().
-                            equalTo(requestFriend.getRequester()).getRef().removeValue();
+                    deleteRequester();
                 }
+            });
+        }
+        public void deleteRequester(){
+            int index = txt_request.getText().toString().indexOf("送")-1;
+            requester = txt_request.getText().subSequence(0,index).toString();
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+            // 列出所有對該用戶所發出的好友通知
+            mDatabase.child("RequestFriend").child(userProfile.getUserid()).getRef().
+                    orderByChild("requester").equalTo(requester).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Object o = dataSnapshot.getValue(Object.class);
+                        String id = ((HashMap<String, String>) o).get("requester");
+                        // 找到viewholder對應的 requester
+                        dataSnapshot.getRef().removeValue();
+                    }
+
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
             });
         }
     }
@@ -85,6 +107,8 @@ public class Notification extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
+        // 顯示最新資訊，由上而下
+        mLinearLayoutManager.setReverseLayout(true);
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         getUserProfile();
@@ -101,7 +125,7 @@ public class Notification extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     userProfile = dataSnapshot.getValue(UserProfile.class);
                     Log.e("username", userProfile.getUsername());
-                    // 再取得使用者資料後才對資料庫存取
+                    // 再取得使用者資料後才對通知資料庫存取
                     show();
                 }
             }
@@ -114,19 +138,20 @@ public class Notification extends AppCompatActivity {
 
     private void show(){
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<RequestFriend,
+        // 存取通知資料庫，並且顯示通知出來
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Object,
                 RequestViewHolder>(
-                RequestFriend.class,
+                Object.class,
                 R.layout.item_request_friend,
                 RequestViewHolder.class,
-                mFirebaseDatabaseReference.child("RequestFriend").orderByChild("user").equalTo(userProfile.getUserid())) {
+                mFirebaseDatabaseReference.child("RequestFriend").child(userProfile.getUserid()).orderByChild("requester")) {
 
             @Override
             protected void populateViewHolder(RequestViewHolder viewHolder,
-                                              RequestFriend requestFriend, int position) {
-                viewHolder.txt_request.setText(requestFriend.getRequester() + " 送出好友邀請");
-                viewHolder.requestFriend = requestFriend;
+                                              Object o , int position) {
+                String requester = ((HashMap)o).get("requester").toString();
+                viewHolder.txt_request.setText(requester + " 送出好友邀請");
+                viewHolder.requester = requester;
                 viewHolder.userProfile = userProfile;
             }
         };

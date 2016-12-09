@@ -117,6 +117,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp" />
 
+    <Button
+        android:text="delete_allUserProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_toStartOf="@+id/txt_homeditatnce"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="56dp"
+        android:id="@+id/deleteALL" />
+
 
 </RelativeLayout>
 
