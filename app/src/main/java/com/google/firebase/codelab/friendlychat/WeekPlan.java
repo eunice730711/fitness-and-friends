@@ -47,6 +47,8 @@ public class WeekPlan extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //避免 按上一頁 會跳出 或 沒改到目前schedule的狀態(complete與否)
+        //按上一頁的話會重新開啟一個schedule的activity
 
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {

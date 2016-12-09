@@ -46,6 +46,8 @@ public class UserProfile {
 
     public double updateDistance(double oneDistance){ this.totaldistance += oneDistance; return this.totaldistance;}
 
+    public double getTotaldistance(){return totaldistance;}
+
     public String getUsergender(){return usergender;}
 
     public String getUsercity(){return usercity;}

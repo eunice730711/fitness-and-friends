@@ -23,7 +23,6 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.google.firebase.codelab.friendlychat.R.id.btn_friendprofile;
 
 //import static com.google.firebase.codelab.friendlychat.R.id.btn_friend;
 
@@ -39,18 +38,18 @@ public class FriendList extends AppCompatActivity {
     // ViewHolder 可以做每個好友的layout設定
     public static class FriendListViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_friendName;
-        public Button btn_friendprofile;
+        public Button btn_friendProfile;
         public CircleImageView friendListImageView;
         public UserProfile userProfile;
         public String friendid;
         public FriendListViewHolder( View v) {
             super(v);
             txt_friendName = (TextView) itemView.findViewById(R.id.txt_friendName);
-            btn_friendprofile = (Button) itemView.findViewById(R.id.btn_friendprofile);
+            btn_friendProfile = (Button) itemView.findViewById(R.id.btn_friendProfile);
             friendListImageView= (CircleImageView) itemView.findViewById(R.id.friendListImageView);
 
 
-            btn_friendprofile.setOnClickListener(new View.OnClickListener() {
+            btn_friendProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // 刪除好友
