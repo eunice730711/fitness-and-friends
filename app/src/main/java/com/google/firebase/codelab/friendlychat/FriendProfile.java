@@ -1,8 +1,10 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -15,26 +17,27 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.R.attr.id;
+
 public class FriendProfile extends AppCompatActivity {
 
     //Google account information
     //private AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
     public DatabaseReference mDatabase;
-
-    private static final String TAG = "MyProfile";
-    public static final String ANONYMOUS = "anonymous";
-    public static final String PROFILE_CHILD = "UserProfile";
-    private static final int RC_SIGN_IN = 9001;
-
     private TextView txt_usergmail, txt_googlename, txt_usercity, txt_userbirthday, txt_userid, txt_usergender, txt_selfintroduction;
     private CircleImageView userImageView;
-    private String refreshedToken;
+    private String friendid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile);
+        setContentView(R.layout.activity_friend_profile);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            friendid = extras.getString("friendid");
+        }
 
         //--------------------------Get firebase information
         txt_usercity = (TextView) findViewById(R.id.txt_usercity);
@@ -47,32 +50,30 @@ public class FriendProfile extends AppCompatActivity {
         userImageView = (CircleImageView) findViewById(R.id.userImageView);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        //refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        getProfile(friendid);
 
-        // get the userProfile by instanceId
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
+    }
+
+    private void getProfile(String id) {
+        FirebaseData firebaseData = new FirebaseData();
+        firebaseData.getProfileById(id, new FirebaseData.Callback() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                    //User information
-                    txt_usercity.setText(userProfile.getUsercity());
-                    txt_userbirthday.setText(userProfile.getUserbirthday());
-                    txt_usergender.setText(userProfile.getUsergender());
-                    txt_userid.setText(userProfile.getUserid());
-                    txt_selfintroduction.setText(userProfile.getSelfintroduction());
-                    txt_usergmail.setText(userProfile.getUseremail());
-                    txt_googlename.setText(userProfile.getUsername());
-                    //imageView
-                    Glide.with(FriendProfile.this)
-                        .load(userProfile.getUserphoto())
+            public void getProfile(UserProfile profile) {
+                //User information
+                txt_usercity.setText(profile.getUsercity());
+                txt_userbirthday.setText(profile.getUserbirthday());
+                txt_usergender.setText(profile.getUsergender());
+                txt_userid.setText(profile.getUserid());
+                txt_selfintroduction.setText(profile.getSelfintroduction());
+                txt_usergmail.setText(profile.getUseremail());
+                txt_googlename.setText(profile.getUsername());
+                //imageView
+                Glide.with(FriendProfile.this)
+                        .load(profile.getUserphoto())
                         .into(userImageView);
-                    Log.d("userid", userProfile.getUserid());
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                Log.d("userid", profile.getUserid());
+
             }
         });
     }
