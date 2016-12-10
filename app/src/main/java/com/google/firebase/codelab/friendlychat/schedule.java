@@ -44,7 +44,7 @@ public class schedule extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         Intent intent = this.getIntent();
-        r = (Result) intent.getSerializableExtra("schedul");
+        r = (Result) intent.getSerializableExtra("schedule");
 
 
         // 01 display every week
@@ -63,12 +63,18 @@ public class schedule extends AppCompatActivity {
 
         }
         else{
-            myplan = fileIO.ReadFile(); 
+            myplan = fileIO.ReadFile();
         }
 
-        if(myplan.size() == 5){
+        if(myplan!=null && myplan.size() == 5){
             weekList.add("Week 5");
         }
+
+//        Day da = fileIO.TodayJob();
+//        if(da != null ){
+//            Toast.makeText(schedule.this, "here", Toast.LENGTH_LONG).show();
+//        }
+
 
 
 
@@ -244,7 +250,15 @@ public class schedule extends AppCompatActivity {
                 s = now_of_week-1;
             }
             else if(w == 4){
+                //如果開始填第五周
                 f = now_of_week-1;
+            }
+            else if(w == 0 && !ifFiveWeek()){
+                //如果沒有第五周 而且現在開始填第一周的計畫時
+                set_date = Calendar.getInstance();
+                for(int k=0; k<now_of_week; k++){
+                    set_date.add(Calendar.DATE, -1);
+                }
             }
 
             //根據幾周開始塞計畫
@@ -373,6 +387,5 @@ public class schedule extends AppCompatActivity {
         return weekDay;
     }
 }
-
 
 

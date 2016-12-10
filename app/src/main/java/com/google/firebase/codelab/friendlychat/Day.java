@@ -17,6 +17,11 @@ public class Day implements Serializable {
     private Date date;
 
     public Day() {
+        this.time = 0;
+        this.dist = 0.0;
+        this.choose = false;
+        this.complete = false;
+        this.date = new Date();
 
     }
     public Day(int time, double dist, boolean choose, boolean complete, Date date) {

@@ -91,12 +91,15 @@ public class ScheduleIO {
         File dir = c.getFilesDir();
         File inFile = new File(dir, "schedule.txt");
 
-        StringBuilder data = new StringBuilder();
-        BufferedReader reader = null;
-
         List<WeekContent> list_week = new ArrayList<WeekContent>();
 
+        if(!inFile.exists()){
+            Toast.makeText(c, "File does not exist.", Toast.LENGTH_SHORT).show();
+            return  list_week;
+        }
 
+        StringBuilder data = new StringBuilder();
+        BufferedReader reader = null;
 
         try {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "utf-8"));
@@ -161,8 +164,11 @@ public class ScheduleIO {
         c.deleteFile("schedule.txt");
     }
 
+    public interface IsNewPush {
+        void SetNewPush(UserSchedule userSchedule,DatabaseReference mFirebaseDatabaseReference);
+    }
 
-    public void WriteFirebase(List<WeekContent> data){
+    public void QueryFirebase(List<WeekContent> data,final IsNewPush callback){
 
         final UserSchedule userSchedule = new UserSchedule();
 
@@ -179,21 +185,22 @@ public class ScheduleIO {
         mFirebaseDatabaseReference.child("UserSchedule").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
-                boolean newpush = true;
+                boolean find = false;
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Object o  = dataSnapshot.getValue(Object.class);
                     String email = ((HashMap<String,String>)o).get("googleEmail");
                     if( email.equals(userSchedule.getGoogleEmail())) {
                         dataSnapshot.getRef().setValue(userSchedule);
-                        newpush = false;
+                        find = true;
                         break;
                     }
                 }
-                if(newpush){
-                    snapshot.getRef().push().setValue(userSchedule);
+
+                if(find == false){
+                    callback.SetNewPush(userSchedule,snapshot.getRef());
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}
@@ -201,10 +208,63 @@ public class ScheduleIO {
 
     }
 
+
+    public void WriteFirebase(List<WeekContent> data){
+
+        QueryFirebase(data,
+                new IsNewPush() {
+                    @Override
+                    public void SetNewPush(UserSchedule userSchedule,DatabaseReference mFirebaseDatabaseReference) {
+                        mFirebaseDatabaseReference.push().setValue(userSchedule);
+
+                    }
+                });
+
+
+//        //-------ok method
+//        final UserSchedule userSchedule = new UserSchedule();
+//
+//        //firebase初始化
+//        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+//        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+//        DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+//
+//        //user 的schedule 初始化
+//        userSchedule.setGoogleEmail(mFirebaseUser.getEmail());
+//        userSchedule.setPlan(data);
+//
+//        //找firebase中的email節點
+//        mFirebaseDatabaseReference.child("UserSchedule").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//
+//                boolean newpush = true;
+//
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    Object o  = dataSnapshot.getValue(Object.class);
+//                    String email = ((HashMap<String,String>)o).get("googleEmail");
+//                    if( email.equals(userSchedule.getGoogleEmail())) {
+//                        dataSnapshot.getRef().setValue(userSchedule);
+//                        newpush = false;
+//                        break;
+//                    }
+//                }
+//                if(newpush){
+//                    snapshot.getRef().push().setValue(userSchedule);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {}
+//        });
+//        //-------ok method
+
+    }
+
     public Day TodayJob(){
 
         List<WeekContent> list_week = new ArrayList<WeekContent>();
         list_week = ReadFile();
+
         Calendar calendar = Calendar.getInstance();
 
         for(int i=0; i<list_week.size(); i++){
@@ -217,6 +277,7 @@ public class ScheduleIO {
                 }
             }
         }
+
         return null;
     }
 

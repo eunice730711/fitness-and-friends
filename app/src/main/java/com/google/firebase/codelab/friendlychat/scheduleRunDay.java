@@ -173,7 +173,7 @@ public class scheduleRunDay extends AppCompatActivity {
                     String days = "" + s1 + s2 + s3 + s4 + s5 + s6 + s7;
                     r.setDays(days);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("schedul", r);
+                    bundle.putSerializable("schedule", r);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     scheduleRunDay.this.finish();
