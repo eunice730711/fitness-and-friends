@@ -25,6 +25,7 @@ import java.util.concurrent.CountDownLatch;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.R.attr.id;
+import static com.google.firebase.codelab.friendlychat.R.id.txt_friendid;
 
 
 //import static com.google.firebase.codelab.friendlychat.R.id.btn_friend;
@@ -40,14 +41,14 @@ public class FriendList extends AppCompatActivity {
 
     // ViewHolder 可以做每個好友的layout設定
     public static class FriendListViewHolder extends RecyclerView.ViewHolder {
-        public TextView txt_friendName;
+        public TextView txt_friendid;
         public Button btn_friendProfile;
         public CircleImageView friendListImageView;
         public UserProfile userProfile;
         public String friendid;
         public FriendListViewHolder( View v) {
             super(v);
-            txt_friendName = (TextView) itemView.findViewById(R.id.txt_friendName);
+            txt_friendid = (TextView) itemView.findViewById(R.id.txt_friendid);
             btn_friendProfile = (Button) itemView.findViewById(R.id.btn_friendProfile);
             friendListImageView= (CircleImageView) itemView.findViewById(R.id.friendListImageView);
 
