@@ -20,8 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.R.attr.id;
 
 
 //import static com.google.firebase.codelab.friendlychat.R.id.btn_friend;
@@ -29,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 // 顯示該使用者的好友列表
 public class FriendList extends AppCompatActivity {
     public DatabaseReference mDatabase;
-    public UserProfile userProfile, result;
+    public UserProfile userProfile, friendProfile;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<Object,FriendListViewHolder>
@@ -112,7 +115,9 @@ public class FriendList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_list);
-
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO(FriendList.this);
+        userProfile = profileIO.ReadFile();
         // 初始化，以及程式與layout的連結
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mRecyclerView = (RecyclerView) findViewById(R.id.friendListRecyclerView);
@@ -121,35 +126,23 @@ public class FriendList extends AppCompatActivity {
         mLinearLayoutManager.setReverseLayout(true);
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        getFriendList();
+        //getFriendList();
+        showFriendList();
 
     }
-    private void getFriendList(){
-        getUserProfile();
-        //userProfile = get("alan");
-        //show();
-    }
-    private void getUserProfile() {
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        // get the userProfile by instanceId
-        // 該部分須改成以email取得個人資料
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
+    /*
+    private void getFriendProfile(FriendListViewHolder viewHolder, String id){
+        FirebaseData firebaseData = new FirebaseData();
+        firebaseData.getProfileById(id,new FirebaseData.Callback(){
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    userProfile = dataSnapshot.getValue(UserProfile.class);
-                    Log.d("username", userProfile.getUsername());
+            public void getProfile(UserProfile profile) {
+                friendProfile = profile;
 
-                    // 在取得使用者資料後才對好友資料庫存取
-                    show();
-
-                }
             }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
         });
-    }
-    private void show(){
+    }*/
+
+    private void showFriendList(){
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         // 取得好友名單並且列出
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Object,
@@ -162,10 +155,10 @@ public class FriendList extends AppCompatActivity {
             @Override
             protected void populateViewHolder(FriendListViewHolder viewHolder,
                                               Object o, int position) {
-
-                        viewHolder.txt_friendName.setText(((HashMap)o).get("friendid").toString());
-                        viewHolder.friendid = ((HashMap)o).get("friendid").toString();
+                        String friendid = ((HashMap)o).get("friendid").toString();
+                        viewHolder.friendid = friendid;
                         viewHolder.userProfile = userProfile;
+
 
             }
         };
@@ -173,23 +166,6 @@ public class FriendList extends AppCompatActivity {
 
     }
 
-    public UserProfile get(String id) {
-        result = null;
-        mDatabase.child("UserProfile").orderByChild("userid").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    result = dataSnapshot.getValue(UserProfile.class);
-                    break;
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-        while( result ==null);
-        return result;
-    }
 
 }

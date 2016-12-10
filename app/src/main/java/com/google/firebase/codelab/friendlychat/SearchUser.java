@@ -63,7 +63,7 @@ public class SearchUser extends AppCompatActivity {
                                     // 避免重複送出邀請
                                     String userId2 = txt_searchId.getText().toString();
                                     // 傳送好友ID 到好友頁面
-                                    Intent intent = new Intent(SearchUser.this, FriendProfile.class);
+                                    Intent intent = new Intent(SearchUser.this, SearchProfile.class);
                                     intent.putExtra("friendid", userId2);
                                     startActivity(intent);
 

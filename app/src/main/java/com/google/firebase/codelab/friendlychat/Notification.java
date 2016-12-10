@@ -103,6 +103,9 @@ public class Notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO(Notification.this);
+        userProfile = profileIO.ReadFile();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
@@ -111,32 +114,12 @@ public class Notification extends AppCompatActivity {
         mLinearLayoutManager.setReverseLayout(true);
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        getUserProfile();
-
+        showNotification();
 
     }
 
-    private void getUserProfile() {
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        // get the userProfile by instanceId
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    userProfile = dataSnapshot.getValue(UserProfile.class);
-                    Log.e("username", userProfile.getUsername());
-                    // 再取得使用者資料後才對通知資料庫存取
-                    show();
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-    private void show(){
+    private void showNotification(){
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         // 存取通知資料庫，並且顯示通知出來
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Object,
