@@ -1,5 +1,18 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.concurrent.CountDownLatch;
+
+import static android.R.attr.id;
+import static android.R.attr.userVisible;
+
 /**
  * Created by user on 2016/11/18.
  */
@@ -59,5 +72,6 @@ public class UserProfile {
     public String getUseremail(){return useremail;}
 
     public String getUserphoto(){return userphoto;}
+
 
 }

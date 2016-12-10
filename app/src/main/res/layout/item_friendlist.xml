@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="90dp">
+
+
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/friendListImageView"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:src="@drawable/ic_account_circle_black_36dp"/>
+        android:src="@drawable/ic_account_circle_black_36dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="50dp">
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="15dp">
 
 
         <TextView
-            android:text="TextView"
+            android:text="id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:id="@+id/txt_friendName" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginLeft="150dp">
+            android:id="@+id/txt_friendid"
+            android:layout_marginTop="5dp" />
 
-            <Button
-                android:text="Unfriend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/btn_deleteFriend" />
-        </LinearLayout>
-</LinearLayout>
-</LinearLayout>
+    </LinearLayout>
+    <Button
+        android:text="   "
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/btn_friendProfile"
+        android:background="@color/transparent"/>
+</RelativeLayout>

@@ -118,7 +118,7 @@
         android:layout_marginBottom="35dp" />
 
     <Button
-        android:text="delete_allUserProfile"
+        android:text="Dangeous_deleteUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout2"
@@ -126,6 +126,15 @@
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="56dp"
         android:id="@+id/deleteALL" />
+
+    <Button
+        android:text="  "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txt_homeditatnce"
+        android:layout_centerHorizontal="true"
+        android:background="@color/transparent"
+        android:id="@+id/btn_record" />
 
 
 </RelativeLayout>

@@ -15,6 +15,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.os.Build.VERSION_CODES.M;
+
 
 public class MyProfile extends AppCompatActivity {
     //Google account information
@@ -25,10 +27,9 @@ public class MyProfile extends AppCompatActivity {
     public static final String ANONYMOUS = "anonymous";
     public static final String PROFILE_CHILD = "UserProfile";
     private static final int RC_SIGN_IN = 9001;
-
+    private UserProfile userProfile;
     private TextView txt_usergmail, txt_googlename, txt_usercity, txt_userbirthday, txt_userid, txt_usergender, txt_selfintroduction;
     private CircleImageView userImageView;
-    private String refreshedToken;
 
 //
     @Override
@@ -36,6 +37,9 @@ public class MyProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+        // 從file取 使用者資料
+        ProfileIO profileIO = new ProfileIO(MyProfile.this);
+        userProfile = profileIO.ReadFile();
         //--------------------------Get firebase information
 
         txt_usercity = (TextView) findViewById(R.id.txt_usercity);
@@ -48,11 +52,10 @@ public class MyProfile extends AppCompatActivity {
         userImageView = (CircleImageView) findViewById(R.id.userImageView);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
 
         // get the userProfile by instanceId
-        mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("UserProfile").orderByChild("userid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 

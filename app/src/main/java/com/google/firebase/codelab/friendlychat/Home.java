@@ -118,6 +118,16 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button btn_record = (Button) findViewById(R.id.btn_record);
+        btn_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent();
+                intent2.setClass(Home.this, Record.class);
+                startActivity(intent2);
+            }
+        });
+
 //        Button btn_friend = (Button) findViewById(R.id.btn_friend);
 //        btn_friend.setOnClickListener(new View.OnClickListener() {
 //            @Override

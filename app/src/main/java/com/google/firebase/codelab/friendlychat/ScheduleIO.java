@@ -204,7 +204,6 @@ public class ScheduleIO {
     public Day TodayJob(){
 
         List<WeekContent> list_week = new ArrayList<WeekContent>();
-        Day today = new Day();
         list_week = ReadFile();
         Calendar calendar = Calendar.getInstance();
 
@@ -218,7 +217,7 @@ public class ScheduleIO {
                 }
             }
         }
-        return today;
+        return null;
     }
 
 

@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -41,6 +42,7 @@ import static android.R.id.message;
 import static android.net.wifi.SupplicantState.COMPLETED;
 import static android.os.Build.VERSION_CODES.M;
 import static com.google.android.gms.auth.api.credentials.PasswordSpecification.da;
+import static com.google.firebase.codelab.friendlychat.Day.DatetoString;
 
 public class Running extends FragmentActivity
         implements
@@ -251,12 +253,13 @@ public class Running extends FragmentActivity
             public void onDataChange(DataSnapshot snapshot) {
                 Map<String, Object> map = new HashMap();
                 // to do 要改成取得當天日期的函式
-                map.put("date","1999/07/20");
+                Calendar calendar = Calendar.getInstance();
+                String now = DatetoString(calendar.getTime(),0);
+                map.put("date",now);
                 map.put("distance", String.valueOf(distance));
                 // 每次跑步紀錄的時間以分鐘為單位
-                map.put("time", String.valueOf(hour*60+min));
+                map.put("time", String.valueOf(hour*60+min+sec/60));
                 snapshot.getRef().push().updateChildren(map);
-                Log.e("log",snapshot.toString());
             }
 
             @Override
