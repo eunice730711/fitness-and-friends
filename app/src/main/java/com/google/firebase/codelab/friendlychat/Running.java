@@ -68,6 +68,8 @@ public class Running extends FragmentActivity
     //private Firebase mRef;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private ScheduleIO scheduleIO ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,7 +214,9 @@ public class Running extends FragmentActivity
         updateDistance();
         // 上傳本次紀錄
         updateRecord();
-        //
+        // 更新檔案 : 是否完成本日schedute
+        scheduleIO.UpdateComplete();
+
         if(toast == null){
             toast = Toast.makeText(Running.this,"恭喜你已完成本次跑步" ,Toast.LENGTH_SHORT);
         }
@@ -252,7 +256,6 @@ public class Running extends FragmentActivity
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Map<String, Object> map = new HashMap();
-                // to do 要改成取得當天日期的函式
                 Calendar calendar = Calendar.getInstance();
                 String now = DatetoString(calendar.getTime(),0);
                 map.put("date",now);
@@ -274,13 +277,18 @@ public class Running extends FragmentActivity
         builder.setTitle("Today goal");
         //設定Dialog的內容
         String message=null;
-        ScheduleIO scheduleIO = new ScheduleIO(Running.this);
         Day day = scheduleIO.TodayJob();
-        if( day ==null){
+        if( day.getDist() ==0 && day.getTime() ==0){
             message = "It's free today.";
         }
-        else
+        else if( day.getTime() ==0)
+            //  中階
             message = String.valueOf(day.getDist()) +" km";
+        else if( day.getDist() ==0)
+            // 初階
+            message = String.valueOf(day.getTime()) + "minutes";
+        else
+            message = "File doesn't exist";
         builder.setMessage(message);
 
         //設定Positive按鈕資料
@@ -295,6 +303,7 @@ public class Running extends FragmentActivity
     }
 
     private void init(){
+        scheduleIO = new ScheduleIO(Running.this);
         AlertDialog alertDialog = GoalAlertDialog();
         alertDialog.show();
         txt_time = (TextView) findViewById(R.id.txt_time_value);
@@ -312,6 +321,7 @@ public class Running extends FragmentActivity
         // 從file取得 使用者資料
         ProfileIO profileIO = new ProfileIO(Running.this);
         userProfile = profileIO.ReadFile();
+
     }
 
     private Handler handler = new Handler(){

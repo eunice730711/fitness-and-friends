@@ -101,6 +101,8 @@ public class ScheduleIO {
         StringBuilder data = new StringBuilder();
         BufferedReader reader = null;
 
+
+
         try {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "utf-8"));
 
@@ -185,22 +187,21 @@ public class ScheduleIO {
         mFirebaseDatabaseReference.child("UserSchedule").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                boolean find = false;
+
+                boolean newpush = true;
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Object o  = dataSnapshot.getValue(Object.class);
                     String email = ((HashMap<String,String>)o).get("googleEmail");
                     if( email.equals(userSchedule.getGoogleEmail())) {
                         dataSnapshot.getRef().setValue(userSchedule);
-                        find = true;
+                        newpush = false;
                         break;
                     }
                 }
-
-                if(find == false){
-                    callback.SetNewPush(userSchedule,snapshot.getRef());
+                if(newpush){
+                    snapshot.getRef().push().setValue(userSchedule);
                 }
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}
@@ -277,9 +278,50 @@ public class ScheduleIO {
                 }
             }
         }
-
         return null;
     }
+    public void UpdateComplete(){
+        List<WeekContent> list_week = null;
+        list_week = ReadFile();
 
+        Calendar calendar = Calendar.getInstance();
+
+        for(int i=0; i<list_week.size(); i++){
+            for(int j=0; j<list_week.get(i).getDays().size(); j++){
+
+                String date = DatetoString(list_week.get(i).getDays().get(j).getDate(),0);
+                String now = DatetoString(calendar.getTime(),0);
+                if(date.compareTo(now)==0){
+                    list_week.get(i).getDays().get(j).setComplete(true);
+                }
+            }
+        }
+        WriteFile(list_week);
+    }
+
+    public boolean IsComplete(double time, double dist){
+        Day day = TodayJob();
+        if(day.getDist() !=0){
+            if( dist >= day.getDist()){
+                // finish the today job
+                UpdateComplete();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else if(day.getTime() !=0){
+            if( time >= day.getTime()){
+                UpdateComplete();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else
+            return true;
+    }
 
 }

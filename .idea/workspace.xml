@@ -15,6 +15,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
+<<<<<<< Updated upstream
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
@@ -54,6 +55,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/scheduleRunDay.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/scheduleRunDay.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/ScheduleIO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/ScheduleIO.java" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="fitness-and-friends.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -133,8 +138,13 @@
       <file leaf-file-name="ScheduleIO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/ScheduleIO.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="483">
               <caret line="192" column="49" selection-start-line="192" selection-start-column="49" selection-end-line="192" selection-end-column="49" />
+=======
+            <state relative-caret-position="322">
+              <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2946#2959#0" expanded="true" />
@@ -195,8 +205,13 @@
       <file leaf-file-name="FriendList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/FriendList.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="471">
               <caret line="52" column="23" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+=======
+            <state relative-caret-position="333">
+              <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -2169,10 +2184,14 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_friendlist.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/Record.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/FriendList.java" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/Day.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/ScheduleIO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/schedule.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/scheduleRunDay.java" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/ScheduleIO.java" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -3186,6 +3205,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/FriendList.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="471">
           <caret line="52" column="23" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
           <folding />
@@ -3196,10 +3216,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+=======
+        <state relative-caret-position="333">
+          <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
+>>>>>>> Stashed changes
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/schedule.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8464">
@@ -3241,6 +3266,14 @@
             <element signature="e#6876#7163#0" expanded="true" />
             <element signature="e#7162#7163#0" expanded="true" />
             <element signature="e#8836#8849#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/ScheduleIO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>

@@ -56,7 +56,7 @@ public class FriendList extends AppCompatActivity {
             btn_friendProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // 刪除好友
+                    // 好友的個人頁面介紹
                     Intent i = new Intent(v.getContext(), FriendProfile.class);
                     i.putExtra("friendid", friendid);
                     v.getContext().startActivity(i);
@@ -157,9 +157,10 @@ public class FriendList extends AppCompatActivity {
             protected void populateViewHolder(FriendListViewHolder viewHolder,
                                               Object o, int position) {
                         String friendid = ((HashMap)o).get("friendid").toString();
+                        Log.e("friend",friendid);
                         viewHolder.friendid = friendid;
                         viewHolder.userProfile = userProfile;
-
+                        viewHolder.txt_friendid.setText(friendid);
 
             }
         };
