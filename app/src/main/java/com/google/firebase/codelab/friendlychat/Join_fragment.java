@@ -1,5 +1,6 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.google.firebase.codelab.friendlychat.Join_fragment.JoinViewHolder.J_view;
 import static com.google.firebase.codelab.friendlychat.MainActivity.ANONYMOUS;
 
 /**
@@ -34,7 +36,7 @@ public class Join_fragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+    public static class JoinViewHolder extends RecyclerView.ViewHolder {
         public TextView typeTextView;
         public TextView posTextView;
         public TextView NameTexView;
@@ -42,9 +44,11 @@ public class Join_fragment extends Fragment {
         public TextView timeTextView;
         public CircleImageView messengerImageView;
         public Button editbutton;
+        public static View J_view;
 
-        public MessageViewHolder(View v) {
+        public JoinViewHolder(View v) {
             super(v);
+            J_view = v;
             typeTextView = (TextView) itemView.findViewById(R.id.Type);
             posTextView = (TextView) itemView.findViewById(R.id.Position);
             NameTexView = (TextView) itemView.findViewById(R.id.Name);
@@ -72,8 +76,9 @@ public class Join_fragment extends Fragment {
     private DatabaseReference mFirebaseDatabaseReference;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
-    private FirebaseRecyclerAdapter<JoinMessage,MessageViewHolder>
-            mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<JoinMessage,JoinViewHolder> mFirebaseAdapter;
+
+    public JoinMessage j ;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -90,17 +95,17 @@ public class Join_fragment extends Fragment {
         mLinearLayoutManager.setReverseLayout(true);
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<JoinMessage, MessageViewHolder>(
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<JoinMessage, JoinViewHolder>(
                 JoinMessage.class,
                 R.layout.item_joinmessage,
-                MessageViewHolder.class,
+                JoinViewHolder.class,
                 mFirebaseDatabaseReference.child("Join")) {
 
             @Override
-            protected void populateViewHolder(MessageViewHolder viewHolder,
-                                              JoinMessage JoinMessage, int position) {
+            protected void populateViewHolder(final JoinViewHolder viewHolder,
+                                              final JoinMessage JoinMessage,final int position) {
                 //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-                viewHolder.typeTextView.setText(JoinMessage.getJtype());
+                viewHolder.typeTextView.setText(JoinMessage.getTitle());
                 viewHolder.posTextView.setText(JoinMessage.getJpos());
                 viewHolder.NameTexView.setText(JoinMessage.getName());
                 viewHolder.dateTextView.setText(JoinMessage.getJdate());
@@ -115,6 +120,20 @@ public class Join_fragment extends Fragment {
                             .load(JoinMessage.getPhotoUrl())
                             .into(viewHolder.messengerImageView);
                 }
+                J_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Log.w(TAG, "You clicked on "+position);
+                        //mRecycleViewAdapter.getRef(position).removeValue();
+                        j = mFirebaseAdapter.getItem(viewHolder.getAdapterPosition());
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity() , Join_Detail.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("join",j);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {

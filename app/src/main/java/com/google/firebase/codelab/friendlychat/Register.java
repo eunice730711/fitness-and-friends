@@ -56,9 +56,6 @@ public class Register extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
 
-        // Get google profile image
-        //userImageView = (CircleImageView) findViewById(R.id.userImageView);
-
         if (mFirebaseUser == null) {
             // Not signed in, launch the Sign In activity
             startActivity(new Intent(this, SignInActivity.class));
@@ -69,28 +66,9 @@ public class Register extends AppCompatActivity {
             personEmail = mFirebaseUser.getEmail();
             if (mFirebaseUser.getPhotoUrl() != null) {
                 PhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-//                Glide.with(FriendProfile.this)
-//                        .load(mFirebaseUser.getPhotoUrl())
-//                        .into(userImageView);
-            }
-            else
-            {
-//                PhotoUrl = "http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png";
-//                userImageView.setImageDrawable(ContextCompat
-//                        .getDrawable(FriendProfile.this,
-//                                R.drawable.ic_account_circle_black_36dp));
             }
         }
-//        txt_usergmail = (TextView) findViewById(R.id.txt_usergmail);
-//        txt_googlename = (TextView) findViewById(R.id.txt_googlename);
-//
-//        txt_usergmail.setText(personEmail);
-//        txt_googlename.setText(personName);
-
         //-----------------------google profile information finish
-
-
-
         init();
 
         usergender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
