@@ -73,6 +73,11 @@ public class ProfileIO {
         UserProfile u = new UserProfile();
 
         try {
+
+            if(!inFile.exists()){
+                Toast.makeText(c, "File does not exist.", Toast.LENGTH_SHORT).show();
+                return  null;
+            }
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "utf-8"));
 
             double dist = Double.valueOf(reader.readLine());

@@ -51,12 +51,12 @@ public class fragment1 extends Fragment {
             public void onClick(View v) {
                 String nowDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
                 String nowTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
-                FriendlyMessage friendlyMessage = new
-                        FriendlyMessage(mMessageEditText.getText().toString(),
+                PostMessage postMessage = new
+                        PostMessage(mMessageEditText.getText().toString(),
                         mUsername,
                         mPhotoUrl,nowTime,nowDate);
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD)
-                        .push().setValue(friendlyMessage);
+                        .push().setValue(postMessage);
                 mMessageEditText.setText("");
                 mFirebaseDatabaseReference.push().setValue(mMessageEditText);
                 mMessageEditText.getText().clear();
