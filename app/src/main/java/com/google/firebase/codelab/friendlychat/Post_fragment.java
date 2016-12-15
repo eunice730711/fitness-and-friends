@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +28,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 
 /**
@@ -48,8 +54,6 @@ public class Post_fragment extends Fragment {
         public TextView mdateTextView;
         public TextView mtimeTextView;
         public CircleImageView messengerImageView;
-        public Button editbutton;
-
         public static View P_view;
 
         public PostViewHolder(View v) {
@@ -60,19 +64,19 @@ public class Post_fragment extends Fragment {
             mdateTextView = (TextView) itemView.findViewById(R.id.mdateTextView);
             mtimeTextView = (TextView) itemView.findViewById(R.id.mtimeTextView);
             messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
-            editbutton = (Button) itemView.findViewById(R.id.editbutton);
         }
 
     }
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private String mUsername;
     private DatabaseReference mFirebaseDatabaseReference;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<PostMessage,PostViewHolder> mFirebaseAdapter;
     public PostMessage p;
-
+    private List<PostMessage> Post_List = new ArrayList<>();
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -81,6 +85,7 @@ public class Post_fragment extends Fragment {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mUsername = mFirebaseUser.getDisplayName();
         mMessageRecyclerView = (RecyclerView) v.findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mLinearLayoutManager.setStackFromEnd(true);
@@ -111,52 +116,18 @@ public class Post_fragment extends Fragment {
                             .load(postMessage.getPhotoUrl())
                             .into(viewHolder.messengerImageView);
                 }
-                if(!viewHolder.messengerTextView.getText().equals(mFirebaseUser.getDisplayName()))
-                {
-                    viewHolder.editbutton.setVisibility(View.INVISIBLE);
-                }
-                else
-                {
-                    viewHolder.editbutton.setVisibility(View.VISIBLE);
-                    viewHolder.editbutton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            LayoutInflater inflater = LayoutInflater.from(getActivity());
-                            final View v2 = inflater.inflate(R.layout.edit_post, null);
-                            final EditText editText = (EditText) (v2.findViewById(R.id.e_Post));
-                            editText.setText(viewHolder.messageTextView.getText());
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle("編輯貼文")
-                                    .setView(v2)
-                                    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                            Toast.makeText(getContext(),"修改完成" + position, Toast.LENGTH_SHORT).show();
-                                            viewHolder.messageTextView.setText(editText.getText().toString());
-                                            Map<String, Object> nameMap = new HashMap<String, Object>();
-                                            nameMap.put("text", editText.getText().toString());
-                                            mFirebaseAdapter.getRef(position).updateChildren(nameMap);
-                                        }})
-                                    .setNeutralButton("取消",new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface arg0, int arg1) {
-                                            // TODO Auto-generated method stub
-                                            Toast.makeText(getContext(), "取消",Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    }).show();
-                        }
-                    });
-                }
-                viewHolder.P_view.setOnClickListener(new View.OnClickListener() {
+//                viewHolder.P_view.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {}
+//                });
+            }
+        };
+        mMessageRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    //按一下進入detail
                     @Override
-                    public void onClick(View view) {
-                        //mRecycleViewAdapter.getRef(position).removeValue();
-//                        p = new PostMessage(postMessage.getText(),postMessage.getName()
-//                                ,postMessage.getPhotoUrl(),postMessage.getTime()
-//                                ,postMessage.getDate());
-                        p = mFirebaseAdapter.getItem(viewHolder.getAdapterPosition());
+                    public void onItemClick(View view, int position) {
+                        p = mFirebaseAdapter.getItem(position);
                         Intent intent = new Intent();
                         intent.setClass(getActivity() , Post_Detail.class);
                         Bundle bundle = new Bundle();
@@ -164,9 +135,41 @@ public class Post_fragment extends Fragment {
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
-                });
-            }
-        };
+                    //長按來編輯貼文
+                    @Override
+                    public void onLongClick(View view, final int position) {
+                        PostMessage post = mFirebaseAdapter.getItem(position);
+                        if (mUsername.equals(post.getName())) {
+                            LayoutInflater inflater = LayoutInflater.from(getActivity());
+                            final View v = inflater.inflate(R.layout.edit_post, null);
+                            final EditText editText = (EditText)(v.findViewById(R.id.e_PText));
+                            final EditText editTitle = (EditText)(v.findViewById(R.id.e_PTitle));
+                            editText.setText(post.getText());
+                            editTitle.setText(post.getTitle());
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("編輯貼文")
+                                    .setView(v)
+                                    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Toast.makeText(getContext(), "修改完成" + position, Toast.LENGTH_SHORT).show();
+                                            //viewHolder.messageTextView.setText(editText.getText().toString());
+                                            Map<String, Object> nameMap = new HashMap<String, Object>();
+                                            nameMap.put("text", editText.getText().toString());
+                                            nameMap.put("title", editTitle.getText().toString());
+                                            mFirebaseAdapter.getRef(position).updateChildren(nameMap);
+                                        }
+                                    })
+                                    .setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            // TODO Auto-generated method stub
+                                            Toast.makeText(getContext(), "取消", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).show();
+                        }
+                    }
+                }));
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -184,14 +187,13 @@ public class Post_fragment extends Fragment {
                 }
             }
         });
+        mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View returnView = inflater.inflate(R.layout.post_fragment, container, false);
-
-
         return returnView;
     }
 }

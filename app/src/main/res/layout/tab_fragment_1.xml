@@ -9,8 +9,16 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/Post"
-        android:layout_weight="1"/>
+        android:id="@+id/New_Title"
+        android:layout_weight="0.03"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/New_Text"
+        android:layout_weight="0.99"/>
 
     <Button
         android:text="Send"

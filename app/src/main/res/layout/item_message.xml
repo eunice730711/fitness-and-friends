@@ -4,8 +4,6 @@
     android:layout_height="110dp"
     android:weightSum="1">
 
-
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/messengerImageView"
         android:layout_width="46dp"
@@ -22,25 +20,12 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-
-        <LinearLayout
+        <TextView
+            android:text="Name"
+            android:id="@+id/messengerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Name"
-                android:id="@+id/messengerTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
-            <Button
-                android:text="edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editbutton" />
-        </LinearLayout>
-
-
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <TextView
             android:text="message"

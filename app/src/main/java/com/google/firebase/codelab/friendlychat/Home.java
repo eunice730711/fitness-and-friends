@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,11 +30,21 @@ public class Home extends AppCompatActivity {
     public TextView txt_distance;
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        if (mFirebaseUser == null) {
+            // Not signed in, launch the Sign In activity
+            startActivity(new Intent(this, SignInActivity.class));
+            finish();
+            return;
+        }
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         myToolbar.setNavigationIcon(R.drawable.home_menu);

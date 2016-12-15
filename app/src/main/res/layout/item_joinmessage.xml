@@ -81,28 +81,11 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkBox"
-            style="@android:style/Widget.Holo.Light.CompoundButton.CheckBox"
-            android:checked="false"
-            android:duplicateParentState="false"
-            android:layout_marginTop="20dp" />
-        <Button
-            android:text="e"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/edit"
-            android:allowUndo="false"
-            android:visibility="invisible" />
-
-    </LinearLayout>
+    <Button
+        android:text="e"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/edit"
+        android:allowUndo="false"
+        android:visibility="invisible" />
 </LinearLayout>

@@ -21,16 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignInActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:label="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -47,6 +39,8 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".PostJoinActivity" />
         <activity android:name=".schedule" />
         <activity android:name=".scheduleChose" />
