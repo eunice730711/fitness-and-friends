@@ -40,7 +40,8 @@
         </service>
 
         <activity android:name=".SignInActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:label=""/>
         <activity android:name=".PostJoinActivity" />
         <activity android:name=".schedule" />
         <activity android:name=".scheduleChose" />

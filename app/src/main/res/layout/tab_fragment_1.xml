@@ -10,7 +10,8 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/New_Title"
-        android:layout_weight="0.03"/>
+        android:layout_weight="0.03"
+        android:visibility="gone"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -18,7 +19,13 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/New_Text"
-        android:layout_weight="0.99"/>
+        android:layout_weight="0.99"
+        android:background="@null"
+        android:gravity="start"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:hint="What is in your mind?"/>
 
     <Button
         android:text="Send"

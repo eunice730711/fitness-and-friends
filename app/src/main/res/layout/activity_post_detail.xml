@@ -14,7 +14,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_account_circle_black_36dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_alignParentTop="true" />
 
@@ -23,6 +23,8 @@
     <TextView
         android:text="name"
         android:textSize="20dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Detail_Name"
@@ -53,24 +55,13 @@
 
     <TextView
         android:text="text~~dsfjiosdjfkaodjsfioajsdfkoajsdfmkoasjdfioasjdifopajsdifojasidfojasidofjisaodpfjioasdfjiopasjdfiopasjdfiopajsdkfljasdifpasjdifopjasidofpsaiodpfjioaspdjfiopasjdfiopjasidofpjasiopdfjiasopdjfiopasjdfiopajsdiofpjasidpfjiaospdjfioaspjdfiopasjdiofpjasiodpfjaisopdfjiaospdjfioapsjdfiopasjdiofpjasiodpfjiasopdjfp"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/Detail_Text"
-        android:layout_below="@+id/Detail_Title"
-        android:paddingTop="10dp"
+        android:layout_below="@+id/Detail_photo"
+        android:paddingTop="15dp"
         android:paddingLeft="35dp"
         android:paddingRight="35dp"/>
-
-    <TextView
-        android:text="title"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Detail_photo"
-        android:id="@+id/Detail_Title"
-        android:layout_alignParentStart="true"
-        android:paddingLeft="35dp"
-        android:layout_marginTop="5dp"/>
 
 </RelativeLayout>
