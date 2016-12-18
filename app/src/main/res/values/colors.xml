@@ -8,10 +8,8 @@
     <color name="theme">#1e065b</color>
     <color name="gray">#999999</color>
     <color name="transparent">#00000000</color>
-<<<<<<< HEAD
-=======
+
     <color name="colorRed">#ff404a</color>
     <color name="colorlightRed">#ef1760</color>
     <color name="messagetitlecolor">#2b323d</color>
->>>>>>> 98b82258a378427177fc960aeb2db74c4b85824b
 </resources>

@@ -157,7 +157,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-
+/*
         Button btn_delete = (Button) findViewById(R.id.deleteALL);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +166,7 @@ public class Home extends AppCompatActivity {
                 sendNotification.subscribeFriend(userProfile.getUserid());
             }
         });
+        */
 //        Button btn_friend = (Button) findViewById(R.id.btn_friend);
 //        btn_friend.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -175,13 +176,13 @@ public class Home extends AppCompatActivity {
 //                startActivity(intent2);
 //            }
 //        });
-/*
+
         Button btn_delete = (Button) findViewById(R.id.deleteALL);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Record").orderByChild("date").addListenerForSingleValueEvent(new ValueEventListener() {
+                mDatabase.child("UserProfile").orderByChild("instanceid").addListenerForSingleValueEvent(new ValueEventListener() {
                 //mDatabase.child("UserProfile").orderByChild("instanceid").equalTo(refreshedToken).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
@@ -195,7 +196,7 @@ public class Home extends AppCompatActivity {
                 });
             }
         });
-*/
+
         txt_distance = (TextView)findViewById(R.id.txt_homeditatnce);
         updateDistance();
     }
