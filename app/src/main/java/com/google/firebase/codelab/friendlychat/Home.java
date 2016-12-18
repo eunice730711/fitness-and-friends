@@ -22,6 +22,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import static com.google.android.gms.internal.zzng.ex;
+
 
 public class Home extends AppCompatActivity {
     public UserProfile userProfile;
@@ -129,6 +145,15 @@ public class Home extends AppCompatActivity {
             }
         });
 
+
+        Button btn_delete = (Button) findViewById(R.id.deleteALL);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendNotification sendNotification = new SendNotification();
+                sendNotification.subscribeFriend(userProfile.getUserid());
+            }
+        });
 //        Button btn_friend = (Button) findViewById(R.id.btn_friend);
 //        btn_friend.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -169,33 +194,28 @@ public class Home extends AppCompatActivity {
     }
 
 
-
-
     private void updateDistance(){
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // get the userProfile by userid
-        mDatabase.child("UserProfile").orderByChild("userid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabase.child("UserProfile").orderByChild("userid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                /*
-                userProfile = snapshot.getValue(UserProfile.class);
-                Log.e("username", userProfile.getUsername());
-                txt_distance.setText(userProfile.updateDistance(0)+" M");
-*/
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     userProfile = dataSnapshot.getValue(UserProfile.class);
                     Log.e("username", userProfile.getUsername());
                     txt_distance.setText(userProfile.updateDistance(0)+" M");
-
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
+
+
+
+
 }

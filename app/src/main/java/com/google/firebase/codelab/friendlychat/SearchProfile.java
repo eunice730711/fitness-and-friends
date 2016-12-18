@@ -82,6 +82,10 @@ public class SearchProfile extends AppCompatActivity {
                             map.put("requester", userProfile.getUserid());
                             mDatabase.child("RequestFriend").child(friendid).push().setValue(map);
                             Toast.makeText(SearchProfile.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
+                            SendNotification sendNotification = new SendNotification();
+                            sendNotification.setupFriend(userProfile.getUserid(),friendid);
+                            Toast.makeText(SearchProfile.this,"1", Toast.LENGTH_SHORT).show();
+                            sendNotification.start();
                         }
                     }
 
