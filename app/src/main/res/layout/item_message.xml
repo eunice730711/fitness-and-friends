@@ -16,7 +16,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="20dp"
+        android:paddingRight="30dp">
 
         <TextView
             android:text="Name"
