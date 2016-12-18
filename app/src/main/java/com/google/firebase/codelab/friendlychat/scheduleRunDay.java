@@ -46,7 +46,7 @@ public class scheduleRunDay extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent();
-                intent1.setClass(scheduleRunDay.this, scheduleRunLevel.class);
+                intent1.setClass(scheduleRunDay.this, schedule.class);
                 startActivity(intent1);
                 scheduleRunDay.this.finish();
             }
@@ -182,6 +182,7 @@ public class scheduleRunDay extends AppCompatActivity {
         });
 
     }
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -200,4 +201,5 @@ public class scheduleRunDay extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    */
 }

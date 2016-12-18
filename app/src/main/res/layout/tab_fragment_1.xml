@@ -9,8 +9,29 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/Post"
-        android:layout_weight="1"/>
+        android:id="@+id/New_Title"
+        android:layout_weight="0.99"
+        android:background="@null"
+        android:gravity="start"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:hint="What is in your mind?"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/New_Text"
+        android:layout_weight="0.33"
+        android:background="@null"
+        android:gravity="start"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:hint="What is in your mind?"
+        android:visibility="gone"/>
 
     <Button
         android:text="Send"

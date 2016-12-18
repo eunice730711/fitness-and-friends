@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="9b85394ca82613191a8f447ba885402c83c18a27">
+        sha1="1f00cf153765d8738b04644d20144f9a86b96823">
         <dex dex="C:\Users\user\AndroidStudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_e1d7e2b27bb4fe7907d901b363233c922bd14922\classes.dex" />
     </item>
     <item
@@ -162,6 +162,15 @@
         revision="21.1.2"
         sha1="673d77a5bbddd766037f088e775df525c46407f0">
         <dex dex="C:\Users\user\AndroidStudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.2.1_7a538e71c1bac7b0fb884b3080256982cd152c0d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\AndroidStudioProjects\fitness-and-friends\app\build\intermediates\exploded-aar\pl.droidsonroids.gif\android-gif-drawable\1.2.3\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="75d15557ff7531e59b01362d46bb06dd59c5f971">
+        <dex dex="C:\Users\user\AndroidStudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\pl.droidsonroids.gif-android-gif-drawable-1.2.3_23ff3f4acd29b1fecea2b132c890359642cb62e9\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -286,7 +295,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="301df3c58f106d0eb10d2099d6d1e2e24923fd40">
+        sha1="1a826f34518cd0c1d7ae95f4c19cfbae1d627b38">
         <dex dex="C:\Users\user\AndroidStudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_8f623ac384b82d204f587ba323a5c635b71b8dc4\classes.dex" />
     </item>
     <item

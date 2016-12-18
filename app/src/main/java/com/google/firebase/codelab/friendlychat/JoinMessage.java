@@ -1,10 +1,12 @@
 package com.google.firebase.codelab.friendlychat;
 
+import java.io.Serializable;
+
 /**
  * Created by pei on 2016/11/15.
  */
 
-public class JoinMessage {
+public class JoinMessage implements Serializable {
     private String text;
     private String name;
     private String photoUrl;
@@ -13,7 +15,7 @@ public class JoinMessage {
     private String Jdate;
     private String Jtime;
     private String Jpos;
-    private String Jtype;
+    private String title;
 
     public JoinMessage(){
     }
@@ -27,7 +29,7 @@ public class JoinMessage {
         this.Jdate = j_date;
         this.Jtime = j_time;
         this.Jpos = j_pos;
-        this.Jtype = j_type;
+        this.title = j_type;
     }
     public String getText() {
         return text;
@@ -85,11 +87,11 @@ public class JoinMessage {
 
     public void setJpos(String J_pos) { this.Jpos = J_pos; }
 
-    public String getJtype() {
-        return Jtype;
+    public String getTitle() {
+        return title;
     }
 
-    public void setJtype(String J_type) { this.Jtype = J_type; }
+    public void setTitle(String title) { this.title = title; }
 
 
 

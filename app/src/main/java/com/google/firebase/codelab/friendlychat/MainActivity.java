@@ -278,11 +278,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.myfriends:
-                Intent intent5 = new Intent();
-                intent5.setClass(MainActivity.this, FriendList.class);
-                startActivity(intent5);
-                return true;
             case R.id.invite_menu:
                 Intent intent6 = new Intent();
                 intent6.setClass(MainActivity.this, SearchUser.class);
@@ -299,6 +294,11 @@ public class MainActivity extends AppCompatActivity implements
                 Intent intent3 = new Intent();
                 intent3.setClass(MainActivity.this, Notification.class);
                 startActivity(intent3);
+                return true;
+            case R.id.friend_list_menu:
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, FriendList.class);
+                startActivity(intent);
                 return true;
             case R.id.sign_out_menu:
                 mFirebaseAuth.signOut();

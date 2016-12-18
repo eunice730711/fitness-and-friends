@@ -5,12 +5,6 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/myfriends"
-        android:icon="@drawable/friends"
-        android:title="@string/showfriends"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/sign_out_menu"
         android:title="@string/sign_out"
         app:showAsAction="never"/>
@@ -25,4 +19,8 @@
     <item
         android:id="@+id/notification_menu"
         android:title="@string/notification"/>
+    <item
+        android:id="@+id/friend_list_menu"
+        android:title="Friend List"/>
+
 </menu>

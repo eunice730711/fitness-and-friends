@@ -24,7 +24,7 @@ public class scheduleRunMedDistance extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent();
-                intent1.setClass(scheduleRunMedDistance.this, scheduleRunLevel.class);
+                intent1.setClass(scheduleRunMedDistance.this, schedule.class);
                 startActivity(intent1);
                 scheduleRunMedDistance.this.finish();
             }

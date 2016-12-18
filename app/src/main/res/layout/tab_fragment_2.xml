@@ -1,126 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:orientation="horizontal">
-
-        <TextView
-            android:text="Date"
-            android:layout_height="36dp"
-            android:layout_width="80dp"
-            android:id="@+id/textView_1"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:fontFamily="sans-serif"
-            android:textSize="20sp"
-            android:textAlignment="center" />
-
-        <TextView
-            android:text=""
-            android:layout_height="36dp"
-            android:layout_width="220dp"
-            android:id="@+id/Edit_Date"/>
-
-        <Button
-            android:text="set"
-            android:layout_width="55dp"
-            android:layout_height="45dp"
-            android:id="@+id/set_date"/>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:text="Time"
-            android:layout_width="80dp"
-            android:layout_height="36dp"
-            android:id="@+id/textView_2"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="20sp"
-            android:textAlignment="center" />
-
-        <TextView
-            android:text=""
-            android:layout_width="220dp"
-            android:layout_height="36dp"
-            android:id="@+id/Edit_Time" />
-
-        <Button
-            android:text="SET"
-            android:layout_width="55dp"
-            android:layout_height="45dp"
-            android:id="@+id/set_time" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="Location"
-            android:layout_height="36dp"
-            android:layout_width="80dp"
-            android:id="@+id/textView_4"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="20sp"
-            android:textAlignment="center" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="textPersonName"
-            android:text=""
-            android:ems="10"
-            android:id="@+id/Edit_Pos" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="Type"
-            android:layout_height="36dp"
-            android:layout_width="80dp"
-            android:id="@+id/textView_3"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="20sp"
-            android:textAlignment="center" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="textPersonName"
-            android:text=""
-            android:ems="10"
-            android:id="@+id/Edit_Type" />
-
-    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:inputType="textMultiLine"
+        android:text=""
+        android:textSize="20dp"
         android:ems="10"
         android:id="@+id/Join"
-        android:layout_weight="1"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_below="@+id/grid"
+        android:layout_centerHorizontal="true"
+        android:gravity="start"
+        android:background="@null"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:hint="Something you want to add~~"/>
+
     <Button
         android:text="Send"
         android:textColor="#737373"
@@ -130,6 +31,140 @@
         android:layout_height="wrap_content"
         android:id="@+id/Join_Button"
         android:background="@drawable/button_style"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
 
-</LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/grid"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Type"
+            android:textSize="20dp"
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:id="@+id/textView_3"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:text="Location"
+            android:textSize="20dp"
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:id="@+id/textView_4"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:text="Time"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/textView_2"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="20dp"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:text="Date"
+            android:textSize="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:fontFamily="sans-serif"
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:id="@+id/textView_1"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:inputType="textPersonName"
+            android:text=""
+            android:textSize="20dp"
+            android:ems="10"
+            android:id="@+id/Edit_Type"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:hint="what kind of workout?"/>
+
+        <Button
+            android:text="+"
+            android:textStyle="bold"
+            android:textColor="#737373"
+            android:background="@drawable/button_style_small"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/set_time"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:text="+"
+            android:textColor="#737373"
+            android:textStyle="bold"
+            android:background="@drawable/button_style_small"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/set_date"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:text=""
+            android:textSize="20dp"
+            android:layout_height="50dp"
+            android:layout_width="200dp"
+            android:id="@+id/Edit_Date"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:gravity="center"
+            android:hint=""/>
+
+        <TextView
+            android:text=""
+            android:textSize="20dp"
+            android:layout_height="50dp"
+            android:layout_width="200dp"
+            android:id="@+id/Edit_Time"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:gravity="center"/>
+
+        <EditText
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:inputType="textPersonName"
+            android:text=""
+            android:textSize="20dp"
+            android:ems="10"
+            android:id="@+id/Edit_Pos"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:hint="where?"/>
+
+    </GridLayout>
+
+</RelativeLayout>

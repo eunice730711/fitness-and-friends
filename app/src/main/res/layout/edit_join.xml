@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:text="Title"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:ems="10"
+        android:id="@+id/e_JTitle"
+        android:inputType="text"
+        android:selectAllOnFocus="false" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+        <EditText
+            android:text="Date"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:ems="10"
+            android:id="@+id/e_JDate"
+            android:inputType="text"
+            android:selectAllOnFocus="false" />
+        <EditText
+            android:text="Time"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:ems="10"
+            android:id="@+id/e_JTime"
+            android:inputType="text"
+            android:selectAllOnFocus="false" />
+        </LinearLayout>
+    <EditText
+        android:text="Postion"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:ems="10"
+        android:id="@+id/e_JPos"
+        android:inputType="text"
+        android:selectAllOnFocus="false" />
+    <EditText
+        android:text="Edit"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:ems="10"
+        android:id="@+id/e_JText"
+        android:inputType="text"
+        android:selectAllOnFocus="false" />
+
+</LinearLayout>

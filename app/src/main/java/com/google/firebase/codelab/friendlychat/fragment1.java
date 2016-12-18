@@ -26,7 +26,8 @@ import static com.google.firebase.codelab.friendlychat.MainActivity.MESSAGES_CHI
 
 public class fragment1 extends Fragment {
 
-    private EditText mMessageEditText;
+    private EditText New_text;
+    private EditText New_title;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
@@ -44,22 +45,25 @@ public class fragment1 extends Fragment {
             mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
         }
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mMessageEditText = (EditText)returnView.findViewById(R.id.Post);
+
+        New_title = (EditText)returnView.findViewById(R.id.New_Title);
+        New_text = (EditText)returnView.findViewById(R.id.New_Text);
         Button button = (Button)returnView.findViewById(R.id.Post_Button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String nowDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
                 String nowTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
-                FriendlyMessage friendlyMessage = new
-                        FriendlyMessage(mMessageEditText.getText().toString(),
-                        mUsername,
+                PostMessage postMessage = new
+                        PostMessage(New_title.getText().toString(),
+                        New_title.getText().toString(),mUsername,
                         mPhotoUrl,nowTime,nowDate);
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD)
-                        .push().setValue(friendlyMessage);
-                mMessageEditText.setText("");
-                mFirebaseDatabaseReference.push().setValue(mMessageEditText);
-                mMessageEditText.getText().clear();
+                        .push().setValue(postMessage);
+                New_title.setText("");
+                New_text.setText("");
+                //mFirebaseDatabaseReference.push().setValue(New_text);
+                //New_title.getText().clear();
                 startNextPage();
 
             }
