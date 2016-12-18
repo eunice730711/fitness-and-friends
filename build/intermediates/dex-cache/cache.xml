@@ -196,8 +196,13 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
+<<<<<<< HEAD
         sha1="58c9f5ee817fdb8b658fd7455fadfb74119f7ee9">
         <dex dex="C:\Users\user\AndroidStudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-base-9.4.0_3eaa8d586c2b0435377cc56779283cce97794cfd\classes.dex" />
+=======
+        sha1="bfc24d4c732b4144cdf74dde7651bb78fdfcae4b">
+        <dex dex="C:\Users\Andersen\StudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_5f5638bf7631084a8ef427f5c12e9cd14e81ee21\classes.dex" />
+>>>>>>> 98b82258a378427177fc960aeb2db74c4b85824b
     </item>
     <item
         is-multidex="true"
@@ -268,8 +273,13 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
+<<<<<<< HEAD
         sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
         <dex dex="C:\Users\user\AndroidStudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\de.hdodenhof-circleimageview-1.3.0_29316750554209066e14f829cb313639bc44743b\classes.dex" />
+=======
+        sha1="c7aa1393ade144d137cb823192ca18c2140b0df5">
+        <dex dex="C:\Users\Andersen\StudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_57967409305bf5b103ffb880f6268ce4c4d938b8\classes.dex" />
+>>>>>>> 98b82258a378427177fc960aeb2db74c4b85824b
     </item>
     <item
         is-multidex="true"

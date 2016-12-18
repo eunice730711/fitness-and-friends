@@ -55,61 +55,94 @@
         android:visibility="gone"/>
 
     <TextView
-        android:text="title"
-        android:textSize="20dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:text="What: "
+        android:textSize="22dp"
+        android:textColor="#52796F"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Detail_Title"
+        android:id="@+id/what"
         android:layout_below="@+id/Detail_photo"
         android:layout_alignParentStart="true"
         android:paddingLeft="35dp"
         android:layout_marginTop="15dp"/>
 
     <TextView
+        android:text="title"
+        android:textSize="22dp"
+        android:textColor="#84A98C"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Detail_Title"
+        android:layout_below="@+id/Detail_photo"
+        android:layout_alignLeft="@+id/Detail_JPos"
+        android:layout_marginTop="15dp"/>
+
+
+    <TextView
+        android:text="Where:  "
+        android:textSize="22dp"
+        android:textColor="#52796F"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/where"
+        android:layout_below="@+id/what"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="35dp"/>
+    <TextView
         android:text="jposition"
-        android:textSize="20dp"
-        android:textColor="#64dd3b"
+        android:textSize="22dp"
+        android:textColor="#84A98C"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Detail_JPos"
-        android:layout_below="@+id/Detail_photo"
-        android:layout_toRightOf="@+id/Detail_Title"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="7dp"/>
+        android:layout_below="@+id/Detail_Title"
+        android:layout_toRightOf="@+id/where"/>
+
+    <TextView
+        android:text="When: "
+        android:textSize="22dp"
+        android:textColor="#52796F"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/when"
+        android:layout_below="@+id/where"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="35dp"/>
 
     <TextView
         android:text="jdate"
-        android:textSize="18dp"
-        android:textColor="#dd693b"
+        android:textSize="20dp"
+        android:textColor="#84A98C"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Detail_JDate"
         android:layout_below="@+id/Detail_JPos"
-        android:layout_alignLeft="@+id/Detail_Title"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="35dp" />
+        android:layout_alignLeft="@+id/Detail_JPos" />
 
     <TextView
         android:text="jtime"
-        android:textSize="18dp"
-        android:textColor="#dd693b"
+        android:textSize="20dp"
+        android:textColor="#84A98C"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Detail_JTime"
         android:layout_below="@+id/Detail_JPos"
         android:layout_toRightOf="@+id/Detail_JDate"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="5dp" />
+        android:layout_marginTop="0dp"
+        android:paddingLeft="10dp" />
 
 
     <TextView
         android:text="text~~dsfjiosdjfkaodjsfioajsdfkoajsdfmkoasjdfioasjdifopajsdifojasidfojasidofjisaodpfjioasdfjiopasjdfiopasjdfiopajsdkfljasdifpasjdifopjasidofpsaiodpfjioaspdjfiopasjdfiopjasidofpjasiopdfjiasopdjfiopasjdfiopajsdiofpjasidpfjiaospdjfioaspjdfiopasjdiofpjasiodpfjaisopdfjiaospdjfioapsjdfiopasjdiofpjasiodpfjiasopdjfp"
         android:textSize="20dp"
+        android:textColor="#2b323d"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/Detail_Text"

@@ -95,7 +95,7 @@
             android:paddingLeft="10dp"/>
 
         <EditText
-            android:layout_width="230dp"
+            android:layout_width="210dp"
             android:layout_height="50dp"
             android:inputType="textPersonName"
             android:text=""
@@ -133,28 +133,27 @@
             android:layout_marginRight="10dp"/>
 
         <TextView
-            android:text=""
             android:textSize="20dp"
             android:layout_height="50dp"
             android:layout_width="200dp"
             android:id="@+id/Edit_Date"
             android:layout_row="2"
             android:layout_column="1"
-            android:gravity="center"
-            android:hint=""/>
+            android:gravity="center_vertical"
+            android:hint="press the button"/>
 
         <TextView
-            android:text=""
             android:textSize="20dp"
             android:layout_height="50dp"
             android:layout_width="200dp"
             android:id="@+id/Edit_Time"
             android:layout_row="3"
             android:layout_column="1"
-            android:gravity="center"/>
+            android:gravity="left"
+            android:hint="press the button"/>
 
         <EditText
-            android:layout_width="230dp"
+            android:layout_width="210dp"
             android:layout_height="50dp"
             android:inputType="textPersonName"
             android:text=""
