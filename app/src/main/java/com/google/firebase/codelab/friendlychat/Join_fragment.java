@@ -151,12 +151,12 @@ public class Join_fragment extends Fragment {
                             editTime.setText(join.getJtime());
                             editPos.setText(join.getJpos());
                             new AlertDialog.Builder(getActivity())
-                                    .setTitle("編輯貼文")
+                                    .setTitle("Edit Your Join")
                                     .setView(v)
-                                    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
+                                    .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(getContext(), "修改完成" + position, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "successfully changed" + position, Toast.LENGTH_SHORT).show();
                                             //viewHolder.messageTextView.setText(editText.getText().toString());
                                             Map<String, Object> nameMap = new HashMap<String, Object>();
                                             nameMap.put("text", editText.getText().toString());
@@ -167,11 +167,11 @@ public class Join_fragment extends Fragment {
                                             mFirebaseAdapter.getRef(position).updateChildren(nameMap);
                                         }
                                     })
-                                    .setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                                    .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface arg0, int arg1) {
                                             // TODO Auto-generated method stub
-                                            Toast.makeText(getContext(), "取消", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
                                         }
                                     }).show();
                         }
