@@ -10,4 +10,5 @@
     <color name="transparent">#00000000</color>
     <color name="colorRed">#ff404a</color>
     <color name="colorlightRed">#ef1760</color>
+    <color name="messagetitlecolor">#2b323d</color>
 </resources>

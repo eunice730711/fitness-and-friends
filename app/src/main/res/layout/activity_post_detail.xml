@@ -56,6 +56,7 @@
     <TextView
         android:text="text~~dsfjiosdjfkaodjsfioajsdfkoajsdfmkoasjdfioasjdifopajsdifojasidfojasidofjisaodpfjioasdfjiopasjdfiopasjdfiopajsdkfljasdifpasjdifopjasidofpsaiodpfjioaspdjfiopasjdfiopjasidofpjasiopdfjiasopdjfiopasjdfiopajsdiofpjasidpfjiaospdjfioaspjdfiopasjdiofpjasiodpfjaisopdfjiaospdjfioapsjdfiopasjdiofpjasiodpfjiasopdjfp"
         android:textSize="20dp"
+        android:textColor="#2b323d"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/Detail_Text"

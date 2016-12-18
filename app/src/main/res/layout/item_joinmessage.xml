@@ -1,86 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:weightSum="1">
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:orientation="horizontal">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/messengerImageView"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:src="@drawable/ic_account_circle_black_36dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp" />
-
-    <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:elevation="0dp"
-            android:weightSum="1">
-
-            <TextView
-                android:text="Type"
-                android:id="@+id/Type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="20dp"
-                android:paddingRight="5dp" />
-
-            <TextView
-                android:text="Location"
-                android:id="@+id/Position"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp" />
 
 
-            <TextView
-                android:text="name"
-                android:id="@+id/Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="18sp"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:visibility="gone"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:text="Name"
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:text="# "
+            android:id="@+id/mark"
+            android:textSize="18dp"
+            android:textColor="#2b323d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_below="@+id/Position" />
+        <TextView
+            android:text="date"
+            android:id="@+id/Date"
+            android:textSize="18dp"
+            android:textColor="#2b323d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_below="@+id/Position"
+            android:paddingTop="3dp"
+            android:layout_toRightOf="@+id/mark"/>
+
+        <TextView
+            android:text="time"
+            android:id="@+id/Time"
+            android:textSize="18dp"
+            android:textColor="#2b323d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_below="@+id/Position"
+            android:layout_toRightOf="@+id/Date"
+            android:paddingLeft="5dp"
+            android:paddingTop="3dp"/>
 
 
-            <TextView
-                android:text="date"
-                android:id="@+id/Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="18sp"
-                android:layout_marginRight="5dp" />
+        <TextView
+            android:text="# "
+            android:id="@+id/slash2"
+            android:textSize="18dp"
+            android:textColor="#2b323d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_below="@+id/Name" />
 
-            <TextView
-                android:text="time"
-                android:id="@+id/Time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="18sp" />
+        <TextView
+            android:text="Type"
+            android:id="@+id/Type"
+            android:textSize="18dp"
+            android:textColor="#2b323d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_below="@+id/Name"
+            android:layout_toRightOf="@+id/slash2"/>
+        <TextView
+            android:text="#"
+            android:id="@+id/slash"
+            android:textSize="18dp"
+            android:textColor="#2b323d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_below="@+id/Type" />
 
-        </LinearLayout>
+        <TextView
+            android:text="Location"
+            android:id="@+id/Position"
+            android:textSize="18dp"
+            android:textColor="#2b323d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_below="@+id/Type"
+            android:layout_toRightOf="@+id/slash"
+            android:paddingLeft="5dp" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
     <Button
         android:text="e"
         android:layout_width="30dp"
@@ -89,3 +113,98 @@
         android:allowUndo="false"
         android:visibility="invisible" />
 </LinearLayout>
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="110dp"
+android:weightSum="1">
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/messengerImageView"
+    android:layout_width="46dp"
+    android:layout_height="46dp"
+    android:src="@drawable/ic_account_circle_black_36dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="20dp" />
+
+<LinearLayout
+    android:layout_width="200dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="30dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:elevation="0dp"
+        android:weightSum="1">
+
+        <TextView
+            android:text="Type"
+            android:id="@+id/Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="20dp"
+            android:paddingRight="5dp" />
+
+        <TextView
+            android:text="Location"
+            android:id="@+id/Position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:text="name"
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="18sp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:text="date"
+            android:id="@+id/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp" />
+
+        <TextView
+            android:text="time"
+            android:id="@+id/Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
+<Button
+    android:text="e"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:id="@+id/edit"
+    android:allowUndo="false"
+    android:visibility="invisible" />
+</LinearLayout>
+-->
