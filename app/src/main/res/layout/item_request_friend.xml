@@ -20,7 +20,8 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="50dp">
+        android:layout_marginLeft="50dp"
+        android:id="@+id/layout_1">
 
 
         <TextView
@@ -51,7 +52,11 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
-
+    <View
+        android:background="#DEDEDE"
+        android:layout_toRightOf="@+id/requestImageView"
+        android:layout_below="@+id/layout_1"
+        android:layout_height="1dp"
+        android:layout_width="fill_parent"/>
 </RelativeLayout>

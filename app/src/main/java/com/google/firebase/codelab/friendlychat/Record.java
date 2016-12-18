@@ -73,7 +73,7 @@ public class Record extends AppCompatActivity {
                 viewHolder.txt_dist.setText((formatter.format(Double.valueOf(dist))).toString());
                 viewHolder.txt_time.setText(time+"minutes");
 
-                if(dist.compareTo("0")!=0)
+                if(dist.compareTo("0.0")!=0)
                     rate = String.valueOf(formatter.format(Double.valueOf(time)/Double.valueOf(dist))+" mins/km");
                 else
                     rate = "0.00"+" mins/km";

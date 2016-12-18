@@ -40,4 +40,11 @@
         android:layout_height="match_parent"
         android:id="@+id/btn_friendProfile"
         android:background="@color/transparent"/>
+
+    <View
+        android:background="#DEDEDE"
+        android:layout_toRightOf="@+id/friendListImageView"
+        android:layout_below="@+id/friendListImageView"
+        android:layout_height="1dp"
+        android:layout_width="fill_parent"/>
 </RelativeLayout>

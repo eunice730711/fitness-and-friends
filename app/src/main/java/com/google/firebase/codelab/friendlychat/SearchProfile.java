@@ -74,15 +74,24 @@ public class SearchProfile extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         // 避免重複送出邀請
-                        if (snapshot.exists())
-                            Toast.makeText(SearchProfile.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_SHORT).show();
-                        else {
-                            // 送出邀請
-                            HashMap<String, String> map = new HashMap<String, String>();
-                            map.put("requester", userProfile.getUserid());
-                            mDatabase.child("RequestFriend").child(friendid).push().setValue(map);
-                            Toast.makeText(SearchProfile.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            Object o = dataSnapshot.getValue(Object.class);
+                            String id = ((HashMap<String, String>) o).get("requester");
+                            if( id.compareTo(userProfile.getUserid())==0) {
+                                Toast.makeText(SearchProfile.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                         }
+                        // 送出邀請
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("requester", userProfile.getUserid());
+                        mDatabase.child("RequestFriend").child(friendid).push().setValue(map);
+                        Toast.makeText(SearchProfile.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
+                        SendNotification sendNotification = new SendNotification();
+                        sendNotification.setupFriend(userProfile.getUserid(),friendid);
+                        Toast.makeText(SearchProfile.this,"1", Toast.LENGTH_SHORT).show();
+                        sendNotification.start();
                     }
 
                     @Override
