@@ -54,6 +54,7 @@ public class SendNotification extends Thread{
         data.put("to", "/topics/friend_"+this.friendid);
         //data.put("notification","Friend request");
         nestedData.put("message",this.userId+" sends a friend request");
+        nestedData.put("type","friend");
         data.put("data",nestedData);
 
         OutputStream os = con.getOutputStream();

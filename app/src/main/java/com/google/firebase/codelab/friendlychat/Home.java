@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,20 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import static com.google.android.gms.internal.zzng.ex;
 
 
 public class Home extends AppCompatActivity {
@@ -87,8 +72,6 @@ public class Home extends AppCompatActivity {
         };
         mActionBarDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
-
-
 
 
 
@@ -156,17 +139,16 @@ public class Home extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+        // 設定自己可以接收好友通知
+        SendNotification sendNotification = new SendNotification();
+        sendNotification.subscribeFriend(userProfile.getUserid());
 
-/*
+
+
+
+
         Button btn_delete = (Button) findViewById(R.id.deleteALL);
-        btn_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SendNotification sendNotification = new SendNotification();
-                sendNotification.subscribeFriend(userProfile.getUserid());
-            }
-        });
-        */
+
 //        Button btn_friend = (Button) findViewById(R.id.btn_friend);
 //        btn_friend.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -176,7 +158,7 @@ public class Home extends AppCompatActivity {
 //                startActivity(intent2);
 //            }
 //        });
-
+/*
         Button btn_delete = (Button) findViewById(R.id.deleteALL);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +178,7 @@ public class Home extends AppCompatActivity {
                 });
             }
         });
-
+*/
         txt_distance = (TextView)findViewById(R.id.txt_homeditatnce);
         updateDistance();
     }
