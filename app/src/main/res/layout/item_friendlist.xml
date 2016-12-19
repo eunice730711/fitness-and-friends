@@ -5,8 +5,6 @@
     android:layout_height="90dp">
 
 
-
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/friendListImageView"
         android:layout_width="46dp"
@@ -23,7 +21,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="15dp">
-
 
         <TextView
             android:text="id"

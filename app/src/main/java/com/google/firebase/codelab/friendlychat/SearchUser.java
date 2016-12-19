@@ -4,13 +4,18 @@ package com.google.firebase.codelab.friendlychat;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,20 +25,57 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.google.firebase.codelab.friendlychat.R.id.btn_accept;
+import static com.google.firebase.codelab.friendlychat.R.id.btn_setProfile;
+import static com.google.firebase.codelab.friendlychat.R.id.recommedFriendView;
+import static com.google.firebase.codelab.friendlychat.R.id.requestImageView;
+import static com.google.firebase.codelab.friendlychat.R.id.txt_request;
+import static com.google.firebase.codelab.friendlychat.R.id.userImageView;
+
 
 public class SearchUser extends AppCompatActivity {
 
     public DatabaseReference mDatabase;
-    private Button btn_send, btn_setProfile;
+    private Button btn_send;
     private EditText txt_userid, txt_username, txt_searchId;
     public UserProfile userProfile;
-    private String refreshedToken;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private FirebaseRecyclerAdapter<Object, RecommendFriendViewHolder>
+            mFirebaseAdapter;
+
+    public static class RecommendFriendViewHolder extends RecyclerView.ViewHolder {
+
+        public CircleImageView ImageView;
+        public String friendid;
+        public TextView txt_recommendId;
+        public Button btn_friendProfile;
+
+        public RecommendFriendViewHolder(View v) {
+            super(v);
+            txt_recommendId = (TextView) itemView.findViewById(R.id.txt_recommendId);
+            ImageView = (CircleImageView) itemView.findViewById(R.id.recommedFriendView);
+            btn_friendProfile = (Button) itemView.findViewById(R.id.btn_recommendfriendProfile);
+
+            btn_friendProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 好友的個人頁面介紹
+                    Intent i = new Intent(v.getContext(), FriendProfile.class);
+                    i.putExtra("friendid", friendid);
+                    v.getContext().startActivity(i);
+                }
+            });
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         init();
-
+        recommendFriend();
         // send requesting friend by ID
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,14 +140,48 @@ public class SearchUser extends AppCompatActivity {
     private void init(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btn_send = (Button) findViewById(R.id.btn_search_send);
-        btn_setProfile = (Button) findViewById(R.id.btn_setProfile);
         txt_userid = (EditText) findViewById(R.id.txt_id);
         txt_username = (EditText) findViewById(R.id.txt_username);
         txt_searchId = (EditText) findViewById(R.id.txt_searchId);
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
         // 從file取得 使用者資料
         ProfileIO profileIO = new ProfileIO(SearchUser.this);
         userProfile = profileIO.ReadFile();
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.RecommendFriendRecyclerView);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        // 顯示最新資訊，由上而下
+        mLinearLayoutManager.setReverseLayout(true);
+        mLinearLayoutManager.setStackFromEnd(true);
+        mLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+    }
+
+    private void recommendFriend(){
+        DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        // 存取通知資料庫，並且顯示通知出來
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Object,
+                RecommendFriendViewHolder>(
+                Object.class,
+                R.layout.item_recommendfriend,
+                RecommendFriendViewHolder.class,
+                mFirebaseDatabaseReference.child("UserProfile").orderByChild("usergender")) {
+
+            @Override
+            protected void populateViewHolder(RecommendFriendViewHolder viewHolder,
+                                              Object o , int position) {
+                Log.e("profile",o.toString());
+                String id = ((HashMap)o).get("userid").toString();
+                String userphoto = ((HashMap)o).get("userphoto").toString();
+                viewHolder.friendid = id;
+                viewHolder.txt_recommendId.setText(id);
+
+                Glide.with(SearchUser.this)
+                        .load(userphoto)
+                        .into(viewHolder.ImageView);
+
+            }
+        };
+        mRecyclerView.setAdapter(mFirebaseAdapter);
     }
 
 }

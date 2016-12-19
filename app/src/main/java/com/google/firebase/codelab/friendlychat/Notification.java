@@ -112,7 +112,6 @@ public class Notification extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         // 顯示最新資訊，由上而下
-        mLinearLayoutManager.setReverseLayout(true);
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         showNotification();
