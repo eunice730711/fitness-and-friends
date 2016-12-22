@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,47 +10,155 @@
         android:layout_height="56dp"
         android:layout_margin="5dp">
 
-        <TextView
-            android:text="TextView"
-            android:layout_height="34dp"
-            android:id="@+id/Week_x"
-            android:textStyle="normal|bold"
-            android:textSize="18sp"
-            android:gravity="center_vertical|center"
-            android:layout_weight="1"
-            android:layout_width="80dp"
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/plan_date" />
-
-        <TextView
-            android:text="無"
-            android:layout_height="28dp"
-            android:id="@+id/runContent"
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_toEndOf="@+id/Week_x"
-            android:layout_alignParentTop="true"
-            android:paddingLeft="10dp"
-            android:textSize="18sp"
-            android:layout_width="220dp"
-            android:layout_alignParentBottom="true" />
-
-        <CheckBox
+        <LinearLayout
+            android:id="@+id/rowBG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Day_done"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="horizontal">
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/plan_date"
-            android:layout_toStartOf="@+id/runContent"
-            android:gravity="center" />
+
+            <RelativeLayout
+                android:id="@+id/edit"
+                android:layout_width="@dimen/swipeWidth"
+                android:layout_height="match_parent"
+                android:background="@color/swipeoption_green"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="?android:selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:tint="@android:color/white"
+                        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Edit"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/delete"
+                android:layout_width="@dimen/swipeWidth"
+                android:layout_height="match_parent"
+                android:background="@color/swipeoption_purple"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="?android:selectableItemBackground"
+                    android:gravity="center_vertical|left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:tint="@android:color/white"
+                        app:srcCompat="@android:drawable/ic_menu_delete"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Delete"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rowFG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTitle"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:text="TextView"
+                android:layout_height="34dp"
+                android:id="@+id/Week_x"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:gravity="center_vertical|center"
+                android:layout_weight="1"
+                android:layout_width="80dp"
+                android:layout_alignParentTop="true"
+                android:layout_above="@+id/plan_date" />
+
+            <TextView
+                android:text="無"
+                android:layout_height="28dp"
+                android:id="@+id/DayRunContent"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_toEndOf="@+id/Week_x"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="10dp"
+                android:textSize="18sp"
+                android:layout_width="220dp"
+                android:layout_alignParentBottom="true" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Day_done"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/plan_date"
+                android:layout_toStartOf="@+id/DayRunContent"
+                android:gravity="center" />
+
+
+
+        </RelativeLayout>
+
+
+
     </RelativeLayout>
 
 </LinearLayout>

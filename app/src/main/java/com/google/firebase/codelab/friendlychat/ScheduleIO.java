@@ -266,20 +266,24 @@ public class ScheduleIO {
         List<WeekContent> list_week = new ArrayList<WeekContent>();
         list_week = ReadFile();
 
-        Calendar calendar = Calendar.getInstance();
+        if(list_week.size()!=0){
+            Calendar calendar = Calendar.getInstance();
 
-        for(int i=0; i<list_week.size(); i++){
-            for(int j=0; j<list_week.get(i).getDays().size(); j++){
+            for(int i=0; i<list_week.size(); i++){
+                for(int j=0; j<list_week.get(i).getDays().size(); j++){
 
-                String date = DatetoString(list_week.get(i).getDays().get(j).getDate(),0);
-                String now = DatetoString(calendar.getTime(),0);
-                if(date.equals(now)){
-                    return list_week.get(i).getDays().get(j);
+                    String date = DatetoString(list_week.get(i).getDays().get(j).getDate(),0);
+                    String now = DatetoString(calendar.getTime(),0);
+                    if(date.equals(now)){
+                        return list_week.get(i).getDays().get(j);
+                    }
                 }
             }
         }
         return null;
     }
+
+
     public void UpdateComplete(){
         List<WeekContent> list_week = null;
         list_week = ReadFile();

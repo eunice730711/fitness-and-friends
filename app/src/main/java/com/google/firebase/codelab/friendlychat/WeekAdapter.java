@@ -1,6 +1,7 @@
 package com.google.firebase.codelab.friendlychat;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,58 +17,70 @@ import java.util.List;
  */
 
 
-public class WeekAdapter extends BaseAdapter {
-    private LayoutInflater inflater;
+public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.CustomViewHolder> {
+
     private List<String> w;
     private List<WeekContent> content;
-    public WeekAdapter(Context c, List<String> w, List<WeekContent> content){
-        inflater = LayoutInflater.from(c);
+
+    public WeekAdapter(List<String> w, List<WeekContent> content) {
         this.w = w;
         this.content = content;
     }
+
     @Override
-    public int getCount() {
+    public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_week, null);
+        CustomViewHolder viewHolder = new CustomViewHolder(view);
+
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
+        //把 資料內容 和 介面 綁定
+
+
+        List<String> level_name = new ArrayList<String>(Arrays.asList("初階","中階"));
+
+        customViewHolder.textView_w.setText(w.get(i));
+
+
+        if(i < content.size()) {
+
+            String c = content.get(i).getDayCount() + " 天";
+            if (content.get(i).getLevel() == 2) {
+                int j = 0;
+                for (j = 0; j < content.get(i).getDays().size(); j++) {
+                    if (content.get(i).getDays().get(j).getChoose()) break;
+                }
+                c += "\n距離基礎 : " + content.get(i).getDaysItem(j).getDist() + " km";
+            }
+            customViewHolder.textView_content.setText(c);
+            customViewHolder.textView_level.setText(level_name.get(content.get(i).getLevel()-1));
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
         return w.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return w.get(i);
-    }
+    class CustomViewHolder extends RecyclerView.ViewHolder {
+        //自定義的 ViewHolder，綁定item_week的 id
 
-    @Override
-    public long getItemId(int i) {
-        return w.indexOf(getItem(i));
-    }
+        protected TextView textView_w;
+        protected TextView textView_level;
+        protected TextView textView_content;
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflater.inflate(R.layout.item_week,viewGroup,false);
+        public CustomViewHolder(View view) {
+            super(view);
 
-        String week = (String) getItem(i);
-        TextView textView_w = (TextView) view.findViewById(R.id.Week_x);
-        textView_w.setText(week);
-
-        if(i<content.size()){
-            List<String> level_name = new ArrayList<String>(Arrays.asList("初階","中階"));
-            TextView textView_level = (TextView) view.findViewById(R.id.RunLevel);
-            textView_level.setText(level_name.get(content.get(i).getLevel()-1));
-
-            TextView textView_content = (TextView) view.findViewById(R.id.RunContent);
-            String c = content.get(i).getDayCount()+" 天";
-
-            if(content.get(i).getLevel() == 2){
-                int j=0;
-                for(j=0; j<content.get(i).getDays().size(); j++){
-                    if(content.get(i).getDays().get(j).getChoose())break;
-                }
-                c += "\n距離基礎 : " + content.get(i).getDaysItem(j).getDist()+" km";
-            }
-
-            textView_content.setText(c);
+            this.textView_w = (TextView) view.findViewById(R.id.Week_x);
+            this.textView_content = (TextView) view.findViewById(R.id.RunContent);
+            this.textView_level = (TextView) view.findViewById(R.id.RunLevel);
 
         }
-
-        return view;
     }
 }

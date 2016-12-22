@@ -15,8 +15,11 @@ public class scheduleRunLevel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_run_level);
 
-        Intent intent = this.getIntent();
-        r = (Result)intent.getSerializableExtra("run");
+        r = new Result();
+        r.setType(1);
+
+//        Intent intent = this.getIntent();
+//        r = (Result)intent.getSerializableExtra("run");
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
