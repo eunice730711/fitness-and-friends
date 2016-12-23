@@ -57,7 +57,7 @@ public class fragment1 extends Fragment {
                 PostMessage postMessage = new
                         PostMessage(New_title.getText().toString(),
                         New_title.getText().toString(),mUsername,
-                        mPhotoUrl,nowTime,nowDate);
+                        mPhotoUrl,nowTime,nowDate, 0 );
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD)
                         .push().setValue(postMessage);
                 New_title.setText("");

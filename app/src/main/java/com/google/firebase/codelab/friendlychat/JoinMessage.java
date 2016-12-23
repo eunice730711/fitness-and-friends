@@ -16,6 +16,7 @@ public class JoinMessage implements Serializable {
     private String Jtime;
     private String Jpos;
     private String title;
+    private int join_num;
 
     public JoinMessage(){
     }
@@ -30,6 +31,7 @@ public class JoinMessage implements Serializable {
         this.Jtime = j_time;
         this.Jpos = j_pos;
         this.title = j_type;
+        this.join_num = 0;
     }
     public String getText() {
         return text;
@@ -92,6 +94,15 @@ public class JoinMessage implements Serializable {
     }
 
     public void setTitle(String title) { this.title = title; }
+
+    public int getJoin_num() {
+        return join_num;
+    }
+
+    public void setJoin_num(int join_num) {
+        this.join_num = join_num;
+    }
+
 
 
 

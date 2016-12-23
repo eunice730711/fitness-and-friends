@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_account_circle_black_36dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/user_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_name"
+            android:text="message"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#2b323d"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/user_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="date"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/user_name"
+            android:layout_alignBottom="@+id/user_name"
+            android:layout_toEndOf="@+id/user_name"
+            android:layout_marginStart="12dp" />
+
+        <TextView
+            android:id="@+id/user_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="time"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginStart="13dp"
+            android:layout_alignBaseline="@+id/user_date"
+            android:layout_alignBottom="@+id/user_date"
+            android:layout_toEndOf="@+id/user_date" />
+
+    </RelativeLayout>
+</LinearLayout>
