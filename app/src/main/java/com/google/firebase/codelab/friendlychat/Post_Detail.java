@@ -149,7 +149,7 @@ public class Post_Detail extends AppCompatActivity {
                 // Getting Post failed, log a message
             }
         };
-        PostRef.addValueEventListener(postListener);
+        PostRef.addListenerForSingleValueEvent(postListener);
         //post = (PostMessage) intent.getSerializableExtra("post");
 
         //send message button
@@ -185,7 +185,6 @@ public class Post_Detail extends AppCompatActivity {
                         }
                         init = true;
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // Getting Post failed, log a message
@@ -205,15 +204,12 @@ public class Post_Detail extends AppCompatActivity {
                         post.setLike_num(post.getLike_num() + 1);
                         //資料庫有新增或刪減需通知adapter!!!!!!!不然會crash
                         mFirebaseAdapter.notifyItemInserted(user_positoin);
-                        mFirebaseAdapter.notifyDataSetChanged();
-                        mFirebaseAdapter.notifyItemRangeChanged(user_positoin, mFirebaseAdapter.getItemCount());
                     }
                 } else {
                     mem_ref.removeValue();
                     post.setLike_num(post.getLike_num() - 1);
                     mFirebaseAdapter.notifyItemRemoved(user_positoin);
-                    mFirebaseAdapter.notifyDataSetChanged();
-                    mFirebaseAdapter.notifyItemRangeChanged(user_positoin, mFirebaseAdapter.getItemCount());
+
                 }
                 PostRef.child("like_num").setValue(post.getLike_num());
                 Like_num.setText(post.getLike_num() + "人");
@@ -258,6 +254,7 @@ public class Post_Detail extends AppCompatActivity {
             }
         };
         mRecyclerView.setAdapter(mFirebaseAdapter);
+
 
         // 朋友的留言
         message_Recyclerview = (RecyclerView) findViewById(R.id.user_message);

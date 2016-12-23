@@ -2,8 +2,11 @@ package com.google.firebase.codelab.friendlychat;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +54,64 @@ public class Join_Detail extends AppCompatActivity {
     private DatabaseReference FirebaseDatabaseRef;
     private DatabaseReference mem_ref ;
     private DatabaseReference JoinRef;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private RecyclerView message_Recyclerview;
+    private LinearLayoutManager message_LayoutManger;
+    private FirebaseRecyclerAdapter<Member, Join_Detail.LikeViewHolder>
+            mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<Message, Join_Detail.UserMessageViewHolder>
+            UsermessageAdapter;
+    public static class LikeViewHolder extends RecyclerView.ViewHolder {
+
+        public CircleImageView User_photo;
+        public String userid;
+
+        public LikeViewHolder(View v) {
+            super(v);
+            User_photo = (CircleImageView) itemView.findViewById(R.id.user_photo);
+            User_photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 好友的個人頁面介紹
+                    Intent i = new Intent(v.getContext(), FriendProfile.class);
+                    i.putExtra("friendid", userid);
+                    v.getContext().startActivity(i);
+                }
+            });
+        }
+    }
+    public static class UserMessageViewHolder extends RecyclerView.ViewHolder {
+
+        public CircleImageView User_photo;
+        public TextView User_name;
+        public TextView User_message;
+        public TextView User_date;
+        public TextView User_time;
+        public String userid;
+
+        public UserMessageViewHolder(View v) {
+            super(v);
+            User_photo = (CircleImageView) itemView.findViewById(R.id.user_photo);
+            User_name = (TextView) itemView.findViewById(R.id.user_name);
+            User_message = (TextView) itemView.findViewById(R.id.user_message);
+            User_date = (TextView) itemView.findViewById(R.id.user_date);
+            User_time = (TextView) itemView.findViewById(R.id.user_time);
+            User_photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 好友的個人頁面介紹
+                    Intent i = new Intent(v.getContext(), FriendProfile.class);
+                    i.putExtra("friendid", userid);
+                    v.getContext().startActivity(i);
+                }
+            });
+        }
+    }
+    //紀錄user在join列表中的position
+    public int user_positoin;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +180,11 @@ public class Join_Detail extends AppCompatActivity {
                 }
             }
         });
+
         init = false;
         JoinRef.child("Member").orderByChild("userid")
                 .equalTo(userProfile.getUserid()).limitToFirst(1)
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -152,21 +215,93 @@ public class Join_Detail extends AppCompatActivity {
                                 ,userProfile.getUsername(),userProfile.getUserphoto());
                         JoinRef.child("Member").push().setValue(New_member);
                         join.setJoin_num(join.getJoin_num()+1);
-                        JoinRef.child("join_num").setValue(join.getJoin_num());
-                        Join_num.setText(join.getJoin_num() + "人");
+                        //資料庫有新增或刪減需通知adapter!!!!!!!不然會crash
+                        mFirebaseAdapter.notifyItemInserted(user_positoin);
                     }
                 }
                 else
                 {
                     mem_ref.removeValue();
                     join.setJoin_num(join.getJoin_num()-1);
-                    JoinRef.child("join_num").setValue(join.getJoin_num());
-                    Join_num.setText(join.getJoin_num() + "人");
+                    mFirebaseAdapter.notifyItemRemoved(user_positoin);
                 }
+                JoinRef.child("join_num").setValue(join.getJoin_num());
+                Join_num.setText(join.getJoin_num() + "人");
 
             }
         });
+        //like列表
+        init = false;
+        mRecyclerView = (RecyclerView) findViewById(R.id.Join_people);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        // 顯示最新資訊，由上而下
+        mLinearLayoutManager.setReverseLayout(true);
+        mLinearLayoutManager.setStackFromEnd(true);
+        mLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        // New child entries
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Member, LikeViewHolder>(
+                Member.class,
+                R.layout.item_likepeople,
+                LikeViewHolder.class,
+                JoinRef.child("Member")) {
+            @Override
+            protected void populateViewHolder(final LikeViewHolder viewHolder,
+                                              final Member member, final int position) {
+                //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                viewHolder.userid = member.getUserid();
+                if (member.getUserid().equals(userProfile.getUserid())) {
+                    user_positoin = position;
+                    mem_ref = mFirebaseAdapter.getRef(position);
+                }
+                if (member.getPhotoUrl() == null) {
+                    viewHolder.User_photo
+                            .setImageDrawable(ContextCompat
+                                    .getDrawable(Join_Detail.this,
+                                            R.drawable.ic_account_circle_black_36dp));
+                } else {
+                    Glide.with(Join_Detail.this)
+                            .load(member.getPhotoUrl())
+                            .into(viewHolder.User_photo);
+                }
+            }
+        };
+        mRecyclerView.setAdapter(mFirebaseAdapter);
 
+        // 朋友的留言
+        message_Recyclerview = (RecyclerView) findViewById(R.id.user_message);
+        message_LayoutManger = new LinearLayoutManager(this);
+        // 顯示最新資訊，由上而下
+        //message_LayoutManger.setReverseLayout(true);
+        //message_LayoutManger.setStackFromEnd(true);
+        message_Recyclerview.setLayoutManager(message_LayoutManger);
+        UsermessageAdapter = new FirebaseRecyclerAdapter<Message, UserMessageViewHolder>(
+                Message.class,
+                R.layout.item_usermessage,
+                UserMessageViewHolder.class,
+                JoinRef.child("Message")) {
+            @Override
+            protected void populateViewHolder(final UserMessageViewHolder viewHolder,
+                                              final Message message, final int position) {
+                //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                viewHolder.userid = message.getUserid();
+                viewHolder.User_name.setText(message.getName());
+                viewHolder.User_message.setText(message.getContent());
+                viewHolder.User_date.setText(message.getMdate());
+                viewHolder.User_time.setText(message.getMtime());
+                if (message.getPhotoUrl() == null) {
+                    viewHolder.User_photo
+                            .setImageDrawable(ContextCompat
+                                    .getDrawable(Join_Detail.this,
+                                            R.drawable.ic_account_circle_black_36dp));
+                } else {
+                    Glide.with(Join_Detail.this)
+                            .load(message.getPhotoUrl())
+                            .into(viewHolder.User_photo);
+                }
+            }
+        };
+        message_Recyclerview.setAdapter(UsermessageAdapter);
     }
 
 }
