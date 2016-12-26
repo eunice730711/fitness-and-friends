@@ -124,10 +124,10 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent2 = new Intent();
-//                intent2.setClass(Home.this, Running.class);
-//                startActivity(intent2);
-//                Home.this.finish();
+                Intent intent2 = new Intent();
+                intent2.setClass(Home.this, Run.class);
+                startActivity(intent2);
+                //Home.this.finish();
             }
         });
 

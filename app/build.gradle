@@ -54,6 +54,8 @@ dependencies {
 
     // Google
     compile 'com.google.android.gms:play-services-auth:9.4.0'
+    compile 'com.google.android.gms:play-services-maps:9.4.0'
+    compile 'com.google.android.gms:play-services-location:9.4.0'
 
     // Firebase
     compile 'com.google.firebase:firebase-database:9.4.0'
