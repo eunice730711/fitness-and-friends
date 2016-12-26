@@ -305,27 +305,30 @@ public class ScheduleIO {
 
     public boolean IsComplete(double time, double dist){
         Day day = TodayJob();
-        if(day.getDist() !=0){
-            if( dist >= day.getDist()){
-                // finish the today job
-                UpdateComplete();
+        if(day != null) {
+            if(day.getDist() !=0){
+                if( dist >= day.getDist()){
+                    // finish the today job
+                    UpdateComplete();
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else if(day.getTime() !=0){
+                if( time >= day.getTime()){
+                    UpdateComplete();
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else
                 return true;
-            }
-            else{
-                return false;
-            }
         }
-        else if(day.getTime() !=0){
-            if( time >= day.getTime()){
-                UpdateComplete();
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else
-            return true;
+        return false;
     }
 
 }

@@ -177,7 +177,7 @@ public class schedule extends AppCompatActivity {
                 builder.setMessage("是否重新設定運動計畫?")
                         .setNegativeButton("是", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                //fileIO.DeleteFile();
+                                fileIO.DeleteFile();
                                 Intent intent1 = new Intent();
                                 intent1.setClass(schedule.this, scheduleRunLevel.class);
 
