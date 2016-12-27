@@ -8,23 +8,23 @@
     android:padding="@dimen/activity_vertical_margin"
     tools:context="com.google.firebase.codelab.friendlychat.schedule">
 
-<android.support.v7.widget.Toolbar
-    android:id="@+id/my_toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
-    android:elevation="4dp"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Schedule"
-        android:textSize="20dp"
-        android:textColor="#29e5b6"
-        android:textStyle="normal|bold"
-        android:layout_gravity="center" />
-</android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schedule"
+            android:textSize="20dp"
+            android:textColor="#29e5b6"
+            android:textStyle="normal|bold"
+            android:layout_gravity="center" />
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:orientation="vertical"
@@ -42,11 +42,10 @@
             android:scaleType="fitCenter"
             android:layout_height="88dp" />
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/ListView"
-            android:layout_below="@+id/imageView" />
+            android:id="@+id/weeks_RecyclerView" />
 
     </LinearLayout>
 

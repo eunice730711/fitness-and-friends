@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,16 +26,17 @@ import java.util.List;
 
 public class schedule extends AppCompatActivity {
 
-    private ListView weekListview;
-    List<String> weekList = new ArrayList<String>();
+    private RecyclerView weeksRecyclerView;
+    private LinearLayoutManager layoutManager;
     private WeekAdapter adapter;
+    private List<String> weekList = new ArrayList<String>();
 
-    List <WeekContent> myplan = new ArrayList<WeekContent>();
+    private List <WeekContent> myplan = new ArrayList<WeekContent>();
 
-    ScheduleIO fileIO = new ScheduleIO(schedule.this);
+    private ScheduleIO fileIO = new ScheduleIO(schedule.this);
 
-    Calendar now = Calendar.getInstance();
-    int now_of_week = set_Now_of_week();
+    private Calendar now = Calendar.getInstance();
+    private int now_of_week = set_Now_of_week();
 
     Result r;
     @Override
@@ -47,8 +50,12 @@ public class schedule extends AppCompatActivity {
         r = (Result) intent.getSerializableExtra("schedule");
 
 
-        // 01 display every week
-        weekListview = (ListView)findViewById(R.id.ListView);
+        //初始化RecyclerView用的layoutManager
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        // 01 init and display every week
+        weeksRecyclerView = (RecyclerView) findViewById(R.id.weeks_RecyclerView);
         for(int i=1;i<=4;i++){
             weekList.add("Week "+ String.valueOf(i) );
         }
@@ -79,23 +86,20 @@ public class schedule extends AppCompatActivity {
 
 
         // 03 This is my own WeekAdapter which is used to display the custom ListView.
-        adapter = new WeekAdapter(schedule.this,weekList,myplan);
-        weekListview.setAdapter(adapter);
+        adapter = new WeekAdapter(weekList,myplan);
+        weeksRecyclerView.setLayoutManager(layoutManager);
+        weeksRecyclerView.setAdapter(adapter);
 
-
-        // 04 When a user click one list
-        weekListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        weeksRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), weeksRecyclerView, new RecyclerViewTouchListener.RecyclerViewClickListener() {
             @Override
-            public void onItemClick(AdapterView adapterView, View view, int position, long id) {
-                ListView listView = (ListView) adapterView;
+            public void onClick(View view, int position) {
+                //Toast.makeText(getApplicationContext(), weekList.get(position) + " is clicked!", Toast.LENGTH_SHORT).show();
 
                 if(myplan.size()!=0 ){
                     Intent intent3 = new Intent();
                     intent3.setClass(schedule.this, WeekPlan.class);
 
-                    // 05 using the var week in fifth element to represent which list is clicked,
-                    //    and the element 1~4 (index 0~3) are user's plan.
-                    //    Then pass this list to next page.
+                    // 05 用最後一周的 var week 去代表哪一周被按，因為要丟全部的plan到下一頁。
                     List <WeekContent> send;
                     send = myplan;
                     WeekContent p = new WeekContent();
@@ -105,6 +109,8 @@ public class schedule extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("plan", (Serializable) send);
                     intent3.putExtras(bundle);
+
+
 
                     startActivity(intent3);
                     schedule.this.finish();
@@ -116,9 +122,16 @@ public class schedule extends AppCompatActivity {
                             "尚未建立運動計畫\n請點擊右上角扳手建立",
                             Toast.LENGTH_LONG).show();
                 }
-
             }
-        });
+
+
+
+            @Override
+            public void onLongClick(View view, int position) {
+                //處理長按事件
+                //Toast.makeText(getApplicationContext(), weekList.get(position) + " is long pressed!", Toast.LENGTH_SHORT).show();
+            }
+        }));
 
 
 
@@ -168,11 +181,11 @@ public class schedule extends AppCompatActivity {
                                 Intent intent1 = new Intent();
                                 intent1.setClass(schedule.this, scheduleRunLevel.class);
 
-                                Result r = new Result();
-                                Bundle bundle = new Bundle();
-                                r.setType(1);
-                                bundle.putSerializable("run",r);
-                                intent1.putExtras(bundle);
+//                                Result r = new Result();
+//                                Bundle bundle = new Bundle();
+//                                r.setType(1);
+//                                bundle.putSerializable("run",r);
+//                                intent1.putExtras(bundle);
 
                                 startActivity(intent1);
                                 schedule.this.finish();
@@ -190,11 +203,11 @@ public class schedule extends AppCompatActivity {
                 Intent intent1 = new Intent();
                 intent1.setClass(this, scheduleRunLevel.class);
 
-                Result r = new Result();
-                Bundle bundle = new Bundle();
-                r.setType(1);
-                bundle.putSerializable("run",r);
-                intent1.putExtras(bundle);
+//                Result r = new Result();
+//                Bundle bundle = new Bundle();
+//                r.setType(1);
+//                bundle.putSerializable("run",r);
+//                intent1.putExtras(bundle);
 
                 startActivity(intent1);
                 schedule.this.finish();
@@ -386,6 +399,7 @@ public class schedule extends AppCompatActivity {
         }
         return weekDay;
     }
+
 }
 
 

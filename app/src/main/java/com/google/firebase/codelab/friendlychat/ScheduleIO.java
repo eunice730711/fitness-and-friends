@@ -266,20 +266,24 @@ public class ScheduleIO {
         List<WeekContent> list_week = new ArrayList<WeekContent>();
         list_week = ReadFile();
 
-        Calendar calendar = Calendar.getInstance();
+        if(list_week.size()!=0){
+            Calendar calendar = Calendar.getInstance();
 
-        for(int i=0; i<list_week.size(); i++){
-            for(int j=0; j<list_week.get(i).getDays().size(); j++){
+            for(int i=0; i<list_week.size(); i++){
+                for(int j=0; j<list_week.get(i).getDays().size(); j++){
 
-                String date = DatetoString(list_week.get(i).getDays().get(j).getDate(),0);
-                String now = DatetoString(calendar.getTime(),0);
-                if(date.equals(now)){
-                    return list_week.get(i).getDays().get(j);
+                    String date = DatetoString(list_week.get(i).getDays().get(j).getDate(),0);
+                    String now = DatetoString(calendar.getTime(),0);
+                    if(date.equals(now)){
+                        return list_week.get(i).getDays().get(j);
+                    }
                 }
             }
         }
         return null;
     }
+
+
     public void UpdateComplete(){
         List<WeekContent> list_week = null;
         list_week = ReadFile();
@@ -301,27 +305,30 @@ public class ScheduleIO {
 
     public boolean IsComplete(double time, double dist){
         Day day = TodayJob();
-        if(day.getDist() !=0){
-            if( dist >= day.getDist()){
-                // finish the today job
-                UpdateComplete();
+        if(day != null) {
+            if(day.getDist() !=0){
+                if( dist >= day.getDist()){
+                    // finish the today job
+                    UpdateComplete();
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else if(day.getTime() !=0){
+                if( time >= day.getTime()){
+                    UpdateComplete();
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else
                 return true;
-            }
-            else{
-                return false;
-            }
         }
-        else if(day.getTime() !=0){
-            if( time >= day.getTime()){
-                UpdateComplete();
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else
-            return true;
+        return false;
     }
 
 }

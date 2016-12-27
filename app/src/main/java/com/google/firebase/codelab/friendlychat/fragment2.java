@@ -3,10 +3,7 @@ package com.google.firebase.codelab.friendlychat;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import static com.google.firebase.codelab.friendlychat.MainActivity.MESSAGES_CHILD;
 
 public class fragment2 extends Fragment {
 

@@ -18,7 +18,18 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#29e5b6"
+            android:textStyle="normal|bold"
+            android:layout_gravity="center"
+            android:id="@+id/editTitle" />
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:text="TextView"
@@ -31,12 +42,11 @@
         android:textSize="18sp"
         android:layout_height="40dp" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:id="@+id/EveryDay" />
+        android:id="@+id/EveryDay"
+        android:layout_below="@+id/textView" />
 
 
 </RelativeLayout>

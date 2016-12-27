@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -44,9 +46,7 @@ import static android.os.Build.VERSION_CODES.M;
 import static com.google.android.gms.auth.api.credentials.PasswordSpecification.da;
 import static com.google.firebase.codelab.friendlychat.Day.DatetoString;
 
-public class Running extends FragmentActivity
-        implements
-        LocationListener {
+public class Running extends FragmentActivity{
     /** Called when the activity is first created. */
     private final double EARTH_RADIUS = 6378137.0;
     public static final String ANONYMOUS = "anonymous";
@@ -65,17 +65,21 @@ public class Running extends FragmentActivity
     public UserProfile userProfile;
     private Location location;
     private Toast toast;
+    private MyLocationListener locationListener;
+    private double last_lat, last_lng;
+
     //private Firebase mRef;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private ScheduleIO scheduleIO ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running);
+
         status = (LocationManager) (this.getSystemService(Context.LOCATION_SERVICE));
+        locationListener = new MyLocationListener(Running.this);
         init();
+
 
         btn_start.setOnClickListener(
                 new Button.OnClickListener() {
@@ -101,8 +105,8 @@ public class Running extends FragmentActivity
                     }
                 });
 
-        if (status.isProviderEnabled(LocationManager.GPS_PROVIDER) || status.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            //如果GPS或網路定位開啟，呼叫locationServiceInitial()更新位置
+        if (status.isProviderEnabled(LocationManager.PASSIVE_PROVIDER) || status.isProviderEnabled(LocationManager.GPS_PROVIDER) || status.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            //如果GPS或網路定位開啟，呼叫locationServiceInitial()初始化
             locationServiceInitial();
 
         } else {
@@ -115,37 +119,13 @@ public class Running extends FragmentActivity
             }
             toast.show();
 
-            //Toast.makeText(this, "請開啟定位服務", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));	//開啟設定頁面
+            //startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));	//開啟設定頁面
         }
 
-    }
 
-
-    @Override
-    public void onLocationChanged(Location location) {	//當地點改變時
-        // TODO Auto-generated method stub
-        Toast.makeText(this, "location change", Toast.LENGTH_LONG).show();
 
     }
 
-    @Override
-    public void onProviderDisabled(String arg0) {	//當GPS或網路定位功能關閉時
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onProviderEnabled(String arg0) {	//當GPS或網路定位功能開啟
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {	//定位狀態改變
-        //status=OUT_OF_SERVICE 供應商停止服務
-        //status=TEMPORARILY_UNAVAILABLE 供應商暫停服務
-    }
     private void locationServiceInitial() {
 
         try {
@@ -154,45 +134,36 @@ public class Running extends FragmentActivity
             criteria.setAccuracy(Criteria.ACCURACY_FINE);//設置為最大精度
             criteria.setSpeedAccuracy(Criteria.ACCURACY_HIGH);
             //location = lms.getLastKnownLocation(LocationManager.GPS_PROVIDER);	//使用GPS定位座標
-            getLocation();
+
+            location = status.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location == null) {
+                location = status.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+
+            last_lat = location.getLatitude();
+            last_lng = location.getLongitude();
+
+            //註冊 MylocationListener
+            status.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+            status.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener);
+
+            //last_lng = status.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+            //last_lat = status.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
 
 
         } catch (SecurityException e) {
             Toast.makeText(this, "requestLocationUpdate fails", Toast.LENGTH_SHORT).show();
 
         }
-
     }
-    // 每十毫秒會更新GPS
-    private void getLocation() {	//將定位資訊顯示在畫面中
 
-            try {
-                location = status
-                        .getLastKnownLocation(status.getBestProvider(criteria, true));
-            }catch (SecurityException e) {
-                Toast.makeText(this, "requestLocationUpdate fails", Toast.LENGTH_SHORT).show();
+    private void Freelistener(){
+        try {
+            status.removeUpdates(locationListener);
 
-            }
-        if(location != null) {
-            Double longitude = location.getLongitude();	//取得經度
-            Double latitude = location.getLatitude();	//取得緯度
+        } catch (SecurityException e) {
+            Toast.makeText(this, "remove fails", Toast.LENGTH_SHORT).show();
 
-            String s = "lng : "+ longitude + ", lat : "+latitude;
-            txt_loc.setText(s);
-            cur_lat = latitude;
-            cur_lng = longitude;
-        }
-        else {
-
-            if(toast == null){
-                toast = Toast.makeText(this,"無法定位座標" ,Toast.LENGTH_SHORT);
-            }
-            else{
-                toast.setText("無法定位座標");
-            }
-            toast.show();
-
-            //Toast.makeText(this, "無法定位座標", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -214,9 +185,7 @@ public class Running extends FragmentActivity
         updateDistance();
         // 上傳本次紀錄
         updateRecord();
-        // 更新檔案 : 是否完成本日schedute
-        scheduleIO.UpdateComplete();
-
+        //
         if(toast == null){
             toast = Toast.makeText(Running.this,"恭喜你已完成本次跑步" ,Toast.LENGTH_SHORT);
         }
@@ -225,7 +194,6 @@ public class Running extends FragmentActivity
         }
         toast.show();
 
-        //Toast.makeText(Running.this, "恭喜你已完成本次跑步", Toast.LENGTH_LONG).show();
     }
 
     private void updateDistance(){
@@ -256,6 +224,7 @@ public class Running extends FragmentActivity
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Map<String, Object> map = new HashMap();
+                // to do 要改成取得當天日期的函式
                 Calendar calendar = Calendar.getInstance();
                 String now = DatetoString(calendar.getTime(),0);
                 map.put("date",now);
@@ -277,18 +246,13 @@ public class Running extends FragmentActivity
         builder.setTitle("Today goal");
         //設定Dialog的內容
         String message=null;
+        ScheduleIO scheduleIO = new ScheduleIO(Running.this);
         Day day = scheduleIO.TodayJob();
-        if( day.getDist() ==0 && day.getTime() ==0){
+        if( day ==null){
             message = "It's free today.";
         }
-        else if( day.getTime() ==0)
-            //  中階
-            message = String.valueOf(day.getDist()) +" km";
-        else if( day.getDist() ==0)
-            // 初階
-            message = String.valueOf(day.getTime()) + "minutes";
         else
-            message = "File doesn't exist";
+            message = String.valueOf(day.getDist()) +" km";
         builder.setMessage(message);
 
         //設定Positive按鈕資料
@@ -303,7 +267,6 @@ public class Running extends FragmentActivity
     }
 
     private void init(){
-        scheduleIO = new ScheduleIO(Running.this);
         AlertDialog alertDialog = GoalAlertDialog();
         alertDialog.show();
         txt_time = (TextView) findViewById(R.id.txt_time_value);
@@ -321,14 +284,13 @@ public class Running extends FragmentActivity
         // 從file取得 使用者資料
         ProfileIO profileIO = new ProfileIO(Running.this);
         userProfile = profileIO.ReadFile();
-
     }
 
     private Handler handler = new Handler(){
         public  void  handleMessage(Message msg) {
             super.handleMessage(msg);
             switch(msg.what) {
-                case 1:
+                case 1:{
 
                     if(msec >=1000) {
                         sec++;
@@ -347,7 +309,8 @@ public class Running extends FragmentActivity
                     if(msec <=100) {
                         double last_lat = cur_lat, last_lng = cur_lng;
                         // 進行GPS定位
-                        getLocation();
+
+
                         if( last_lat != cur_lat || last_lng !=cur_lng){
                             TextView t = (TextView)findViewById(R.id.change);
                             t.setText("changed!!!");
@@ -358,6 +321,7 @@ public class Running extends FragmentActivity
                         txt_distance.setText(String.valueOf(distance) + "m");
                     }
                     break;
+                }
             }
 
         }
@@ -378,12 +342,98 @@ public class Running extends FragmentActivity
                 message.what =1;
                 handler.sendMessage(message);
 
-
-
             }
         }
 
     };
+
+    class MyLocationListener implements LocationListener{
+        private Context c;
+
+        public MyLocationListener(Context c){
+            this.c = c;
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {
+            if(location.getAccuracy() <= 30){
+                Double longitude = location.getLongitude();	//取得經度
+                Double latitude = location.getLatitude();	//取得緯度
+
+                String s = "lng : "+ longitude + ", lat : "+latitude;
+                txt_loc.setText(s);
+                cur_lat = latitude;
+                cur_lng = longitude;
+
+                // 進行GPS定位
+                if( last_lat != cur_lat || last_lng !=cur_lng){
+                    TextView t = (TextView)findViewById(R.id.change);
+                    t.setText("changed!!!");
+                }
+                String loc = cur_lng + "," + cur_lat;
+                locations.add(loc);
+                distance += getDistance(last_lat, last_lng);
+
+                txt_distance.setText( String.format("%.2f",distance) + "m");
+
+                last_lat = cur_lat;
+                last_lng = cur_lng;
+
+
+                if(toast == null){
+                    toast = Toast.makeText(c,"location change" ,Toast.LENGTH_SHORT);
+                }
+                else{
+                    toast.setText("location change");
+                }
+                toast.show();
+
+            }
+
+
+
+
+
+        }
+        @Override
+        public void onProviderDisabled(String provider) {
+            //當所選的Location Provider不可用時 調用
+
+            if(toast == null){
+                toast = Toast.makeText(c,"無法定位座標" ,Toast.LENGTH_SHORT);
+            }
+            else{
+                toast.setText("無法定位座標");
+            }
+            toast.show();
+
+        }
+        @Override
+        public void onProviderEnabled(String provider) {
+            //當所選的Location Provider可用時 調用
+        }
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            //當定位狀況改變時調用
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //按上一頁  會移除LocationListener
+
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Freelistener();
+            Intent intent1 = new Intent();
+            intent1.setClass(this, Home.class);
+            startActivity(intent1);
+            Running.this.finish();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 }

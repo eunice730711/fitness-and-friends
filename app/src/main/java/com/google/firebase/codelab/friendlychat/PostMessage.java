@@ -25,17 +25,19 @@ public class PostMessage implements Serializable{
     private String photoUrl;
     private String time;
     private String date;
+    private int like_num;
 
     public PostMessage() {
     }
 
-    public PostMessage(String text, String title, String name, String photoUrl, String time, String date) {
+    public PostMessage(String text, String title, String name, String photoUrl, String time, String date, int like_num) {
         this.text = text;
         this.title = title;
         this.name = name;
         this.photoUrl = photoUrl;
         this.time = time;
         this.date = date;
+        this.like_num = like_num;
     }
 
     public String getText() {
@@ -72,7 +74,7 @@ public class PostMessage implements Serializable{
         return time;
     }
 
-    public void setPTime(String time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -82,5 +84,13 @@ public class PostMessage implements Serializable{
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getLike_num() {
+        return like_num;
+    }
+
+    public void setLike_num(int like_num) {
+        this.like_num = like_num;
     }
 }

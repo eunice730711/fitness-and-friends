@@ -38,7 +38,7 @@
             android:id="@+id/m_viewpager"
             android:layout_below="@id/m_tab"
             android:layout_width="wrap_content"
-            android:layout_height="458dp" />
+            android:layout_height="420dp" />
 
     </LinearLayout>
 

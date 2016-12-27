@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,7 +51,6 @@ public class Join_fragment extends Fragment {
         public TextView dateTextView;
         public TextView timeTextView;
         public CircleImageView messengerImageView;
-        public Button editbutton;
         public static View J_view;
 
         public JoinViewHolder(View v) {
@@ -62,14 +62,6 @@ public class Join_fragment extends Fragment {
             dateTextView = (TextView) itemView.findViewById(R.id.Date);
             timeTextView = (TextView) itemView.findViewById(R.id.Time);
             messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
-            editbutton = (Button) itemView.findViewById(R.id.edit);
-            editbutton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
         }
     }
 
@@ -93,6 +85,7 @@ public class Join_fragment extends Fragment {
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mLinearLayoutManager.setStackFromEnd(true);
         mLinearLayoutManager.setReverseLayout(true);
+        mLinearLayoutManager.setAutoMeasureEnabled(false);
         // New child entries
         mFirebaseAdapter = new FirebaseRecyclerAdapter<JoinMessage, JoinViewHolder>(
                 JoinMessage.class,
@@ -125,12 +118,14 @@ public class Join_fragment extends Fragment {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        j = mFirebaseAdapter.getItem(position);
+                        //j = mFirebaseAdapter.getItem(position);
+                        String ref = mFirebaseAdapter.getRef(position).toString();
                         Intent intent = new Intent();
                         intent.setClass(getActivity() , Join_Detail.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("join",j);
-                        intent.putExtras(bundle);
+                        //Bundle bundle = new Bundle();
+                        //bundle.putSerializable("join",j);
+                        //intent.putExtras(bundle);
+                        intent.putExtra("ref",ref);
                         startActivity(intent);
                     }
 
@@ -138,6 +133,7 @@ public class Join_fragment extends Fragment {
                     public void onLongClick(View view, final int position) {
                         JoinMessage join = mFirebaseAdapter.getItem(position);
                         if (mFirebaseUser.getDisplayName().equals(join.getName())) {
+                            //彈跳視窗(編輯和刪除)
                             LayoutInflater inflater = LayoutInflater.from(getActivity());
                             final View v = inflater.inflate(R.layout.edit_join, null);
                             final EditText editText = (EditText)(v.findViewById(R.id.e_JText));
@@ -155,7 +151,7 @@ public class Join_fragment extends Fragment {
                                     .setView(v)
                                     .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onClick(DialogInterface dialog, int which) {
+                                        public void onClick(DialogInterface arg0, int arg1) {
                                             Toast.makeText(getContext(), "successfully changed" + position, Toast.LENGTH_SHORT).show();
                                             //viewHolder.messageTextView.setText(editText.getText().toString());
                                             Map<String, Object> nameMap = new HashMap<String, Object>();
@@ -172,6 +168,16 @@ public class Join_fragment extends Fragment {
                                         public void onClick(DialogInterface arg0, int arg1) {
                                             // TODO Auto-generated method stub
                                             Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .setNegativeButton("Remove", new DialogInterface.OnClickListener(){
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            mFirebaseAdapter.getRef(position).removeValue();
+                                            mFirebaseAdapter.notifyItemRemoved(position);
+                                            mFirebaseAdapter.notifyDataSetChanged();
+                                            mFirebaseAdapter.notifyItemRangeChanged(position,mFirebaseAdapter.getItemCount());
+                                            Toast.makeText(getContext(), "successfully removed!", Toast.LENGTH_SHORT).show();
                                         }
                                     }).show();
                         }
@@ -194,7 +200,8 @@ public class Join_fragment extends Fragment {
                 }
             }
         });
-        mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        //mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        mMessageRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
 

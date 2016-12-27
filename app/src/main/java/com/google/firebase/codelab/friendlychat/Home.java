@@ -123,9 +123,11 @@ public class Home extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent2 = new Intent();
-                intent2.setClass(Home.this, Running.class);
+                intent2.setClass(Home.this, Run.class);
                 startActivity(intent2);
+                //Home.this.finish();
             }
         });
 

@@ -11,11 +11,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,8 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 
 /**
@@ -86,17 +82,19 @@ public class Post_fragment extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mUsername = mFirebaseUser.getDisplayName();
+
         mMessageRecyclerView = (RecyclerView) v.findViewById(R.id.messageRecyclerView);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
         mLinearLayoutManager.setStackFromEnd(true);
         mLinearLayoutManager.setReverseLayout(true);
+        mLinearLayoutManager.setAutoMeasureEnabled(false);
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mFirebaseAdapter = new FirebaseRecyclerAdapter<PostMessage, PostViewHolder>(
                 PostMessage.class,
-                R.layout.item_message,
+                R.layout.item_postmessage,
                 PostViewHolder.class,
-                mFirebaseDatabaseReference.child("messages")) {
+                mFirebaseDatabaseReference.child("messages").limitToLast(15)) {
 
             @Override
             protected void populateViewHolder(final PostViewHolder viewHolder,
@@ -127,12 +125,14 @@ public class Post_fragment extends Fragment {
                     //按一下進入detail
                     @Override
                     public void onItemClick(View view, int position) {
-                        p = mFirebaseAdapter.getItem(position);
+                        //p = mFirebaseAdapter.getItem(position);
+                        String ref= mFirebaseAdapter.getRef(position).getRef().toString();
                         Intent intent = new Intent();
                         intent.setClass(getActivity() , Post_Detail.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("post",p);
-                        intent.putExtras(bundle);
+                        intent.putExtra("ref",ref);
+                        //Bundle bundle = new Bundle();
+                        //bundle.putSerializable("post",p);
+                        //intent.putExtras(bundle);
                         startActivity(intent);
                     }
                     //長按來編輯貼文
@@ -154,10 +154,10 @@ public class Post_fragment extends Fragment {
                                         public void onClick(DialogInterface dialog, int which) {
                                             Toast.makeText(getContext(), "successfully changed" + position, Toast.LENGTH_SHORT).show();
                                             //viewHolder.messageTextView.setText(editText.getText().toString());
-                                            Map<String, Object> nameMap = new HashMap<String, Object>();
-                                            nameMap.put("text", editText.getText().toString());
-                                            nameMap.put("title", editTitle.getText().toString());
-                                            mFirebaseAdapter.getRef(position).updateChildren(nameMap);
+                                            Map<String, Object> updateMap = new HashMap<String, Object>();
+                                            updateMap.put("text", editText.getText().toString());
+                                            updateMap.put("title", editTitle.getText().toString());
+                                            mFirebaseAdapter.getRef(position).updateChildren(updateMap);
                                         }
                                     })
                                     .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -166,10 +166,22 @@ public class Post_fragment extends Fragment {
                                             // TODO Auto-generated method stub
                                             Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
                                         }
+                                    })
+                                    .setNegativeButton("Remove", new DialogInterface.OnClickListener(){
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            mFirebaseAdapter.getRef(position).removeValue();
+                                            mFirebaseAdapter.notifyItemRemoved(position);
+                                            mFirebaseAdapter.notifyDataSetChanged();
+                                            mFirebaseAdapter.notifyItemRangeChanged(position,mFirebaseAdapter.getItemCount());
+                                            Toast.makeText(getContext(), "successfully removed!", Toast.LENGTH_SHORT).show();
+                                        }
                                     }).show();
+
                         }
                     }
                 }));
+
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -187,7 +199,8 @@ public class Post_fragment extends Fragment {
                 }
             }
         });
-        mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        //mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        mMessageRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
     }
