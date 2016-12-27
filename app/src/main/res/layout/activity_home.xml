@@ -112,10 +112,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_homeditatnce"
-        android:textSize="40sp"
+        android:textSize="100dp"
         android:layout_above="@+id/btn_start"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp" />
+        android:layout_marginBottom="0dp" />
 
     <Button
         android:text="Dangeous_deleteUser"

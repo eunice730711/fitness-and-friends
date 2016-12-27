@@ -34,9 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_name"
             android:text="message"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#2b323d"
-            android:textSize="20dp" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/user_date"
@@ -47,7 +45,8 @@
             android:layout_alignBaseline="@+id/user_name"
             android:layout_alignBottom="@+id/user_name"
             android:layout_toEndOf="@+id/user_name"
-            android:layout_marginStart="12dp" />
+            android:layout_marginStart="12dp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/user_time"
@@ -59,7 +58,8 @@
             android:layout_marginStart="13dp"
             android:layout_alignBaseline="@+id/user_date"
             android:layout_alignBottom="@+id/user_date"
-            android:layout_toEndOf="@+id/user_date" />
+            android:layout_toEndOf="@+id/user_date"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 </LinearLayout>

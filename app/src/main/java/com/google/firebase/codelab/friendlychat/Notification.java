@@ -1,10 +1,12 @@
 package com.google.firebase.codelab.friendlychat;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,23 +48,23 @@ public class Notification extends AppCompatActivity {
             mFirebaseAdapter;
     public static class RequestViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_request;
-        public Button btn_accept, btn_refect;
+        public ImageButton btn_accept, btn_refect;
         public CircleImageView requestImageView;
         public UserProfile userProfile;
         public String requester;
         public RequestViewHolder( View v) {
             super(v);
             txt_request = (TextView) itemView.findViewById(R.id.txt_request);
-            btn_accept = (Button) itemView.findViewById(R.id.btn_accept);
-            btn_refect = (Button) itemView.findViewById(R.id.btn_reject);
+            btn_accept = (ImageButton) itemView.findViewById(R.id.btn_accept);
+            btn_refect = (ImageButton) itemView.findViewById(R.id.btn_reject);
             requestImageView = (CircleImageView) itemView.findViewById(R.id.requestImageView);
 
             btn_accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    int index = txt_request.getText().toString().indexOf("送")-1;
-                    requester = txt_request.getText().subSequence(0,index).toString();
+                    //int index = txt_request.getText().toString().indexOf("送")-1;
+                    //requester = txt_request.getText().subSequence(0,index).toString();
                     HashMap<String, String> friend = new HashMap<String, String>();
                     HashMap<String, String> friend2 = new HashMap<String, String>();
 
@@ -112,6 +115,18 @@ public class Notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent();
+                intent1.setClass(Notification.this, MainActivity.class);
+                startActivity(intent1);
+                Notification.this.finish();
+            }
+        });
         // 從file取得 使用者資料
         ProfileIO profileIO = new ProfileIO(Notification.this);
         userProfile = profileIO.ReadFile();

@@ -1,57 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
 
     <TextView
         android:text="Time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/Running_time"
         android:layout_below="@+id/Running_dist"
         android:layout_alignParentStart="true"
         android:layout_marginTop="38dp"
-        android:layout_toStartOf="@+id/Run_time_text" />
+        android:layout_toStartOf="@+id/Run_time_text"
+        android:visibility="gone"/>
 
     <TextView
         android:text="0.0"
+        android:textSize="150dp"
+        android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Run_dist_text"
-        android:layout_alignTop="@+id/Running_dist"
-        android:layout_above="@+id/Running_time"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/Running_dist"
-        android:gravity="center" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
 
     <TextView
-        android:text="Distance"
+        android:text="Km"
+        android:textSize="40dp"
+        android:textColor="#ffffff"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
         android:id="@+id/Running_dist"
-        android:layout_marginTop="13dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_width="100dp" />
+        android:layout_toRightOf="@+id/Run_dist_text"
+        android:layout_alignBottom="@+id/Run_dist_text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="25dp"/>
 
     <TextView
         android:text="0.0"
+        android:textSize="30dp"
+        android:textColor="#ffffff"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/Run_time_text"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/Run_dist_text"
-        android:layout_alignBottom="@+id/Running_time"
-        android:layout_alignTop="@+id/Running_time"
-        android:gravity="center" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
     <Button
         android:text="Start"
+        android:background="@drawable/button_style_gold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="99dp"
+        android:textColor="#F6EB88"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
         android:id="@+id/Run_start"
-        android:layout_below="@+id/Run_time_text"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
