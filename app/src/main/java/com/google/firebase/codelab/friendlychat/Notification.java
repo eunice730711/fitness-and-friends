@@ -149,13 +149,13 @@ public class Notification extends AppCompatActivity {
             }
         };
 
-        /*
+/*
         WebView mWebView = (WebView)findViewById(R.id.webView);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.loadUrl("http://140.113.193.71/FitnessFriend/test.html");
-
-
+*/
+/*
 
         ArrayList l = new ArrayList();
         Map m1 = new HashMap();

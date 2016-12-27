@@ -65,9 +65,10 @@ public class SearchUser extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // 好友的個人頁面介紹
-                    Intent i = new Intent(v.getContext(), FriendProfile.class);
+                    Intent i = new Intent(v.getContext(), SearchProfile.class);
                     i.putExtra("friendid", friendid);
                     v.getContext().startActivity(i);
+
                 }
             });
         }

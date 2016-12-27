@@ -36,6 +36,7 @@ public class MyWebViewClient extends WebViewClient {
 
         }
     }
+
     private class JsCallBack
     {
         @JavascriptInterface
