@@ -27,6 +27,8 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.R.attr.id;
+import static android.util.Log.e;
 import static com.google.firebase.codelab.friendlychat.R.id.btn_accept;
 import static com.google.firebase.codelab.friendlychat.R.id.btn_setProfile;
 import static com.google.firebase.codelab.friendlychat.R.id.recommedFriendView;
@@ -70,12 +72,20 @@ public class SearchUser extends AppCompatActivity {
             });
         }
     }
+    /*
+    @Override
+    protected  void onPause(){
+        mFirebaseAdapter.cleanup();
+        super.onPause();
+    }
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         init();
-        recommendFriend();
+        mDatabase.child("recFriend").child(userProfile.getUserid()).child("onFresh").setValue("True");
+        upDateRes();
         // send requesting friend by ID
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +165,25 @@ public class SearchUser extends AppCompatActivity {
         mLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
     }
-
+    private void upDateRes(){
+        mDatabase.child("recFriend").child(userProfile.getUserid()).child("onFresh").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String flag = snapshot.getValue().toString();
+                if (flag.compareTo("False") == 0) {
+                    recommendFriend();
+                    //mDatabase.child("recFriend").child(userProfile.getUserid()).child("onFresh").removeEventListener(this);
+                    Log.e("ch","ch");
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        }
     private void recommendFriend(){
+        e("id",userProfile.getUserid());
+
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         // 存取通知資料庫，並且顯示通知出來
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Object,
@@ -164,21 +191,27 @@ public class SearchUser extends AppCompatActivity {
                 Object.class,
                 R.layout.item_recommendfriend,
                 RecommendFriendViewHolder.class,
-                mFirebaseDatabaseReference.child("UserProfile").orderByChild("usergender")) {
+                mFirebaseDatabaseReference.child("recFriend").child(userProfile.getUserid()).orderByChild("userid")) {
 
             @Override
             protected void populateViewHolder(RecommendFriendViewHolder viewHolder,
                                               Object o , int position) {
-                Log.e("profile",o.toString());
-                String id = ((HashMap)o).get("userid").toString();
-                String userphoto = ((HashMap)o).get("userphoto").toString();
-                viewHolder.friendid = id;
-                viewHolder.txt_recommendId.setText(id);
+                if( o.toString().compareTo("False")==0)
+                {
+                    viewHolder.ImageView.setVisibility(View.INVISIBLE);
+                    viewHolder.txt_recommendId.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    Log.e("profile", o.toString());
+                    String id = ((HashMap) o).get("userid").toString();
+                    String userphoto = ((HashMap) o).get("userphoto").toString();
+                    viewHolder.friendid = id;
+                    viewHolder.txt_recommendId.setText(id);
 
-                Glide.with(SearchUser.this)
-                        .load(userphoto)
-                        .into(viewHolder.ImageView);
-
+                    Glide.with(SearchUser.this)
+                            .load(userphoto)
+                            .into(viewHolder.ImageView);
+                }
             }
         };
         mRecyclerView.setAdapter(mFirebaseAdapter);

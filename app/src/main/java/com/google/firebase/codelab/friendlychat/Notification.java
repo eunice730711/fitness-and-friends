@@ -6,7 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,15 +23,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
 
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
+import static android.R.attr.value;
+import static android.os.Build.VERSION_CODES.M;
+import static com.google.firebase.codelab.friendlychat.R.id.webView;
 
 
 public class Notification extends AppCompatActivity {
@@ -112,6 +120,7 @@ public class Notification extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         // 顯示最新資訊，由上而下
+        mLinearLayoutManager.setReverseLayout(true);
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         showNotification();
@@ -122,6 +131,7 @@ public class Notification extends AppCompatActivity {
     private void showNotification(){
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         // 存取通知資料庫，並且顯示通知出來
+
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Object,
                 RequestViewHolder>(
                 Object.class,
@@ -138,8 +148,50 @@ public class Notification extends AppCompatActivity {
                 viewHolder.userProfile = userProfile;
             }
         };
+
+        /*
+        WebView mWebView = (WebView)findViewById(R.id.webView);
+        mWebView.setWebViewClient(new MyWebViewClient());
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.loadUrl("http://140.113.193.71/FitnessFriend/test.html");
+
+
+
+        ArrayList l = new ArrayList();
+        Map m1 = new HashMap();
+        Map m2 = new HashMap();
+        m1.put("requester","r1");
+        m2.put("requester","r2");
+        l.add(m1);
+        l.add(m2);
+
+        JsAdapter adapter = new JsAdapter(l){
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                // 設定viewHolder 所使用的 layout
+                View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_request_friend, parent, false);
+               RequestViewHolder vh = new RequestViewHolder(mView);
+                return vh;
+            }
+            @Override
+            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+               RequestViewHolder viewHolder = (RequestViewHolder) holder;
+
+                String requester = ((HashMap)iList.get(position)).get("requester").toString();
+                viewHolder.txt_request.setText(requester + " 送出好友邀請");
+                viewHolder.requester = requester;
+                viewHolder.userProfile = userProfile;
+            }
+        };
+*/
+        //adapter.setOnRecyclerViewListener(this);
+        //mRecyclerView.setAdapter(adapter);
         mRecyclerView.setAdapter(mFirebaseAdapter);
+
     }
+
+
+
 }
 
 

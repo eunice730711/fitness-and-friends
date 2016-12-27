@@ -10,6 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.google.firebase.codelab.friendlychat.Notification">
 
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webView"
+        />
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,6 +32,8 @@
             android:id="@+id/textView5"
             android:textSize="24sp"
             tools:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+
 
 
         <android.support.v7.widget.RecyclerView
