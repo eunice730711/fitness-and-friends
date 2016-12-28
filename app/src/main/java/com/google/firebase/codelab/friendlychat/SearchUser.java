@@ -39,7 +39,7 @@ public class SearchUser extends AppCompatActivity {
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<Object, RecommendFriendViewHolder>
             mFirebaseAdapter;
-
+    private String searchId;
     public static class RecommendFriendViewHolder extends RecyclerView.ViewHolder {
 
         public CircleImageView ImageView;
@@ -60,18 +60,11 @@ public class SearchUser extends AppCompatActivity {
                     Intent i = new Intent(v.getContext(), SearchProfile.class);
                     i.putExtra("friendid", friendid);
                     v.getContext().startActivity(i);
-
                 }
             });
         }
     }
-    /*
-    @Override
-    protected  void onPause(){
-        mFirebaseAdapter.cleanup();
-        super.onPause();
-    }
-    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,36 +91,41 @@ public class SearchUser extends AppCompatActivity {
                         }
                         else{
                             // if the user account exists
-                            String userId = txt_searchId.getText().toString();
+                            searchId = txt_searchId.getText().toString();
 
-                            // 送出邀請
-                            mDatabase.child("RequestFriend").child(userId).getRef()
-                                    .orderByChild("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                            // 查看 你們是否有好友關係
+                            mDatabase.child("Friend").child(userProfile.getUserid()).getRef()
+                                    .orderByChild("friendid").equalTo(searchId).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
-                                    // 避免重複送出邀請
-                                    String userId2 = txt_searchId.getText().toString();
-                                    // 傳送好友ID 到好友頁面
-                                    Intent intent = new Intent(SearchUser.this, SearchProfile.class);
-                                    intent.putExtra("friendid", userId2);
-                                    startActivity(intent);
-
-/*
-                                    if ( snapshot.exists())
-                                        Toast.makeText(SearchUser.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_SHORT).show();
+                                    if(snapshot.exists()) {
+                                        // 傳送好友ID 到好友頁面
+                                        Intent intent = new Intent(SearchUser.this, FriendProfile.class);
+                                        intent.putExtra("friendid", searchId);
+                                        startActivity(intent);
+                                    }
                                     else{
                                         // 送出邀請
-                                        String userId = txt_searchId.getText().toString();
-                                        HashMap<String,String> map = new HashMap<String, String>();
-                                        map.put("requester",userProfile.getUserid());
-                                        mDatabase.child("RequestFriend").child(userId).push().setValue(map);
-                                        Toast.makeText(SearchUser.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
+                                        mDatabase.child("RequestFriend").child(searchId).getRef()
+                                                .orderByChild("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot snapshot) {
+                                                // 避免重複送出邀請
+                                                String userId2 = txt_searchId.getText().toString();
+                                                // 傳送好友ID 到好友頁面
+                                                Intent intent = new Intent(SearchUser.this, SearchProfile.class);
+                                                intent.putExtra("friendid", userId2);
+                                                startActivity(intent);
+                                            }
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {}
+                                        });
                                     }
-*/
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {}
                             });
+
                         }
                     }
 
@@ -181,7 +179,6 @@ public class SearchUser extends AppCompatActivity {
                 String flag = snapshot.getValue().toString();
                 if (flag.compareTo("False") == 0) {
                     recommendFriend();
-                    //mDatabase.child("recFriend").child(userProfile.getUserid()).child("onFresh").removeEventListener(this);
                 }
             }
             @Override
