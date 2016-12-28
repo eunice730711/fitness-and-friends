@@ -318,7 +318,7 @@ public class Running extends FragmentActivity{
                         String loc = cur_lng + "," + cur_lat;
                         locations.add(loc);
                         distance += getDistance(last_lat, last_lng);
-                        txt_distance.setText(String.valueOf(distance) + "m");
+                        txt_distance.setText(String.valueOf(distance) );
                     }
                     break;
                 }
@@ -374,7 +374,7 @@ public class Running extends FragmentActivity{
                 locations.add(loc);
                 distance += getDistance(last_lat, last_lng);
 
-                txt_distance.setText( String.format("%.2f",distance) + "m");
+                txt_distance.setText( String.format("%.2f",distance) );
 
                 last_lat = cur_lat;
                 last_lng = cur_lng;

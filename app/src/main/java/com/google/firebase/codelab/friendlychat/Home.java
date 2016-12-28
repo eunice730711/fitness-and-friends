@@ -203,7 +203,7 @@ public class Home extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     userProfile = dataSnapshot.getValue(UserProfile.class);
                     Log.e("username", userProfile.getUsername());
-                    txt_distance.setText(userProfile.updateDistance(0)+" M");
+                    txt_distance.setText(userProfile.updateDistance(0)+"");
                 }
             }
             @Override

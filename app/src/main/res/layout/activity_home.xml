@@ -108,7 +108,7 @@
         <!--android:id="@+id/btn_friend" />-->
 
     <TextView
-        android:text="0"
+        android:text="0.0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_homeditatnce"
@@ -116,6 +116,15 @@
         android:layout_above="@+id/btn_start"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="0dp" />
+    <TextView
+        android:text="Km"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/km"
+        android:textSize="35dp"
+        android:layout_toRightOf="@+id/txt_homeditatnce"
+        android:layout_alignBottom="@+id/txt_homeditatnce"
+        android:layout_marginBottom="15dp"/>
 
     <Button
         android:text="Dangeous_deleteUser"
@@ -129,8 +138,8 @@
 
     <Button
         android:text="  "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:layout_alignTop="@+id/txt_homeditatnce"
         android:layout_centerHorizontal="true"
         android:background="@color/transparent"

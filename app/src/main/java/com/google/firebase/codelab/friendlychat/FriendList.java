@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -129,6 +130,19 @@ public class FriendList extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         //getFriendList();
         showFriendList();
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent();
+                intent1.setClass(FriendList.this, MainActivity.class);
+                startActivity(intent1);
+                FriendList.this.finish();
+            }
+        });
 
     }
     /*

@@ -23,22 +23,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/Run_dist_text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="30dp"/>
 
     <TextView
         android:text="Km"
-        android:textSize="40dp"
+        android:textSize="35dp"
         android:textColor="#ffffff"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/Running_dist"
         android:layout_toRightOf="@+id/Run_dist_text"
         android:layout_alignBottom="@+id/Run_dist_text"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginBottom="25dp"/>
 
     <TextView
-        android:text="0.0"
+        android:text="00:00:00.00"
         android:textSize="30dp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"

@@ -126,7 +126,7 @@ public class Running_fragment extends Fragment{
                     String s = String.format("%02d:%02d:%02d.%02d",hour,min,sec,msec/10);
                     time_text.setText(String.valueOf(s));
                     if(msec <=100) {
-                        dist_text.setText(String.valueOf(mCallback.getTotalDistance()) + "m");
+                        dist_text.setText(String.valueOf(mCallback.getTotalDistance()));
                     }
                     break;
                 }

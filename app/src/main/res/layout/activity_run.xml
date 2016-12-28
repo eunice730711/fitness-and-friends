@@ -48,9 +48,9 @@
 
         <android.support.v4.view.ViewPager
             android:id="@+id/Run_viewpager"
-            android:layout_below="@id/m_tab"
+            android:layout_below="@id/my_toolbar"
             android:layout_width="wrap_content"
-            android:layout_height="473dp" />
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
