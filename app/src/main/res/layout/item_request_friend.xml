@@ -44,20 +44,20 @@
             android:layout_marginRight="15dp">
 
             <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/btn_accept"
-            android:src="@drawable/accept"
-            android:background="#00000000"
-            android:layout_marginRight="15dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/btn_accept"
+                android:src="@drawable/accept"
+                android:background="#00000000"
+                android:layout_marginRight="15dp"/>
             <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/btn_reject"
-            android:src="@drawable/reject"
-            android:background="#00000000"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/btn_reject"
+                android:src="@drawable/reject"
+                android:background="#00000000"/>
 
         </LinearLayout>
 

@@ -19,29 +19,41 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="15dp">
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="12dp">
 
         <TextView
             android:text="id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:id="@+id/txt_friendid"
-            android:layout_marginTop="5dp" />
+            android:textColor="@color/cardview_dark_background"
+            android:id="@+id/txt_friendid" />
+        <TextView
+            android:text="name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/gray"
+            android:id="@+id/txt_friendname"
+            android:layout_marginTop="1dp" />
 
     </LinearLayout>
-    <Button
-        android:text="   "
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/btn_friendProfile"
-        android:background="@color/transparent"/>
 
     <View
         android:background="#DEDEDE"
         android:layout_toRightOf="@+id/friendListImageView"
         android:layout_below="@+id/friendListImageView"
         android:layout_height="1dp"
-        android:layout_width="fill_parent"/>
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:text="   "
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/btn_friendProfile"
+        android:background="@color/transparent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

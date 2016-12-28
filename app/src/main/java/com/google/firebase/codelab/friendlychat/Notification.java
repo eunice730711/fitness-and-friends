@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +37,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.R.attr.value;
 import static android.os.Build.VERSION_CODES.M;
+import static com.google.android.gms.internal.zzng.fi;
+import static com.google.firebase.codelab.friendlychat.R.id.userImageView;
 import static com.google.firebase.codelab.friendlychat.R.id.webView;
 
 
@@ -66,13 +69,30 @@ public class Notification extends AppCompatActivity {
                     //int index = txt_request.getText().toString().indexOf("送")-1;
                     //requester = txt_request.getText().subSequence(0,index).toString();
                     HashMap<String, String> friend = new HashMap<String, String>();
-                    HashMap<String, String> friend2 = new HashMap<String, String>();
 
-                    friend.put("friendid",requester);
-                    friend2.put("friendid",userProfile.getUserid());
-                    // 對好友資料庫進行寫入，建立兩人好友關係
-                    mDatabase.child("Friend").child(userProfile.getUserid()).getRef().push().setValue(friend);
-                    mDatabase.child("Friend").child(requester).getRef().push().setValue(friend2);
+                    friend.put("friendid",userProfile.getUserid());
+                    friend.put("friendname",userProfile.getUsername());
+                    friend.put("friendphotourl",userProfile.getUserphoto());
+
+                    // 對別人的好友資料庫進行寫入自己資料，建立兩人好友關係
+                    mDatabase.child("Friend").child(requester).getRef().push().setValue(friend);
+
+                    // 取得邀請者的資料
+                    FirebaseData firebaseData = new FirebaseData();
+                    firebaseData.getProfileById(requester,new FirebaseData.Callback(){
+                        @Override
+                        public void getProfile(UserProfile profile) {
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                            HashMap<String, String> friend2 = new HashMap<String, String>();
+                            friend2.put("friendid",requester);
+                            friend2.put("friendname",profile.getUsername());
+                            friend2.put("friendphotourl",profile.getUserphoto());
+
+                            mDatabase.child("Friend").child(userProfile.getUserid()).getRef().push().setValue(friend2);
+
+                        }
+                    });
+
                     // 刪除好友邀請
                     deleteRequester();
                     Toast.makeText(v.getContext(), "恭喜你們已成為好友", Toast.LENGTH_LONG).show();
@@ -158,9 +178,13 @@ public class Notification extends AppCompatActivity {
             protected void populateViewHolder(RequestViewHolder viewHolder,
                                               Object o , int position) {
                 String requester = ((HashMap)o).get("requester").toString();
+                String requesterPhoto = ((HashMap)o).get("requesterphoto").toString();
                 viewHolder.txt_request.setText(requester + " 送出好友邀請");
                 viewHolder.requester = requester;
                 viewHolder.userProfile = userProfile;
+                Glide.with(Notification.this)
+                        .load(requesterPhoto)
+                        .into(viewHolder.requestImageView);
             }
         };
 

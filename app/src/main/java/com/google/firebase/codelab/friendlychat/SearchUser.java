@@ -2,6 +2,7 @@ package com.google.firebase.codelab.friendlychat;
 
 
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,7 +41,7 @@ import static com.google.firebase.codelab.friendlychat.R.id.userImageView;
 public class SearchUser extends AppCompatActivity {
 
     public DatabaseReference mDatabase;
-    private Button btn_send;
+    private Button btn_send, btn_find;
     private EditText txt_userid, txt_username, txt_searchId;
     public UserProfile userProfile;
     private RecyclerView mRecyclerView;
@@ -146,11 +147,27 @@ public class SearchUser extends AppCompatActivity {
             }
         });
 
+        btn_find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 進入地圖以GPS結交好友
+                Intent intent = new Intent(SearchUser.this, findNearby.class);
+                startActivity(intent);
+
+                // it is for Google Map , fragement
+                /*
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new findNearby());
+                transaction.commitAllowingStateLoss();*/
+            }
+        });
+
 
     }
     private void init(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btn_send = (Button) findViewById(R.id.btn_search_send);
+        btn_find = (Button) findViewById(R.id.btn_findnearby);
         txt_userid = (EditText) findViewById(R.id.txt_id);
         txt_username = (EditText) findViewById(R.id.txt_username);
         txt_searchId = (EditText) findViewById(R.id.txt_searchId);

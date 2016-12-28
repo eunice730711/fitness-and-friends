@@ -25,6 +25,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignEnd="@+id/linearLayout3"
             android:layout_marginTop="22dp"
+            android:layout_marginLeft="10dp"
+
             android:id="@+id/textView5"
             android:textSize="24sp"
             tools:textColor="@color/common_google_signin_btn_text_dark_focused" />
