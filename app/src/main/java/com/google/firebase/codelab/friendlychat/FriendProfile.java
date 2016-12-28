@@ -1,11 +1,12 @@
 package com.google.firebase.codelab.friendlychat;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -13,11 +14,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
 
 public class FriendProfile extends AppCompatActivity {
 
@@ -25,14 +23,18 @@ public class FriendProfile extends AppCompatActivity {
     //private AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
     public DatabaseReference mDatabase;
     private TextView txt_usergmail, txt_googlename, txt_usercity, txt_userbirthday, txt_userid, txt_usergender, txt_selfintroduction;
+    private Button btn_delete;
     private CircleImageView userImageView;
     private String friendid;
-
+    private UserProfile userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_profile);
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO(FriendProfile.this);
+        userProfile = profileIO.ReadFile();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -48,10 +50,19 @@ public class FriendProfile extends AppCompatActivity {
         txt_usergmail = (TextView) findViewById(R.id.txt_usergmail);
         txt_googlename = (TextView) findViewById(R.id.txt_googlename);
         userImageView = (CircleImageView) findViewById(R.id.userImageView);
-
+        btn_delete = (Button) findViewById(R.id.btn_deleteFriend);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //refreshedToken = FirebaseInstanceId.getInstance().getToken();
         getProfile(friendid);
+
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 刪除好友
+
+                deleteFriend();
+                Toast.makeText(v.getContext(), "恭喜你們已不再是好友", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -75,6 +86,36 @@ public class FriendProfile extends AppCompatActivity {
                 Log.d("userid", profile.getUserid());
 
             }
+        });
+    }
+
+    public void deleteFriend(){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        // 從自己的好友資料庫刪除對方
+
+        mDatabase.child("Friend").child(userProfile.getUserid()).orderByChild("friendid").equalTo(friendid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    // 找到viewholder對應的 requester
+                    dataSnapshot.getRef().removeValue();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+        //從對方的好友資料庫刪除自己
+        mDatabase.child("Friend").child(friendid).orderByChild("friendid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    // 找到viewholder對應的 requester
+                    dataSnapshot.getRef().removeValue();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
         });
     }
 }

@@ -86,6 +86,9 @@ public class SearchProfile extends AppCompatActivity {
                         // 送出邀請
                         HashMap<String, String> map = new HashMap<String, String>();
                         map.put("requester", userProfile.getUserid());
+                        map.put("requestername", userProfile.getUsername());
+                        map.put("requesterphoto", userProfile.getUserphoto());
+
                         mDatabase.child("RequestFriend").child(friendid).push().setValue(map);
                         Toast.makeText(SearchProfile.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
                         SendNotification sendNotification = new SendNotification();
@@ -101,6 +104,7 @@ public class SearchProfile extends AppCompatActivity {
         });
 
     }
+    //
     private void getProfile(String id){
         FirebaseData firebaseData = new FirebaseData();
         firebaseData.getProfileById(id,new FirebaseData.Callback(){

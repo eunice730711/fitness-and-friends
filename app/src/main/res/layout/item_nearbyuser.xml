@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="90dp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nearbyImageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_account_circle_black_36dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:text="id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/cardview_dark_background"
+            android:id="@+id/txt_friendid" />
+        <TextView
+            android:text="name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/gray"
+            android:id="@+id/txt_friendname"
+            android:layout_marginTop="1dp" />
+
+    </LinearLayout>
+    <TextView
+        android:text="dist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/gray"
+        android:id="@+id/txt_dist"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="300dp" />
+        <!-- 需要換成 向右靠齊-->
+
+    <View
+        android:background="#DEDEDE"
+        android:layout_toRightOf="@+id/nearbyImageView"
+        android:layout_below="@+id/nearbyImageView"
+        android:layout_height="1dp"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:text="   "
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/btn_friendProfile"
+        android:background="@color/transparent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

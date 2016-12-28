@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,27 +26,20 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
 import static android.util.Log.e;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_accept;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_setProfile;
-import static com.google.firebase.codelab.friendlychat.R.id.recommedFriendView;
-import static com.google.firebase.codelab.friendlychat.R.id.requestImageView;
-import static com.google.firebase.codelab.friendlychat.R.id.txt_request;
-import static com.google.firebase.codelab.friendlychat.R.id.userImageView;
 
 
 public class SearchUser extends AppCompatActivity {
 
     public DatabaseReference mDatabase;
-    private Button btn_send;
+    private Button btn_send, btn_find;
     private EditText txt_userid, txt_username, txt_searchId;
     public UserProfile userProfile;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<Object, RecommendFriendViewHolder>
             mFirebaseAdapter;
-
+    private String searchId;
     public static class RecommendFriendViewHolder extends RecyclerView.ViewHolder {
 
         public CircleImageView ImageView;
@@ -73,13 +65,7 @@ public class SearchUser extends AppCompatActivity {
             });
         }
     }
-    /*
-    @Override
-    protected  void onPause(){
-        mFirebaseAdapter.cleanup();
-        super.onPause();
-    }
-    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,36 +92,46 @@ public class SearchUser extends AppCompatActivity {
                         }
                         else{
                             // if the user account exists
-                            String userId = txt_searchId.getText().toString();
+                            searchId = txt_searchId.getText().toString();
 
-                            // 送出邀請
-                            mDatabase.child("RequestFriend").child(userId).getRef()
-                                    .orderByChild("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                            // 查看 你們是否有好友關係
+                            mDatabase.child("Friend").child(userProfile.getUserid()).getRef()
+                                    .orderByChild("friendid").equalTo(searchId).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
-                                    // 避免重複送出邀請
-                                    String userId2 = txt_searchId.getText().toString();
-                                    // 傳送好友ID 到好友頁面
-                                    Intent intent = new Intent(SearchUser.this, SearchProfile.class);
-                                    intent.putExtra("friendid", userId2);
-                                    startActivity(intent);
-
-/*
-                                    if ( snapshot.exists())
-                                        Toast.makeText(SearchUser.this, "已發送過邀請，請等待對方確認", Toast.LENGTH_SHORT).show();
-                                    else{
-                                        // 送出邀請
-                                        String userId = txt_searchId.getText().toString();
-                                        HashMap<String,String> map = new HashMap<String, String>();
-                                        map.put("requester",userProfile.getUserid());
-                                        mDatabase.child("RequestFriend").child(userId).push().setValue(map);
-                                        Toast.makeText(SearchUser.this, "Friend request has been sent", Toast.LENGTH_SHORT).show();
+                                    Boolean f = false;
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        String id = ((HashMap) dataSnapshot.getValue()).get("friendid").toString();
+                                        if (id.compareTo(searchId) == 0) {
+                                            // 傳送好友ID 到好友頁面
+                                            Intent intent = new Intent(SearchUser.this, FriendProfile.class);
+                                            intent.putExtra("friendid", searchId);
+                                            startActivity(intent);
+                                            f = true;
+                                        }
                                     }
-*/
+                                    if( f == false){
+                                        // 送出邀請
+                                        mDatabase.child("RequestFriend").child(searchId).getRef()
+                                                .orderByChild("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot snapshot) {
+                                                // 避免重複送出邀請
+                                                String userId2 = txt_searchId.getText().toString();
+                                                // 傳送好友ID 到好友頁面
+                                                Intent intent = new Intent(SearchUser.this, SearchProfile.class);
+                                                intent.putExtra("friendid", userId2);
+                                                startActivity(intent);
+                                            }
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {}
+                                        });
+                                    }
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {}
                             });
+
                         }
                     }
 
@@ -146,11 +142,27 @@ public class SearchUser extends AppCompatActivity {
             }
         });
 
+        btn_find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 進入地圖以GPS結交好友
+                Intent intent = new Intent(SearchUser.this, findNearby.class);
+                startActivity(intent);
+
+                // it is for Google Map , fragement
+                /*
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new findNearby());
+                transaction.commitAllowingStateLoss();*/
+            }
+        });
+
 
     }
     private void init(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btn_send = (Button) findViewById(R.id.btn_search_send);
+        btn_find = (Button) findViewById(R.id.btn_findnearby);
         txt_userid = (EditText) findViewById(R.id.txt_id);
         txt_username = (EditText) findViewById(R.id.txt_username);
         txt_searchId = (EditText) findViewById(R.id.txt_searchId);
@@ -173,8 +185,6 @@ public class SearchUser extends AppCompatActivity {
                 String flag = snapshot.getValue().toString();
                 if (flag.compareTo("False") == 0) {
                     recommendFriend();
-                    //mDatabase.child("recFriend").child(userProfile.getUserid()).child("onFresh").removeEventListener(this);
-                    Log.e("ch","ch");
                 }
             }
             @Override
@@ -183,7 +193,6 @@ public class SearchUser extends AppCompatActivity {
         });
         }
     private void recommendFriend(){
-        e("id",userProfile.getUserid());
 
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         // 存取通知資料庫，並且顯示通知出來
@@ -203,7 +212,6 @@ public class SearchUser extends AppCompatActivity {
                     viewHolder.txt_recommendId.setVisibility(View.INVISIBLE);
                 }
                 else {
-                    Log.e("profile", o.toString());
                     String id = ((HashMap) o).get("userid").toString();
                     String userphoto = ((HashMap) o).get("userphoto").toString();
                     viewHolder.friendid = id;
