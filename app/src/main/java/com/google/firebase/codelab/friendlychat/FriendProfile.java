@@ -1,12 +1,10 @@
 package com.google.firebase.codelab.friendlychat;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,13 +14,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_accept;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_deleteFriend;
 
 public class FriendProfile extends AppCompatActivity {
 
@@ -57,9 +50,8 @@ public class FriendProfile extends AppCompatActivity {
         txt_usergmail = (TextView) findViewById(R.id.txt_usergmail);
         txt_googlename = (TextView) findViewById(R.id.txt_googlename);
         userImageView = (CircleImageView) findViewById(R.id.userImageView);
-        btn_delete = (Button) findViewById(btn_deleteFriend);
+        btn_delete = (Button) findViewById(R.id.btn_deleteFriend);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //refreshedToken = FirebaseInstanceId.getInstance().getToken();
         getProfile(friendid);
 
         btn_delete.setOnClickListener(new View.OnClickListener() {

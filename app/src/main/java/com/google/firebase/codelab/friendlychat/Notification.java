@@ -194,8 +194,8 @@ public class Notification extends AppCompatActivity {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.loadUrl("http://140.113.193.71/FitnessFriend/test.html");
 */
-/*
 
+/*
         ArrayList l = new ArrayList();
         Map m1 = new HashMap();
         Map m2 = new HashMap();
@@ -221,9 +221,8 @@ public class Notification extends AppCompatActivity {
                 viewHolder.requester = requester;
                 viewHolder.userProfile = userProfile;
             }
-        };
-*/
-        //adapter.setOnRecyclerViewListener(this);
+        };*/
+
         //mRecyclerView.setAdapter(adapter);
         mRecyclerView.setAdapter(mFirebaseAdapter);
 

@@ -2,12 +2,10 @@ package com.google.firebase.codelab.friendlychat;
 
 
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,14 +26,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
 import static android.util.Log.e;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_accept;
-import static com.google.firebase.codelab.friendlychat.R.id.btn_setProfile;
-import static com.google.firebase.codelab.friendlychat.R.id.recommedFriendView;
-import static com.google.firebase.codelab.friendlychat.R.id.requestImageView;
-import static com.google.firebase.codelab.friendlychat.R.id.txt_request;
-import static com.google.firebase.codelab.friendlychat.R.id.userImageView;
 
 
 public class SearchUser extends AppCompatActivity {
@@ -191,7 +182,6 @@ public class SearchUser extends AppCompatActivity {
                 if (flag.compareTo("False") == 0) {
                     recommendFriend();
                     //mDatabase.child("recFriend").child(userProfile.getUserid()).child("onFresh").removeEventListener(this);
-                    Log.e("ch","ch");
                 }
             }
             @Override
@@ -200,7 +190,6 @@ public class SearchUser extends AppCompatActivity {
         });
         }
     private void recommendFriend(){
-        e("id",userProfile.getUserid());
 
         DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         // 存取通知資料庫，並且顯示通知出來
@@ -220,7 +209,6 @@ public class SearchUser extends AppCompatActivity {
                     viewHolder.txt_recommendId.setVisibility(View.INVISIBLE);
                 }
                 else {
-                    Log.e("profile", o.toString());
                     String id = ((HashMap) o).get("userid").toString();
                     String userphoto = ((HashMap) o).get("userphoto").toString();
                     viewHolder.friendid = id;
