@@ -60,6 +60,7 @@ public class SearchUser extends AppCompatActivity {
                     Intent i = new Intent(v.getContext(), SearchProfile.class);
                     i.putExtra("friendid", friendid);
                     v.getContext().startActivity(i);
+
                 }
             });
         }
@@ -98,13 +99,18 @@ public class SearchUser extends AppCompatActivity {
                                     .orderByChild("friendid").equalTo(searchId).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
-                                    if(snapshot.exists()) {
-                                        // 傳送好友ID 到好友頁面
-                                        Intent intent = new Intent(SearchUser.this, FriendProfile.class);
-                                        intent.putExtra("friendid", searchId);
-                                        startActivity(intent);
+                                    Boolean f = false;
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        String id = ((HashMap) dataSnapshot.getValue()).get("friendid").toString();
+                                        if (id.compareTo(searchId) == 0) {
+                                            // 傳送好友ID 到好友頁面
+                                            Intent intent = new Intent(SearchUser.this, FriendProfile.class);
+                                            intent.putExtra("friendid", searchId);
+                                            startActivity(intent);
+                                            f = true;
+                                        }
                                     }
-                                    else{
+                                    if( f == false){
                                         // 送出邀請
                                         mDatabase.child("RequestFriend").child(searchId).getRef()
                                                 .orderByChild("requester").equalTo(userProfile.getUserid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {

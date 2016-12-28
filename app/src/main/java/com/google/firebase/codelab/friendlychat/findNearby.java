@@ -38,6 +38,8 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.google.firebase.codelab.friendlychat.R.id.map;
+import static com.google.firebase.codelab.friendlychat.R.id.txt_searchId;
+import static java.security.AccessController.getContext;
 
 
 public class findNearby extends FragmentActivity {
@@ -60,9 +62,11 @@ public class findNearby extends FragmentActivity {
         public CircleImageView nearbyImageView;
         public UserProfile userProfile;
         public String friendid;
+        private View view;
 
         public NearbyViewHolder(View v) {
             super(v);
+            view =v ;
             txt_friendid = (TextView) itemView.findViewById(R.id.txt_friendid);
             txt_friendname = (TextView) itemView.findViewById(R.id.txt_friendname);
             btn_friendProfile = (Button) itemView.findViewById(R.id.btn_friendProfile);
@@ -72,10 +76,37 @@ public class findNearby extends FragmentActivity {
             btn_friendProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // 好友的個人頁面介紹
-                    Intent i = new Intent(v.getContext(), SearchProfile.class);
-                    i.putExtra("friendid", friendid);
-                    v.getContext().startActivity(i);
+                    view = v;
+                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+                    ProfileIO profileIO = new ProfileIO( view.getContext());
+                    userProfile = profileIO.ReadFile();
+                    // 查看 你們是否有好友關係
+                    mDatabase.child("Friend").child(userProfile.getUserid()).getRef()
+                            .orderByChild("friendid").getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            Boolean f = false;
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String id = ((HashMap)dataSnapshot.getValue()).get("friendid").toString();
+                                if( id.compareTo(friendid)==0){
+                                    // 傳送好友ID 到好友頁面
+                                    Intent intent = new Intent(view.getContext(), FriendProfile.class);
+                                    intent.putExtra("friendid", friendid);
+                                    view.getContext().startActivity(intent);
+                                    f = true;
+                                }
+                            }
+                            if( f == false){
+                                //  邀請內容的個人頁面介紹
+                                Intent i = new Intent(view.getContext(), SearchProfile.class);
+                                i.putExtra("friendid", friendid);
+                                view.getContext().startActivity(i);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {}
+                    });
                 }
             });
         }
@@ -89,13 +120,16 @@ public class findNearby extends FragmentActivity {
         lng=120.9945463;
         init();
 
+        getGPS();
+        getNearUsers();
+
     }
 
 
 
     private void init(){
         // 從file取得 使用者資料
-        ProfileIO profileIO = new ProfileIO( this);
+        ProfileIO profileIO = new ProfileIO( findNearby.this);
         userProfile = profileIO.ReadFile();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -106,8 +140,6 @@ public class findNearby extends FragmentActivity {
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        getGPS();
-        getNearUsers();
     }
 
     private void getNearUsers(){
