@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,9 +103,7 @@ public class Post_fragment extends Fragment {
         // 從file取得 使用者資料
         ProfileIO profileIO = new ProfileIO( getActivity());
         userProfile = profileIO.ReadFile();
-        FriendIdList = new ArrayList<>();
-        FriendPost_List = new ArrayList<>();
-        RefList = new ArrayList<>();
+
         mMessageRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
 
@@ -112,6 +111,7 @@ public class Post_fragment extends Fragment {
             @Override
             // 取得好友列表
             public void onDataChange(DataSnapshot snapshot) {
+                FriendIdList = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     HashMap map = (HashMap<String, String>) dataSnapshot.getValue(Object.class);
                     FriendIdList.add(map.get("friendid").toString());
@@ -122,6 +122,8 @@ public class Post_fragment extends Fragment {
                 mFirebaseDatabaseReference.child("messages").orderByChild("id").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
+                        FriendPost_List = new ArrayList<>();
+                        RefList = new ArrayList<>();
                         // 限定只顯示15筆資料
                         int limit_number = limit_post_number;
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -266,9 +268,12 @@ public class Post_fragment extends Fragment {
                                         @Override
                                         public void onClick(DialogInterface arg0, int arg1) {
                                             RefList.get(position).removeValue();
+
                                             adapter.notifyItemRemoved(position);
                                             adapter.notifyDataSetChanged();
+                                            Log.e("number",String.valueOf(adapter.getItemCount()));
                                             adapter.notifyItemRangeChanged(position,adapter.getItemCount());
+
                                             // 原先版本 沒有過濾朋友機制
                                             //mFirebaseAdapter.getRef(position).removeValue();
                                             /*
