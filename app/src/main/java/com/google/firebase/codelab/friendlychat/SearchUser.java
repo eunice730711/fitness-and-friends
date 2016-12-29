@@ -2,9 +2,8 @@ package com.google.firebase.codelab.friendlychat;
 
 
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -21,13 +19,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.util.Log.e;
 
 
 public class SearchUser extends AppCompatActivity {
@@ -165,7 +160,7 @@ public class SearchUser extends AppCompatActivity {
         btn_send = (Button) findViewById(R.id.btn_search_send);
         btn_find = (Button) findViewById(R.id.btn_findnearby);
         txt_userid = (EditText) findViewById(R.id.txt_id);
-        txt_username = (EditText) findViewById(R.id.txt_username);
+        //txt_username = (EditText) findViewById(R.id.txt_username);
         txt_searchId = (EditText) findViewById(R.id.txt_searchId);
         // 從file取得 使用者資料
         ProfileIO profileIO = new ProfileIO(SearchUser.this);

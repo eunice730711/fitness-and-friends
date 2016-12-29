@@ -11,7 +11,7 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <!-- allow the deivce to shake when receiving notification -->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -22,14 +22,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/N1">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAUf7Hsp0CaCS-Lf3I_eizZ2iMzs4aqG7Q" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
 
         <!-- android:theme="@style/AppTheme"> -->
         <activity android:name=".Home">
@@ -78,9 +76,13 @@
         <activity android:name=".Loading" />
         <activity android:name=".Join_Detail" />
         <activity android:name=".Post_Detail" />
-        <activity android:name=".Run"
-            android:label=""></activity>
+        <activity
+            android:name=".Run"
+            android:label="" />
         <activity android:name=".findNearby" />
+        <activity android:name=".Myposts" />
+        <activity android:name=".mypost_fragment" />
+        <activity android:name=".myjoin_fragment"></activity>
     </application>
 
 </manifest>

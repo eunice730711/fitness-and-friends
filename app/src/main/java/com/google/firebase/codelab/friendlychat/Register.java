@@ -4,7 +4,7 @@ package com.google.firebase.codelab.friendlychat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,9 +43,9 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        myToolbar.setTitle("Registration");
+//        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//        setSupportActionBar(myToolbar);
+//        myToolbar.setTitle("Registration");
 
         //-------------------------Get Google Account Information
         personName = ANONYMOUS;
@@ -88,17 +88,20 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
+        Log.i("DEBUG ", "1");
 
         btn_setProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userid = txt_userid.getText().toString();
-                String username= txt_username.getText().toString();
+                //String username= txt_username.getText().toString();
                 String usercity = txt_usercity.getText().toString();
                 String userbirthday = txt_userbirthday.getText().toString();
                 String usergender = txt_usergender.getText().toString();
                 String selfintroduction = txt_selfintroduction.getText().toString();
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+                Log.i("DEBUG ", "2");
 
                 // Throw data to UserProfile
                 UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl);
@@ -124,11 +127,11 @@ public class Register extends AppCompatActivity {
 
     private void init(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        btn_send = (Button) findViewById(R.id.btn_search_send);
+        //btn_send = (Button) findViewById(R.id.btn_search_send);
         btn_setProfile = (Button) findViewById(R.id.btn_setProfile);
         txt_userid = (EditText) findViewById(R.id.txt_id);
-        txt_username = (EditText) findViewById(R.id.txt_username);
-        txt_searchId = (EditText) findViewById(R.id.txt_searchId);
+        //txt_username = (EditText) findViewById(R.id.txt_username);
+        //txt_searchId = (EditText) findViewById(R.id.txt_searchId);
         txt_usercity = (EditText) findViewById(R.id.txt_usercity);
         txt_userbirthday = (EditText) findViewById(R.id.txt_userbirthday);
         txt_selfintroduction = (EditText) findViewById(R.id.txt_selfintroduction);

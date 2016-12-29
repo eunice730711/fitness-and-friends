@@ -1,8 +1,11 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -77,7 +80,21 @@ public class MyProfile extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        Button post = (Button) findViewById(R.id.post_button);
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent2 = new Intent();
+                intent2.setClass(MyProfile.this, Myposts.class);
+                startActivity(intent2);
+                //Home.this.finish();
+            }
+        });
     }
+
+
 
 }
 
