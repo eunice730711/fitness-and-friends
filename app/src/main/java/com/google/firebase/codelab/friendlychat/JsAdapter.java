@@ -18,7 +18,7 @@ public class JsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList iList; // 放在 ArrayList 裡面
     public UserProfile userProfile;
     public String requester;
-
+    public int position;
     JsAdapter(ArrayList list) {
         iList = list ; //new ArrayList<>();
     }
@@ -29,11 +29,18 @@ public class JsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        this.position = position;
     }
 
+    public int getPosition(){return  position;}
     @Override
     public int getItemCount() {
         return iList.size();
     }
+
+    public Object getItem(int position) {
+        return iList.get(position);
+    }
+
+
 }

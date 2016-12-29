@@ -19,6 +19,7 @@ import java.io.Serializable;
 
 public class PostMessage implements Serializable{
 
+    private String id;
     private String text;
     private String title;
     private String name;
@@ -27,10 +28,12 @@ public class PostMessage implements Serializable{
     private String date;
     private int like_num;
 
+
     public PostMessage() {
     }
 
-    public PostMessage(String text, String title, String name, String photoUrl, String time, String date, int like_num) {
+    public PostMessage(String id, String text, String title, String name, String photoUrl, String time, String date, int like_num) {
+        this.id = id;
         this.text = text;
         this.title = title;
         this.name = name;
@@ -39,6 +42,9 @@ public class PostMessage implements Serializable{
         this.date = date;
         this.like_num = like_num;
     }
+    public  String getId() {return id;}
+
+    public  void setId(String id){ this.id = id;}
 
     public String getText() {
         return text;

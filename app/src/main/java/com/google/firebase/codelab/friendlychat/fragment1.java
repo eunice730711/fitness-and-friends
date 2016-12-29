@@ -33,11 +33,14 @@ public class fragment1 extends Fragment {
     private String mUsername;
     private String mPhotoUrl;
     private DatabaseReference mFirebaseDatabaseReference;
-
+    private UserProfile userProfile;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View returnView = inflater.inflate(R.layout.tab_fragment_1, container, false);
 
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO( getActivity());
+        userProfile = profileIO.ReadFile();
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mUsername = mFirebaseUser.getDisplayName();
@@ -55,7 +58,7 @@ public class fragment1 extends Fragment {
                 String nowDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
                 String nowTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
                 PostMessage postMessage = new
-                        PostMessage(New_title.getText().toString(),
+                        PostMessage(userProfile.getUserid(),New_title.getText().toString(),
                         New_title.getText().toString(),mUsername,
                         mPhotoUrl,nowTime,nowDate, 0 );
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD)
