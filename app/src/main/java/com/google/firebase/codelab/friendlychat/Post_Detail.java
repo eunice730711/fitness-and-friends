@@ -1,14 +1,11 @@
 package com.google.firebase.codelab.friendlychat;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -58,7 +55,7 @@ public class Post_Detail extends AppCompatActivity {
             UsermessageAdapter;
 
     //紀錄user在like列表中的position
-    public int user_positoin;
+    public int user_position;
 
     public static class LikeViewHolder extends RecyclerView.ViewHolder {
 
@@ -157,7 +154,7 @@ public class Post_Detail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!Content.getText().equals("")) {
+                if (!Content.getText().toString().equals("")) {
                     String nowDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
                     String nowTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
                     Message temp = new Message(userProfile.getUsername()
@@ -203,12 +200,16 @@ public class Post_Detail extends AppCompatActivity {
                         PostRef.child("Member").push().setValue(New_member);
                         post.setLike_num(post.getLike_num() + 1);
                         //資料庫有新增或刪減需通知adapter!!!!!!!不然會crash
-                        mFirebaseAdapter.notifyItemInserted(user_positoin);
+                        mFirebaseAdapter.notifyItemInserted(user_position);
+                        mFirebaseAdapter.notifyDataSetChanged();
+                        mFirebaseAdapter.notifyItemRangeChanged(user_position,mFirebaseAdapter.getItemCount());
                     }
                 } else {
                     mem_ref.removeValue();
                     post.setLike_num(post.getLike_num() - 1);
-                    mFirebaseAdapter.notifyItemRemoved(user_positoin);
+                    mFirebaseAdapter.notifyItemRemoved(user_position);
+                    mFirebaseAdapter.notifyDataSetChanged();
+                    mFirebaseAdapter.notifyItemRangeChanged(user_position,mFirebaseAdapter.getItemCount());
 
                 }
                 PostRef.child("like_num").setValue(post.getLike_num());
@@ -238,7 +239,7 @@ public class Post_Detail extends AppCompatActivity {
                 //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.userid = member.getUserid();
                 if (member.getUserid().equals(userProfile.getUserid())) {
-                    user_positoin = position;
+                    user_position = position;
                     mem_ref = mFirebaseAdapter.getRef(position);
                 }
                 if (member.getPhotoUrl() == null) {
@@ -289,6 +290,7 @@ public class Post_Detail extends AppCompatActivity {
                 }
             }
         };
+        message_Recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         message_Recyclerview.setAdapter(UsermessageAdapter);
     }
 }
