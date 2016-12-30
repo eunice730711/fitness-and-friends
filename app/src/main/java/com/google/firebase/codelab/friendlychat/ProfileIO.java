@@ -24,26 +24,32 @@ public class ProfileIO {
         this.c = c;
     }
 
-    public void WriteFile(UserProfile data){
+
+
+    public void WriteFile(UserProfile userdata){
+
         File dir = c.getFilesDir();
         File outFile = new File(dir, "userprofile.txt");
         String output = "";
+
+
 
         FileOutputStream osw = null;
         try {
             osw = new FileOutputStream(outFile);
 
             output = output
-                    + data.getTotaldistance() + "\n"
-                    + data.getUsername() + "\n"
-                    + data.getUserid() + "\n"
-                    + data.getInstanceid() + "\n"
-                    + data.getUsercity() + "\n"
-                    + data.getUsergender() + "\n"
-                    + data.getUserbirthday() + "\n"
-                    + data.getSelfintroduction() + "\n"
-                    + data.getUseremail() + "\n"
-                    + data.getUserphoto() + "\n";
+                    + userdata.getTotaldistance() + "\n"
+                    + userdata.getUsername() + "\n"
+                    + userdata.getUserid() + "\n"
+                    + userdata.getInstanceid() + "\n"
+                    + userdata.getUsercity() + "\n"
+                    + userdata.getUsergender() + "\n"
+                    + userdata.getUserbirthday() + "\n"
+                    + userdata.getSelfintroduction() + "\n"
+                    + userdata.getUseremail() + "\n"
+                    + userdata.getUserphoto() + "\n"
+                    + userdata.getUserref() + "\n";
 
             osw.write(output.getBytes());
             osw.flush();
@@ -62,6 +68,7 @@ public class ProfileIO {
 
             }
         }
+
     }
 
     public UserProfile ReadFile(){
@@ -90,8 +97,9 @@ public class ProfileIO {
             String intro = reader.readLine();
             String email = reader.readLine();
             String photo = reader.readLine();
+            String ref = reader.readLine();
 
-            UserProfile userProfile = new UserProfile(name,id,instanceid,city,birthday,gender,intro,email,photo);
+            UserProfile userProfile = new UserProfile(name,id,instanceid,city,birthday,gender,intro,email,photo,ref);
             userProfile.updateDistance(dist);
 
             u = userProfile;

@@ -188,19 +188,20 @@ public class ScheduleIO {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                boolean newpush = true;
+                boolean find = false;
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Object o  = dataSnapshot.getValue(Object.class);
                     String email = ((HashMap<String,String>)o).get("googleEmail");
                     if( email.equals(userSchedule.getGoogleEmail())) {
                         dataSnapshot.getRef().setValue(userSchedule);
-                        newpush = false;
+                        find = true;
                         break;
                     }
                 }
-                if(newpush){
-                    snapshot.getRef().push().setValue(userSchedule);
+                if(find == false){
+                    //呼叫callback function
+                    callback.SetNewPush(userSchedule,snapshot.getRef());
                 }
             }
             @Override

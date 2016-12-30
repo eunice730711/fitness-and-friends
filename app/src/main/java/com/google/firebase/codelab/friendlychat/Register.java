@@ -14,9 +14,14 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
 
 
 public class Register extends AppCompatActivity {
@@ -104,22 +109,49 @@ public class Register extends AppCompatActivity {
                 Log.i("DEBUG ", "2");
 
                 // Throw data to UserProfile
-                UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl);
-
-                // Write file in local
-                profileIO = new ProfileIO(Register.this);
-                profileIO.WriteFile(test);
-                // Read user profile from file!
-                // UserProfile read = new UserProfile();
-                // read = profileIO.ReadFile();
+                final UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl, "");
 
                 // Upload data on firebase
                 mDatabase.child("UserProfile").push().setValue(test);
-                // Move on to the next page(Home)
-                Intent intent2 = new Intent();
-                intent2.setClass(Register.this, Home.class);
-                startActivity(intent2);
-                Register.this.finish();
+
+                mDatabase.child("UserProfile")
+                        .orderByChild("userid")
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot) {
+                                String ref = "";
+
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    Object o  = dataSnapshot.getValue(Object.class);
+                                    String userid = ((HashMap<String,String>)o).get("userid");
+                                    if( userid.equals(userid)) {
+                                        ref = dataSnapshot.getRef().toString();
+                                        break;
+                                    }
+                                }
+                                //Log.e(TAG, ref);
+
+                                // Write file in local
+                                test.setUserref(ref);
+                                profileIO = new ProfileIO(Register.this);
+                                profileIO.WriteFile(test);
+                                // Read user profile from file!
+                                // UserProfile read = new UserProfile();
+                                // read = profileIO.ReadFile();
+
+
+                                // Move on to the next page(Home)
+                                Intent intent2 = new Intent();
+                                intent2.setClass(Register.this, Home.class);
+                                startActivity(intent2);
+                                Register.this.finish();
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {}
+                        });
             }
         });
 

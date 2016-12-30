@@ -28,11 +28,12 @@ public class UserProfile {
     public String selfintroduction;
     public String useremail;
     public String userphoto;
+    public String userref;
 
 
     public UserProfile(){}
 
-    public UserProfile(String username, String userid, String instanceid, String usercity, String userbirthday, String usergender, String selfintroduction, String useremail, String photo){
+    public UserProfile(String username, String userid, String instanceid, String usercity, String userbirthday, String usergender, String selfintroduction, String useremail, String photo, String userref){
         this.username = username;
         this.userid = userid;
         this.instanceid = instanceid;
@@ -43,6 +44,7 @@ public class UserProfile {
         this.selfintroduction = selfintroduction;
         this.useremail = useremail;
         this.userphoto = photo;
+        this.userref = userref;
     }
 
     public String getUsername(){return username;}
@@ -51,11 +53,13 @@ public class UserProfile {
 
     public String getUserid(){return userid;}
 
-    public void setId(String userid){this.userid = userid;}
+    public void setUserid(String userid){this.userid = userid;}
 
     public  String getInstanceid(){return  instanceid;}
 
     public void setInstanceid(String instanceid){this.instanceid = instanceid;}
+
+    public void setUserref(String userref){this.userref = userref;}
 
     public double updateDistance(double oneDistance){ this.totaldistance += oneDistance; return this.totaldistance;}
 
@@ -72,6 +76,8 @@ public class UserProfile {
     public String getUseremail(){return useremail;}
 
     public String getUserphoto(){return userphoto;}
+
+    public String getUserref(){return userref;}
 
 
 }

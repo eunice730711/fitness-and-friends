@@ -81,8 +81,8 @@ public class Loading extends AppCompatActivity {
                         // User do exist on firebase --> get user information on firebase
                         UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                         // write user information to file
-                        profileIO = new ProfileIO(Loading.this);
-                        profileIO.WriteFile(userProfile);
+                        //profileIO = new ProfileIO(Loading.this);
+                        //profileIO.WriteFile(userProfile);
                         Intent intent = new Intent();
                         intent.setClass(Loading.this, Home.class);
                         startActivity(intent);
