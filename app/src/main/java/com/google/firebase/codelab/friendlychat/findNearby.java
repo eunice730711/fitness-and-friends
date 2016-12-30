@@ -32,14 +32,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.google.firebase.codelab.friendlychat.R.id.map;
-import static com.google.firebase.codelab.friendlychat.R.id.txt_searchId;
-import static java.security.AccessController.getContext;
 
 
 public class findNearby extends FragmentActivity {
@@ -116,6 +111,7 @@ public class findNearby extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_nearby);
+        //  給予一個固定GPS , 以免虛擬機找不到GPS
         lat= 24.7859195;
         lng=120.9945463;
         init();
@@ -207,8 +203,6 @@ public class findNearby extends FragmentActivity {
 
                     }
                 };
-
-                //adapter.setOnRecyclerViewListener(this);
                 mRecyclerView.setAdapter(adapter);
 
 
@@ -261,8 +255,6 @@ public class findNearby extends FragmentActivity {
 
             lat = location.getLatitude();
             lng = location.getLongitude();
-            lat= 24.7859195;
-            lng=120.9945463;
             Log.e("GPS",lat+", "+lng);
 
             pushGPStoDB();

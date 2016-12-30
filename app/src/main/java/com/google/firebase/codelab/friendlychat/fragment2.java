@@ -39,6 +39,7 @@ public class fragment2 extends Fragment {
     private String mUsername;
     private String mPhotoUrl;
     private DatabaseReference mFirebaseDatabaseReference;
+    private UserProfile userProfile;
 
 
     @Override
@@ -48,6 +49,10 @@ public class fragment2 extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mUsername = mFirebaseUser.getDisplayName();
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO( getActivity());
+        userProfile = profileIO.ReadFile();
+
         if (mFirebaseUser.getPhotoUrl() != null) {
             mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
         }
@@ -97,7 +102,7 @@ public class fragment2 extends Fragment {
                 String nowTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
 
                 JoinMessage joinMessage = new
-                        JoinMessage(mMessageEditText.getText().toString(),
+                        JoinMessage(userProfile.getUserid(), mMessageEditText.getText().toString(),
                         mUsername, mPhotoUrl,nowTime,nowDate,J_date.getText().toString(),
                         J_time.getText().toString(),J_pos.getText().toString(),J_type.getText().toString());
                 mFirebaseDatabaseReference.child("Join")

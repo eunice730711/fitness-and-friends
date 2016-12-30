@@ -1,7 +1,6 @@
 package com.google.firebase.codelab.friendlychat;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,7 +20,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -58,9 +55,9 @@ public class Join_Detail extends AppCompatActivity {
     private LinearLayoutManager mLinearLayoutManager;
     private RecyclerView message_Recyclerview;
     private LinearLayoutManager message_LayoutManger;
-    private FirebaseRecyclerAdapter<Member, Join_Detail.LikeViewHolder>
+    private FirebaseRecyclerAdapter<Member, LikeViewHolder>
             mFirebaseAdapter;
-    private FirebaseRecyclerAdapter<Message, Join_Detail.UserMessageViewHolder>
+    private FirebaseRecyclerAdapter<Message, UserMessageViewHolder>
             UsermessageAdapter;
     public static class LikeViewHolder extends RecyclerView.ViewHolder {
 
@@ -109,7 +106,7 @@ public class Join_Detail extends AppCompatActivity {
         }
     }
     //紀錄user在join列表中的position
-    public int user_positoin;
+    public int user_position;
 
 
     @Override
@@ -169,7 +166,7 @@ public class Join_Detail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!Content.getText().equals("")) {
+                if (!Content.getText().toString().equals("")) {
                     String nowDate = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
                     String nowTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
                     Message temp = new Message(userProfile.getUsername()
@@ -216,14 +213,18 @@ public class Join_Detail extends AppCompatActivity {
                         JoinRef.child("Member").push().setValue(New_member);
                         join.setJoin_num(join.getJoin_num()+1);
                         //資料庫有新增或刪減需通知adapter!!!!!!!不然會crash
-                        mFirebaseAdapter.notifyItemInserted(user_positoin);
+                        mFirebaseAdapter.notifyItemInserted(user_position);
+                        mFirebaseAdapter.notifyDataSetChanged();
+                        mFirebaseAdapter.notifyItemRangeChanged(user_position,mFirebaseAdapter.getItemCount());
                     }
                 }
                 else
                 {
                     mem_ref.removeValue();
                     join.setJoin_num(join.getJoin_num()-1);
-                    mFirebaseAdapter.notifyItemRemoved(user_positoin);
+                    mFirebaseAdapter.notifyItemRemoved(user_position);
+                    mFirebaseAdapter.notifyDataSetChanged();
+                    mFirebaseAdapter.notifyItemRangeChanged(user_position,mFirebaseAdapter.getItemCount());
                 }
                 JoinRef.child("join_num").setValue(join.getJoin_num());
                 Join_num.setText(join.getJoin_num() + "人");
@@ -251,7 +252,7 @@ public class Join_Detail extends AppCompatActivity {
                 //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.userid = member.getUserid();
                 if (member.getUserid().equals(userProfile.getUserid())) {
-                    user_positoin = position;
+                    user_position = position;
                     mem_ref = mFirebaseAdapter.getRef(position);
                 }
                 if (member.getPhotoUrl() == null) {

@@ -2,9 +2,7 @@ package com.google.firebase.codelab.friendlychat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -14,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,16 +20,19 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.google.firebase.codelab.friendlychat.Join_fragment.JoinViewHolder.J_view;
-import static com.google.firebase.codelab.friendlychat.MainActivity.ANONYMOUS;
 
 /**
  * Created by pei on 2016/11/23.
@@ -72,6 +72,12 @@ public class Join_fragment extends Fragment {
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<JoinMessage,JoinViewHolder> mFirebaseAdapter;
     public JoinMessage j ;
+    public JsAdapter adapter;
+    private List<String> FriendIdList;
+    private List<DatabaseReference>RefList;
+    private ArrayList<JoinMessage> FriendJoin_List;
+    private final int limit_join_number = 15;
+    private UserProfile userProfile;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -86,7 +92,88 @@ public class Join_fragment extends Fragment {
         mLinearLayoutManager.setStackFromEnd(true);
         mLinearLayoutManager.setReverseLayout(true);
         mLinearLayoutManager.setAutoMeasureEnabled(false);
+        mMessageRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         // New child entries
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO( getActivity());
+        userProfile = profileIO.ReadFile();
+
+
+        mFirebaseDatabaseReference.child("Friend").child(userProfile.getUserid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            // 取得好友列表
+            public void onDataChange(DataSnapshot snapshot) {
+                FriendIdList = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    HashMap map = (HashMap<String, String>) dataSnapshot.getValue(Object.class);
+                    FriendIdList.add(map.get("friendid").toString());
+                }
+                // 讓自己的Join 也可以在塗鴉牆顯示
+                FriendIdList.add(userProfile.getUserid());
+                //  搜尋好友的文章
+                mFirebaseDatabaseReference.child("Join").orderByChild("id").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        FriendJoin_List = new ArrayList<>();
+                        RefList = new ArrayList<>();
+                        // 限定只顯示15筆資料
+                        int limit_number = limit_join_number;
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            if( limit_number ==0)
+                                break;
+                            JoinMessage joinMessage =  dataSnapshot.getValue(JoinMessage.class);
+                            String id = joinMessage.getId();
+                            if( FriendIdList.indexOf(id)!=-1){
+                                limit_number --;
+                                FriendJoin_List.add(joinMessage);
+                                RefList.add(dataSnapshot.getRef());
+                            }
+                        }
+                        // 完成搜尋好友文章
+                        adapter = new JsAdapter(FriendJoin_List){
+                            @Override
+                            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                                // 設定viewHolder 所使用的 layout
+                                View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_joinmessage, parent, false);
+                                JoinViewHolder vh = new JoinViewHolder(mView);
+                                return vh;
+                            }
+                            @Override
+                            public void onBindViewHolder(RecyclerView.ViewHolder  holder, int position) {
+                                JoinViewHolder viewHolder = (JoinViewHolder) holder;
+
+                                JoinMessage joinMessage = (JoinMessage)iList.get(position);
+
+                                //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                                viewHolder.typeTextView.setText(joinMessage.getTitle());
+                                viewHolder.posTextView.setText(joinMessage.getJpos());
+                                viewHolder.NameTexView.setText(joinMessage.getName());
+                                viewHolder.dateTextView.setText(joinMessage.getJdate());
+                                viewHolder.timeTextView.setText(joinMessage.getJtime());
+                                if (joinMessage.getPhotoUrl() == null) {
+                                    viewHolder.messengerImageView
+                                            .setImageDrawable(ContextCompat
+                                                    .getDrawable(getActivity(),
+                                                            R.drawable.ic_account_circle_black_36dp));
+                                } else {
+                                    Glide.with(getActivity())
+                                            .load(joinMessage.getPhotoUrl())
+                                            .into(viewHolder.messengerImageView);
+                                }
+                            }
+                        };
+                        mMessageRecyclerView.setAdapter(adapter);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+        /*
         mFirebaseAdapter = new FirebaseRecyclerAdapter<JoinMessage, JoinViewHolder>(
                 JoinMessage.class,
                 R.layout.item_joinmessage,
@@ -114,12 +201,15 @@ public class Join_fragment extends Fragment {
 
             }
         };
+        */
         mMessageRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         //j = mFirebaseAdapter.getItem(position);
-                        String ref = mFirebaseAdapter.getRef(position).toString();
+                        String ref = RefList.get(position).toString();
+                        // 原先版本 沒有過濾朋友機制
+                        //String ref = mFirebaseAdapter.getRef(position).toString();
                         Intent intent = new Intent();
                         intent.setClass(getActivity() , Join_Detail.class);
                         //Bundle bundle = new Bundle();
@@ -131,7 +221,9 @@ public class Join_fragment extends Fragment {
 
                     @Override
                     public void onLongClick(View view, final int position) {
-                        JoinMessage join = mFirebaseAdapter.getItem(position);
+                        JoinMessage join = (JoinMessage) adapter.getItem(position);
+                        // 原先版本 沒有過濾朋友機制
+                        //JoinMessage join = mFirebaseAdapter.getItem(position);
                         if (mFirebaseUser.getDisplayName().equals(join.getName())) {
                             //彈跳視窗(編輯和刪除)
                             LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -152,7 +244,7 @@ public class Join_fragment extends Fragment {
                                     .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface arg0, int arg1) {
-                                            Toast.makeText(getContext(), "successfully changed" + position, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "successfully changed", Toast.LENGTH_SHORT).show();
                                             //viewHolder.messageTextView.setText(editText.getText().toString());
                                             Map<String, Object> nameMap = new HashMap<String, Object>();
                                             nameMap.put("text", editText.getText().toString());
@@ -160,7 +252,9 @@ public class Join_fragment extends Fragment {
                                             nameMap.put("jtime", editTime.getText().toString());
                                             nameMap.put("jdate", editDate.getText().toString());
                                             nameMap.put("jpos", editPos.getText().toString());
-                                            mFirebaseAdapter.getRef(position).updateChildren(nameMap);
+                                            // 原先版本 沒有過濾朋友機制
+                                            //mFirebaseAdapter.getRef(position).updateChildren(nameMap);
+                                            RefList.get(position).updateChildren(nameMap);
                                         }
                                     })
                                     .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -173,16 +267,23 @@ public class Join_fragment extends Fragment {
                                     .setNegativeButton("Remove", new DialogInterface.OnClickListener(){
                                         @Override
                                         public void onClick(DialogInterface arg0, int arg1) {
-                                            mFirebaseAdapter.getRef(position).removeValue();
-                                            mFirebaseAdapter.notifyItemRemoved(position);
-                                            mFirebaseAdapter.notifyDataSetChanged();
-                                            mFirebaseAdapter.notifyItemRangeChanged(position,mFirebaseAdapter.getItemCount());
+                                            RefList.get(position).removeValue();
+
+                                            adapter.notifyItemRemoved(position);
+                                            adapter.notifyDataSetChanged();
+                                            adapter.notifyItemRangeChanged(position,adapter.getItemCount());
+                                            // 原先版本 沒有過濾朋友機制
+                                            //mFirebaseAdapter.getRef(position).removeValue();
+                                            //mFirebaseAdapter.notifyItemRemoved(position);
+                                            //mFirebaseAdapter.notifyDataSetChanged();
+                                            //mFirebaseAdapter.notifyItemRangeChanged(position,mFirebaseAdapter.getItemCount());
                                             Toast.makeText(getContext(), "successfully removed!", Toast.LENGTH_SHORT).show();
                                         }
                                     }).show();
                         }
                     }
                 }));
+        /*
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -200,10 +301,11 @@ public class Join_fragment extends Fragment {
                 }
             }
         });
-        //mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        mMessageRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mMessageRecyclerView.setAdapter(mFirebaseAdapter);
+        */
+
+        mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        // 原先版本 沒有過濾朋友機制
+        //mMessageRecyclerView.setAdapter(mFirebaseAdapter);
 
     }
 

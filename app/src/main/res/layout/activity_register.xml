@@ -10,90 +10,92 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0dp"
+    android:background="#202128"
     tools:context="com.google.firebase.codelab.friendlychat.Register">
 
     <!-- Fill in Userprofile -->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Registration"
-    android:textSize="20dp"
-    android:textColor="#ffffff"
-    android:textStyle="normal|bold"
-    android:layout_gravity="center" />
-    </android.support.v7.widget.Toolbar>
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/my_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:elevation="4dp"-->
+        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentStart="true">-->
+        <!---->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Registration"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:textStyle="normal|bold"-->
+    <!--android:layout_gravity="center" />-->
+    <!--</android.support.v7.widget.Toolbar>-->
 
 
-    <TextView
-        android:text="User Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="170px"
-        android:paddingLeft="20px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/textView3" />
+    <!--<TextView-->
+        <!--android:text="User Name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingTop="170px"-->
+        <!--android:paddingLeft="20px"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:id="@+id/textView3" />-->
 
-    <TextView
-        android:text="ID"
-        android:paddingLeft="20px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_username"
-        android:id="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/textView5"
-        android:layout_toStartOf="@+id/txt_username" />
+    <!--<TextView-->
+        <!--android:text="ID"-->
+        <!--android:paddingLeft="20px"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txt_username"-->
+        <!--android:id="@+id/textView4"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_above="@+id/textView5"-->
+        <!--android:layout_toStartOf="@+id/txt_username" />-->
 
-    <TextView
-        android:text="City"
-        android:paddingLeft="20px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_id"
-        android:id="@+id/textView5"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/txt_id" />
-
-
-    <TextView
-        android:text="BirthDay"
-        android:paddingLeft="20px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_usercity"
-        android:id="@+id/textView7"
-        android:layout_above="@+id/textView8"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/txt_usercity" />
+    <!--<TextView-->
+        <!--android:text="City"-->
+        <!--android:paddingLeft="20px"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txt_id"-->
+        <!--android:id="@+id/textView5"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_toStartOf="@+id/txt_id" />-->
 
 
-    <TextView
-        android:text="Gender"
-        android:paddingLeft="20px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_userbirthday"
-        android:id="@+id/textView8" />
+    <!--<TextView-->
+        <!--android:text="BirthDay"-->
+        <!--android:paddingLeft="20px"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txt_usercity"-->
+        <!--android:id="@+id/textView7"-->
+        <!--android:layout_above="@+id/textView8"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_toStartOf="@+id/txt_usercity" />-->
 
-    <TextView
-        android:text="None"
-        android:paddingLeft="10px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_below="@id/txt_userbirthday"
-        android:id="@+id/showgender" />
+
+    <!--<TextView-->
+        <!--android:text="Gender"-->
+        <!--android:paddingLeft="20px"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/txt_userbirthday"-->
+        <!--android:id="@+id/textView8" />-->
+
+    <!--<TextView-->
+        <!--android:text="None"-->
+        <!--android:paddingLeft="10px"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toRightOf="@+id/textView8"-->
+        <!--android:layout_below="@id/txt_userbirthday"-->
+        <!--android:id="@+id/showgender" />-->
 
     <!--
         <EditText
@@ -106,100 +108,292 @@
             -->
 
 
-    <RadioGroup
+    <!--<RadioGroup-->
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="20px"
-        android:id="@+id/usergender"
-        android:layout_below="@+id/textView8" >
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingLeft="20px"-->
+        <!--android:id="@+id/usergender"-->
+        <!--android:layout_below="@+id/textView8" >-->
 
-        <RadioButton
+        <!--<RadioButton-->
 
-            android:id="@+id/yes_radio_button"
+            <!--android:id="@+id/yes_radio_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="M"  />-->
+
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/no_radio_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="F" />-->
+
+    <!--</RadioGroup>-->
+
+
+    <!--<TextView-->
+        <!--android:text="Self Introdution"-->
+        <!--android:paddingLeft="20px"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/usergender"-->
+        <!--android:id="@+id/textView9" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="50"-->
+        <!--android:id="@+id/txt_selfintroduction"-->
+        <!--android:layout_below="@+id/textView9" />-->
+
+
+
+    <!--<Button-->
+        <!--android:text="Set up"-->
+        <!--android:textColor="#737373"-->
+        <!--android:textSize="30sp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/btn_setProfile"-->
+        <!--android:background="@drawable/button_style"-->
+        <!--android:layout_marginBottom="20dp" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/txt_username"-->
+        <!--android:layout_alignBottom="@+id/textView3"-->
+        <!--android:layout_toEndOf="@+id/textView3"-->
+        <!--android:layout_below="@+id/my_toolbar" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/txt_id"-->
+        <!--android:layout_below="@+id/txt_username"-->
+        <!--android:layout_toEndOf="@+id/textView3" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/txt_usercity"-->
+        <!--android:layout_below="@+id/textView4"-->
+        <!--android:layout_toEndOf="@+id/textView4" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/txt_userbirthday"-->
+        <!--android:layout_below="@+id/txt_usercity"-->
+        <!--android:layout_alignStart="@+id/txt_usercity" />-->
+
+    <!--分隔-->
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:descendantFocusability="beforeDescendants"-->
+        <!--android:background="#202128"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--tools:context="com.google.firebase.codelab.friendlychat.Register">-->
+
+        <TextView
+            android:id="@+id/Register_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="M"  />
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textColor="#29e5b6"
+            android:text="Register"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
 
 
-        <RadioButton
-            android:id="@+id/no_radio_button"
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true" />
+
+
+
+        <ScrollView
+            android:id="@+id/ScrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="F" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#D3D3D3"
+            android:padding="60dp" >
 
-    </RadioGroup>
-
-
-    <TextView
-        android:text="Self Introdution"
-        android:paddingLeft="20px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/usergender"
-        android:id="@+id/textView9" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="50"
-        android:id="@+id/txt_selfintroduction"
-        android:layout_below="@+id/textView9" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
 
 
+                <EditText
+                    android:id="@+id/txt_id"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="0dp"
+                    android:gravity="center"
+                    android:hint="Nickname/ID"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
-    <Button
-        android:text="Set up"
-        android:textColor="#737373"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btn_setProfile"
-        android:background="@drawable/button_style"
-        android:layout_marginBottom="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txt_username"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_below="@+id/my_toolbar" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txt_id"
-        android:layout_below="@+id/txt_username"
-        android:layout_toEndOf="@+id/textView3" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txt_usercity"
-        android:layout_below="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txt_userbirthday"
-        android:layout_below="@+id/txt_usercity"
-        android:layout_alignStart="@+id/txt_usercity" />
+                <EditText
+                    android:id="@+id/txt_usercity"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_id"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:hint="Living city"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
 
+                <EditText
+                    android:id="@+id/txt_selfintroduction"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_usercity"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:hint="Brief introduction"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_userbirthday"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_selfintroduction"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:hint="Birthday"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/showgender"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_userbirthday"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:visibility="invisible"
+                    android:textStyle="bold" />
+
+                <!--<TextView-->
+                <!--android:text="None"-->
+                <!--android:paddingLeft="10px"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_toRightOf="@+id/txt_userbirthday"-->
+                <!--android:layout_below="@id/txt_userbirthday"-->
+                <!--android:id="@+id/showgender" />-->
+
+                <RadioGroup
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingLeft="100px"
+                android:id="@+id/usergender"
+                android:layout_below="@+id/txt_userbirthday" >
+
+                <RadioButton
+
+                android:id="@+id/yes_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"  />
 
 
-</RelativeLayout>
+                <RadioButton
+                android:id="@+id/no_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F" />
+
+                </RadioGroup>
+
+                <!--<Button-->
+                    <!--android:id="@+id/register_button"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/cnfpasswd_edtext"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginTop="25dp"-->
+                    <!--android:text="REGISTER"-->
+                    <!--android:textColor="#ffffff"-->
+                    <!--android:textSize="20dp" />-->
+
+                <Button
+                    android:text="Set up"
+                    android:textColor="#737373"
+                    android:textSize="30sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/usergender"
+                    android:id="@+id/btn_setProfile"
+                    android:background="@drawable/button_style"
+                    android:layout_marginBottom="20dp" />
+
+            </RelativeLayout>
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/view_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+             />
+
+
+
+    </RelativeLayout>
+
+
+
+
+

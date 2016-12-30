@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class JoinMessage implements Serializable {
+    private String id;
     private String text;
     private String name;
     private String photoUrl;
@@ -21,7 +22,8 @@ public class JoinMessage implements Serializable {
     public JoinMessage(){
     }
 
-    public JoinMessage(String text, String name, String photoUrl, String time, String date, String j_date, String j_time, String j_pos, String j_type) {
+    public JoinMessage(String id, String text, String name, String photoUrl, String time, String date, String j_date, String j_time, String j_pos, String j_type) {
+        this.id = id;
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
@@ -33,6 +35,10 @@ public class JoinMessage implements Serializable {
         this.title = j_type;
         this.join_num = 0;
     }
+    public  String getId() {return id;}
+
+    public  void setId(String id){ this.id = id;}
+
     public String getText() {
         return text;
     }

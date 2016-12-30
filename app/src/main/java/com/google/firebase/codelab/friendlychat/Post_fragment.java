@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 
 /**
@@ -63,7 +68,7 @@ public class Post_fragment extends Fragment {
         }
 
     }
-
+    private UserProfile userProfile;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
@@ -73,6 +78,11 @@ public class Post_fragment extends Fragment {
     private FirebaseRecyclerAdapter<PostMessage,PostViewHolder> mFirebaseAdapter;
     public PostMessage p;
     private List<PostMessage> Post_List = new ArrayList<>();
+    private List<String> FriendIdList;
+    private List<DatabaseReference>RefList;
+    private ArrayList<PostMessage> FriendPost_List;
+    private final int limit_post_number = 15;
+    public JsAdapter adapter;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -90,6 +100,85 @@ public class Post_fragment extends Fragment {
         mLinearLayoutManager.setAutoMeasureEnabled(false);
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        // 從file取得 使用者資料
+        ProfileIO profileIO = new ProfileIO( getActivity());
+        userProfile = profileIO.ReadFile();
+
+        mMessageRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
+
+        mFirebaseDatabaseReference.child("Friend").child(userProfile.getUserid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            // 取得好友列表
+            public void onDataChange(DataSnapshot snapshot) {
+                FriendIdList = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    HashMap map = (HashMap<String, String>) dataSnapshot.getValue(Object.class);
+                    FriendIdList.add(map.get("friendid").toString());
+                }
+                // 讓自己的po文也可以在塗鴉牆顯示
+                FriendIdList.add(userProfile.getUserid());
+                //  搜尋好友的文章
+                mFirebaseDatabaseReference.child("messages").orderByChild("id").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        FriendPost_List = new ArrayList<>();
+                        RefList = new ArrayList<>();
+                        // 限定只顯示15筆資料
+                        int limit_number = limit_post_number;
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            if( limit_number ==0)
+                                break;
+                            PostMessage postMessage =  dataSnapshot.getValue(PostMessage.class);
+                            String id = postMessage.getId();
+                            if( FriendIdList.indexOf(id)!=-1){
+                                limit_number --;
+                                FriendPost_List.add(postMessage);
+                                RefList.add(dataSnapshot.getRef());
+                            }
+                        }
+                    // 完成搜尋好友文章
+                        adapter = new JsAdapter(FriendPost_List){
+                            @Override
+                            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                                // 設定viewHolder 所使用的 layout
+                                View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_postmessage, parent, false);
+                                PostViewHolder vh = new PostViewHolder(mView);
+                                return vh;
+                            }
+                            @Override
+                            public void onBindViewHolder(RecyclerView.ViewHolder  holder, int position) {
+                                PostViewHolder viewHolder = (PostViewHolder) holder;
+
+                                PostMessage postMessage = (PostMessage)iList.get(position);
+                                viewHolder.messageTextView.setText(postMessage.getText());
+                                viewHolder.messengerTextView.setText(postMessage.getName());
+                                viewHolder.mdateTextView.setText(postMessage.getDate());
+                                viewHolder.mtimeTextView.setText(postMessage.getTime());
+                                if (postMessage.getPhotoUrl() == null) {
+                                    viewHolder.messengerImageView
+                                            .setImageDrawable(ContextCompat
+                                                    .getDrawable(getActivity(),
+                                                            R.drawable.ic_account_circle_black_36dp));
+                                } else {
+                                    Glide.with(getActivity())
+                                            .load(postMessage.getPhotoUrl())
+                                            .into(viewHolder.messengerImageView);
+                                }
+                            }
+                        };
+                        mMessageRecyclerView.setAdapter(adapter);
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+        // 原先版本 沒有過濾朋友機制
+/*
         mFirebaseAdapter = new FirebaseRecyclerAdapter<PostMessage, PostViewHolder>(
                 PostMessage.class,
                 R.layout.item_postmessage,
@@ -120,13 +209,17 @@ public class Post_fragment extends Fragment {
 //                });
             }
         };
+*/
+
         mMessageRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 new RecyclerItemClickListener.OnItemClickListener() {
                     //按一下進入detail
                     @Override
                     public void onItemClick(View view, int position) {
                         //p = mFirebaseAdapter.getItem(position);
-                        String ref= mFirebaseAdapter.getRef(position).getRef().toString();
+                        String ref = RefList.get(position).toString();
+                        // 原先版本 沒有過濾朋友機制
+                        ///String ref= mFirebaseAdapter.getRef(position).getRef().toString();
                         Intent intent = new Intent();
                         intent.setClass(getActivity() , Post_Detail.class);
                         intent.putExtra("ref",ref);
@@ -138,7 +231,9 @@ public class Post_fragment extends Fragment {
                     //長按來編輯貼文
                     @Override
                     public void onLongClick(View view, final int position) {
-                        PostMessage post = mFirebaseAdapter.getItem(position);
+                        PostMessage post = (PostMessage) adapter.getItem(position);
+                        // 原先版本 沒有過濾朋友機制
+                        //PostMessage post = mFirebaseAdapter.getItem(position);
                         if (mUsername.equals(post.getName())) {
                             LayoutInflater inflater = LayoutInflater.from(getActivity());
                             final View v = inflater.inflate(R.layout.edit_post, null);
@@ -152,12 +247,14 @@ public class Post_fragment extends Fragment {
                                     .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(getContext(), "successfully changed" + position, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "successfully changed", Toast.LENGTH_SHORT).show();
                                             //viewHolder.messageTextView.setText(editText.getText().toString());
                                             Map<String, Object> updateMap = new HashMap<String, Object>();
                                             updateMap.put("text", editText.getText().toString());
                                             updateMap.put("title", editTitle.getText().toString());
-                                            mFirebaseAdapter.getRef(position).updateChildren(updateMap);
+                                            // 原先版本 沒有過濾朋友機制
+                                            //mFirebaseAdapter.getRef(position).updateChildren(updateMap);
+                                            RefList.get(position).updateChildren(updateMap);
                                         }
                                     })
                                     .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -170,18 +267,27 @@ public class Post_fragment extends Fragment {
                                     .setNegativeButton("Remove", new DialogInterface.OnClickListener(){
                                         @Override
                                         public void onClick(DialogInterface arg0, int arg1) {
-                                            mFirebaseAdapter.getRef(position).removeValue();
+                                            RefList.get(position).removeValue();
+
+                                            adapter.notifyItemRemoved(position);
+                                            adapter.notifyDataSetChanged();
+                                            Log.e("number",String.valueOf(adapter.getItemCount()));
+                                            adapter.notifyItemRangeChanged(position,adapter.getItemCount());
+
+                                            // 原先版本 沒有過濾朋友機制
+                                            //mFirebaseAdapter.getRef(position).removeValue();
+                                            /*
                                             mFirebaseAdapter.notifyItemRemoved(position);
                                             mFirebaseAdapter.notifyDataSetChanged();
-                                            mFirebaseAdapter.notifyItemRangeChanged(position,mFirebaseAdapter.getItemCount());
+                                            mFirebaseAdapter.notifyItemRangeChanged(position,mFirebaseAdapter.getItemCount());*/
                                             Toast.makeText(getContext(), "successfully removed!", Toast.LENGTH_SHORT).show();
                                         }
                                     }).show();
-
                         }
                     }
                 }));
-
+        // 原先版本 沒有過濾朋友機制
+/*
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -198,11 +304,11 @@ public class Post_fragment extends Fragment {
                     mLinearLayoutManager.scrollToPosition(positionStart);
                 }
             }
-        });
-        //mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        mMessageRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mMessageRecyclerView.setAdapter(mFirebaseAdapter);
+        });*/
+        mMessageRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        // 原先版本 沒有過濾朋友機制
+        //mMessageRecyclerView.setAdapter(mFirebaseAdapter);
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
