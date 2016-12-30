@@ -38,10 +38,10 @@
             android:id="@+id/m_viewpager"
             android:layout_below="@id/m_tab"
             android:layout_width="wrap_content"
-            android:layout_height="420dp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
-
+    <!--
     <LinearLayout
         android:id="@+id/mainbar"
         android:orientation="horizontal"
@@ -75,6 +75,7 @@
             android:src="@drawable/talk_button_active"
             android:layout_weight="1"/>
     </LinearLayout>
+    -->
 
     <!--
     <android.support.v7.widget.Toolbar
@@ -104,8 +105,9 @@
             android:layout_height="wrap_content"
             android:text="My Post"
             android:textSize="20dp"
-            android:textColor="#29e5b6"
+            android:textColor="#ffffffff"
             android:textStyle="normal|bold"
+            android:fontFamily="sans-serif-condensed"
             android:layout_gravity="center" />
     </android.support.v7.widget.Toolbar>
 

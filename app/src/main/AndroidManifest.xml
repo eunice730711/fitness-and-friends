@@ -80,7 +80,8 @@
             android:name=".Run"
             android:label="" />
         <activity android:name=".findNearby" />
-        <activity android:name=".Myposts" />
+        <activity android:name=".Myposts"
+            android:label=""/>
         <activity android:name=".mypost_fragment" />
         <activity android:name=".myjoin_fragment"></activity>
     </application>

@@ -169,7 +169,7 @@ public class Myposts extends AppCompatActivity implements
 //                startNextPage();
 //            }
 //        });
-
+/*
         ImageButton ihome = (ImageButton) findViewById(R.id.ihome);
         ihome.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
@@ -192,7 +192,7 @@ public class Myposts extends AppCompatActivity implements
             }
         });
 
-
+*/
     }
 
 /*
@@ -266,7 +266,7 @@ public class Myposts extends AppCompatActivity implements
     public void onDestroy() {
         super.onDestroy();
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -308,7 +308,7 @@ public class Myposts extends AppCompatActivity implements
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {

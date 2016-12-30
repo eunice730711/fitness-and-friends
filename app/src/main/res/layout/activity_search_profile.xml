@@ -18,6 +18,13 @@
     <!--android:layout_marginTop="81dp"-->
     <!--android:layout_alignParentTop="true"-->
     <!--android:layout_centerHorizontal="true" />-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/background_friend_profile"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/imageView2" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageView"

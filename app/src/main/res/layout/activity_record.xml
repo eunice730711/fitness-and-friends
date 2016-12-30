@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="Record"
             android:textSize="20dp"
-            android:textColor="#F6EB88"
+            android:textColor="#ffffffff"
             android:textStyle="normal|bold"
             android:fontFamily="sans-serif-condensed"
             android:layout_gravity="center" />
