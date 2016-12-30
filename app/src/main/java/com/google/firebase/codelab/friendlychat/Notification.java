@@ -66,8 +66,8 @@ public class Notification extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    //int index = txt_request.getText().toString().indexOf("送")-1;
-                    //requester = txt_request.getText().subSequence(0,index).toString();
+                    int index = txt_request.getText().toString().indexOf("送")-1;
+                   requester = txt_request.getText().subSequence(0,index).toString();
                     HashMap<String, String> friend = new HashMap<String, String>();
 
                     friend.put("friendid",userProfile.getUserid());

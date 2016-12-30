@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/ihome"
-            android:background="#99999999"
+            android:background="#00000000"
             android:src="@drawable/home_button_active"
             android:layout_weight="1"/>
 
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/ischedule"
-            android:background="#99999999"
+            android:background="#00000000"
             android:src="@drawable/schedule_button_non_active"
             android:layout_weight="1"/>
 
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/italk"
-            android:background="#99999999"
+            android:background="#00000000"
             android:src="@drawable/talk_button_non_active"
             android:layout_weight="1"/>
 </LinearLayout>
@@ -90,12 +90,14 @@
     <Button
         android:text="Start"
         android:textColor="#737373"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
         android:id="@+id/btn_start"
         android:background="@drawable/button_style"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
         android:layout_centerHorizontal="true" />
 
     <!--<Button-->
@@ -112,20 +114,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_homeditatnce"
-        android:textSize="100dp"
+        android:textSize="75dp"
+        android:fontFamily="sans-serif"
         android:layout_above="@+id/btn_start"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp" />
+        android:layout_marginBottom="200dp"/>
     <TextView
         android:text="Km"
-
+        android:fontFamily="sans-serif-condensed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/km"
-        android:textSize="35dp"
+        android:textSize="30dp"
         android:layout_toRightOf="@+id/txt_homeditatnce"
         android:layout_alignBottom="@+id/txt_homeditatnce"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"/>
 
     <Button
         android:text="Dangeous_deleteUser"

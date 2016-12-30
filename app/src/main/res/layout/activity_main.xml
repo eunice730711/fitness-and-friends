@@ -105,7 +105,8 @@
             android:text="Talk"
             android:textSize="20dp"
             android:textColor="#29e5b6"
-            android:textStyle="normal|bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
             android:layout_gravity="center" />
     </android.support.v7.widget.Toolbar>
 

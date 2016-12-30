@@ -37,6 +37,7 @@
         android:text="Send"
         android:textColor="#737373"
         android:textSize="30dp"
+        android:fontFamily="sans-serif-condensed"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

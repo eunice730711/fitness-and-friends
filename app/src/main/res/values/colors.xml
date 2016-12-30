@@ -13,7 +13,7 @@
     <color name="colorlightRed">#ef1760</color>
     <color name="messagetitlecolor">#2b323d</color>
 
-    <color name="swipeoption_green">#36CF8E</color>
+    <color name="swipeoption_green">#36cf8e</color>
     <color name="swipeoption_blue">#3693D0</color>
     <color name="swipeoption_purple">#ff1744</color>
 </resources>

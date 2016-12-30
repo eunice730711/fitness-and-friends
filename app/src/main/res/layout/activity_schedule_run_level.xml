@@ -25,7 +25,8 @@
         android:text="Choose Level"
         android:textSize="20dp"
         android:textColor="#ffffffff"
-        android:textStyle="normal"
+        android:textStyle="normal|bold"
+        android:fontFamily="sans-serif-condensed"
         android:layout_gravity="center" />
     </android.support.v7.widget.Toolbar>
 

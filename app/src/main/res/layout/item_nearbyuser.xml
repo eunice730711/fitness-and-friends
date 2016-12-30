@@ -46,9 +46,10 @@
         android:textSize="18dp"
         android:textColor="@color/gray"
         android:id="@+id/txt_dist"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="300dp" />
-        <!-- 需要換成 向右靠齊-->
+        android:layout_marginRight="100dp" />
+        <!-- 需要換成 向右靠齊......ok, by Andersen-->
 
     <View
         android:background="#DEDEDE"
