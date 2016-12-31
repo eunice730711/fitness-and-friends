@@ -97,7 +97,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="61e105cf2ca3660332a02d8020d8790974266c76">
+        sha1="f8604d239a058100a5319f535e2bfdd3879cf51c">
         <dex dex="D:\app\fitness-and-friends\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_c5041ce2e9d8babcd43f226abc1e27a14ec759ec.jar" />
     </item>
     <item
@@ -277,7 +277,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="e8ec1251d2e64ec4edfbcec7de1f3583c4583c2f">
+        sha1="5dcae2e4a8037341d80c69ac91cbb3badb88d261">
         <dex dex="D:\app\fitness-and-friends\app\build\intermediates\pre-dexed\debug\instant-run_251fb7f51730405d8f2780e9a148059ec6f491bd.jar" />
     </item>
     <item
