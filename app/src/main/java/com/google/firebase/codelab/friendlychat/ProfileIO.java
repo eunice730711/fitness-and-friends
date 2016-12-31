@@ -49,7 +49,9 @@ public class ProfileIO {
                     + userdata.getSelfintroduction() + "\n"
                     + userdata.getUseremail() + "\n"
                     + userdata.getUserphoto() + "\n"
-                    + userdata.getUserref() + "\n";
+                    + userdata.getUserref() + "\n"
+                    + userdata.getUserheight() + "\n"
+                    + userdata.getUserweight() + "\n";
 
             osw.write(output.getBytes());
             osw.flush();
@@ -98,8 +100,10 @@ public class ProfileIO {
             String email = reader.readLine();
             String photo = reader.readLine();
             String ref = reader.readLine();
+            String height = reader.readLine();
+            String weight = reader.readLine();
 
-            UserProfile userProfile = new UserProfile(name,id,instanceid,city,birthday,gender,intro,email,photo,ref);
+            UserProfile userProfile = new UserProfile(name,id,instanceid,city,birthday,gender,intro,email,photo,ref, height, weight);
             userProfile.updateDistance(dist);
 
             u = userProfile;

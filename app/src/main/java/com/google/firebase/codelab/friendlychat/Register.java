@@ -30,7 +30,7 @@ public class Register extends AppCompatActivity {
 
     public static final String ANONYMOUS = "anonymous";
     private Button btn_send, btn_setProfile;
-    private EditText txt_userid, txt_username, txt_searchId, txt_usercity, txt_userbirthday, txt_selfintroduction;
+    private EditText txt_userid, txt_username, txt_searchId, txt_usercity, txt_userbirthday, txt_selfintroduction, txt_userheight, txt_userweight;
     private TextView txt_usergender;
     private String personEmail, personId, PhotoUrl, personName;
     private RadioGroup usergender;
@@ -103,13 +103,16 @@ public class Register extends AppCompatActivity {
                 String usercity = txt_usercity.getText().toString();
                 String userbirthday = txt_userbirthday.getText().toString();
                 String usergender = txt_usergender.getText().toString();
+                String userheight = txt_userheight.getText().toString();
+                String userweight = txt_userweight.getText().toString();
                 String selfintroduction = txt_selfintroduction.getText().toString();
                 String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
 
                 Log.i("DEBUG ", "2");
 
                 // Throw data to UserProfile
-                final UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl, "");
+                final UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl, "", userheight, userweight);
 
                 // Upload data on firebase
                 mDatabase.child("UserProfile").push().setValue(test);
@@ -167,6 +170,8 @@ public class Register extends AppCompatActivity {
         txt_usercity = (EditText) findViewById(R.id.txt_usercity);
         txt_userbirthday = (EditText) findViewById(R.id.txt_userbirthday);
         txt_selfintroduction = (EditText) findViewById(R.id.txt_selfintroduction);
+        txt_userheight = (EditText) findViewById(R.id.txt_userheight);
+        txt_userweight = (EditText) findViewById(R.id.txt_userweight);
         usergender = (RadioGroup) findViewById(R.id.usergender);
         txt_usergender = (TextView) findViewById(R.id.showgender);
         checkedRadioButton = (RadioButton)usergender.findViewById(usergender.getCheckedRadioButtonId());
