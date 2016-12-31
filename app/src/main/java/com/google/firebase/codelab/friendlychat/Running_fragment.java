@@ -53,7 +53,7 @@ public class Running_fragment extends Fragment{
                 new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!mCallback.isStart()) {
+                        if(!mCallback.getStart()) {
                             mCallback.setStart(true);
                             start_buttuon.setText("Finish");
                         }
@@ -101,7 +101,8 @@ public class Running_fragment extends Fragment{
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (mCallback!=null && dist_text!=null) {
-            dist_text.setText(String.valueOf(mCallback.getTotalDistance()));
+            String d = String.format("%.2f",mCallback.getTotalDistance()/1000);
+            dist_text.setText(d);
         }
     }
 
@@ -126,7 +127,8 @@ public class Running_fragment extends Fragment{
                     String s = String.format("%02d:%02d:%02d.%02d",hour,min,sec,msec/10);
                     time_text.setText(String.valueOf(s));
                     if(msec <=100) {
-                        dist_text.setText(String.valueOf(mCallback.getTotalDistance()));
+                        String d = String.format("%.2f",mCallback.getTotalDistance()/1000);
+                        dist_text.setText(d);
                     }
                     break;
                 }
@@ -142,7 +144,7 @@ public class Running_fragment extends Fragment{
             // TODO Auto-generated method stub
             android.os.Message message = new android.os.Message();
 
-            if (mCallback.isStart()){
+            if (mCallback.getStart()){
                 //如果startflag==true則每秒tsec+1
                 msec+=10;
 
@@ -183,7 +185,7 @@ public class Running_fragment extends Fragment{
                     Log.d("userid",mCallback.getUserProfile().getUserid());
 
                     // 更新總距離
-                    dataSnapshot.getRef().child("totaldistance").setValue(mCallback.getUserProfile().updateDistance(mCallback.getTotalDistance()));
+                    dataSnapshot.getRef().child("totaldistance").setValue(mCallback.getUserProfile().updateDistance(mCallback.getTotalDistance()/1000));
                 }
             }
             @Override
@@ -202,7 +204,7 @@ public class Running_fragment extends Fragment{
                 Calendar calendar = Calendar.getInstance();
                 String now = DatetoString(calendar.getTime(),0);
                 map.put("date",now);
-                map.put("distance", String.valueOf(mCallback.getTotalDistance()));
+                map.put("distance", String.valueOf(mCallback.getTotalDistance()/1000));
                 // 每次跑步紀錄的時間以分鐘為單位
                 map.put("time", String.valueOf(hour*60+min+sec/60));
                 snapshot.getRef().push().updateChildren(map);

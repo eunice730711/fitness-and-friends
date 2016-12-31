@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.Manifest;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -91,6 +92,7 @@ public class Map_fragment extends Fragment implements GoogleApiClient.Connection
             public void onMapReady(GoogleMap googleMap) {
                 map = googleMap;
 
+                map.getUiSettings().setScrollGesturesEnabled(false);  // 禁止拖動 MAP
                 map.getUiSettings().setZoomControlsEnabled(true);  // 右下角的放大縮小功能
                 map.getUiSettings().setCompassEnabled(true);       // 左上角的指南針，要兩指旋轉才會出現
                 map.getUiSettings().setMapToolbarEnabled(true);    // 右下角的導覽及開啟 Google Map功能
@@ -106,30 +108,9 @@ public class Map_fragment extends Fragment implements GoogleApiClient.Connection
     public void onResume() {
         super.onResume();
         mapView.onResume();
-
-        manager = (LocationManager) (getActivity().getSystemService(Context.LOCATION_SERVICE));
-
-        // 如果沒開GPS會跳到設定頁面
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                    .setTitle("Location is disabled")
-                    .setMessage("Please enable your location")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 102);
-                            getActivity().finish();
-                        }
-                    });
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-        }
-        else {
+        if(!mGoogleApiClient.isConnected()){
             mGoogleApiClient.connect();
         }
-
     }
 
 
@@ -137,10 +118,6 @@ public class Map_fragment extends Fragment implements GoogleApiClient.Connection
     public void onPause() {
         super.onPause();
         mapView.onPause();
-
-        if (mGoogleApiClient.isConnected()) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
 
     }
 
@@ -178,44 +155,74 @@ public class Map_fragment extends Fragment implements GoogleApiClient.Connection
             mLatLng = lastLatLng;
         }
 
-        if(mCallback.isStart()){
+        if(mCallback.getStart()){
             //畫線 + 算距離
             totalDistance += getDistance();
             mCallback.setTotalDistance(totalDistance);
             dd.setText(String.valueOf(mCallback.getTotalDistance()));
 
             drawLine();
-        }
-
-        //標記
-        if (currentMarker == null) {
-            currentMarker = map.addMarker(new MarkerOptions().position(mLatLng));
-        }
-        else {
+            //標記
             currentMarker.setPosition(latLng);
+            //移動地圖
+            map.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
+            map.animateCamera(CameraUpdateFactory.zoomTo(16));
         }
-
-        map.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(16));
+        if(mCallback.getFirstLocate()){
+            map.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
+            map.animateCamera(CameraUpdateFactory.zoomTo(16));
+            currentMarker = map.addMarker(new MarkerOptions().position(mLatLng));
+            mCallback.setFirstLocate(false);
+        }
 
     }
 
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        LocationRequest mLocationRequest = createLocationRequest();
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
-        if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        int permission = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if(permission != PackageManager.PERMISSION_GRANTED){
             //如果未授權，則請求授權
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION_PERMISSION);
         }
+        else{
+            manager = (LocationManager) (getActivity().getSystemService(Context.LOCATION_SERVICE));
+
+            // 如果沒開GPS會跳到設定頁面
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                        .setTitle("Location is disabled")
+                        .setMessage("Please enable your location")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 102);
+                                getActivity().finish();
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }
+            else {
+                mGoogleApiClient.connect();
+                LocationRequest mLocationRequest = createLocationRequest();
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            }
+            //mGoogleApiClient.connect();
+        }
+
 
     }
 
+    //google 連線中斷
     @Override
     public void onConnectionSuspended(int i) {
-
+        mGoogleApiClient.connect();
     }
 
 
@@ -240,6 +247,7 @@ public class Map_fragment extends Fragment implements GoogleApiClient.Connection
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+
     }
 
     //android 6.0 以上的授權請求
@@ -255,6 +263,7 @@ public class Map_fragment extends Fragment implements GoogleApiClient.Connection
                     mGoogleApiClient.connect();
 
                 } else {
+                    mGoogleApiClient.disconnect();
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
