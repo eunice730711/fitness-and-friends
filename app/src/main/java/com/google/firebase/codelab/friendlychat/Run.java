@@ -134,7 +134,7 @@ public class Run extends AppCompatActivity implements DataCommunication{
         mDatabase = FirebaseDatabase.getInstance().getReference();
         totalDistance = 0;
         start = false;
-        firstLocate = true;
+        firstLocate = false;
 
         //今日目標提醒
         android.app.AlertDialog alertDialog = GoalAlertDialog();

@@ -163,17 +163,22 @@ public class Map_fragment extends Fragment implements GoogleApiClient.Connection
 
             drawLine();
             //標記
-            currentMarker.setPosition(latLng);
+
             //移動地圖
             map.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
             map.animateCamera(CameraUpdateFactory.zoomTo(16));
         }
-        if(mCallback.getFirstLocate()){
-            map.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
-            map.animateCamera(CameraUpdateFactory.zoomTo(16));
+        //移動地圖
+        map.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
+        map.animateCamera(CameraUpdateFactory.zoomTo(16));
+        if(currentMarker == null){
             currentMarker = map.addMarker(new MarkerOptions().position(mLatLng));
-            mCallback.setFirstLocate(false);
         }
+        else{
+            currentMarker.setPosition(latLng);
+        }
+
+
 
     }
 
