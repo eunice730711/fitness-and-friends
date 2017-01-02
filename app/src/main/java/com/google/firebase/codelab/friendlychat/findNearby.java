@@ -117,8 +117,7 @@ public class findNearby extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_nearby);
         //  給予一個固定GPS , 以免虛擬機找不到GPS
-        lat= 24.7859195;
-        lng=120.9945463;
+
         init();
 
         getGPS();

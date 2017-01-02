@@ -143,23 +143,18 @@
         android:background="@color/transparent"
         android:id="@+id/btn_record" />
 
-    <Button
-        android:text=""
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:src="@drawable/home_join"
         android:id="@+id/btn_todayJoin"
-        android:layout_toEndOf="@+id/btn_record"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="15dp"
+        android:paddingRight="10dp"
         android:background="#00000000"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/home_join"
-        android:layout_alignParentEnd="true"
-        android:paddingRight="10dp"
-        android:paddingTop="15dp"
-        android:id="@+id/imageView6" />
+
 
 
 </RelativeLayout>

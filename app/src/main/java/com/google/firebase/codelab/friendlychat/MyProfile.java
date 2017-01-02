@@ -55,35 +55,50 @@ public class MyProfile extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        //User information
+        txt_usercity.setText(userProfile.getUsercity());
+        txt_userbirthday.setText(userProfile.getUserbirthday());
+        txt_usergender.setText(userProfile.getUsergender());
+        txt_userid.setText(userProfile.getUserid());
+        txt_selfintroduction.setText(userProfile.getSelfintroduction());
+        txt_usergmail.setText(userProfile.getUseremail());
+        txt_googlename.setText(userProfile.getUsername());
+        txt_userheight.setText(userProfile.getUserheight());
+        txt_userweight.setText(userProfile.getUserweight());
+        //imageView
+        Glide.with(MyProfile.this)
+                .load(userProfile.getUserphoto())
+                .into(userImageView);
+
 
         // get the userProfile by instanceId
-        mDatabase.child("UserProfile").orderByChild("userid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                    //User information
-                    txt_usercity.setText(userProfile.getUsercity());
-                    txt_userbirthday.setText(userProfile.getUserbirthday());
-                    txt_usergender.setText(userProfile.getUsergender());
-                    txt_userid.setText(userProfile.getUserid());
-                    txt_selfintroduction.setText(userProfile.getSelfintroduction());
-                    txt_usergmail.setText(userProfile.getUseremail());
-                    txt_googlename.setText(userProfile.getUsername());
-                    txt_userheight.setText(userProfile.getUserheight());
-                    txt_userweight.setText(userProfile.getUserweight());
-                    //imageView
-                    Glide.with(MyProfile.this)
-                            .load(userProfile.getUserphoto())
-                            .into(userImageView);
-                    Log.d("userid", userProfile.getUserid());
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+//        mDatabase.child("UserProfile").orderByChild("userid").equalTo(userProfile.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+//                    //User information
+//                    txt_usercity.setText(userProfile.getUsercity());
+//                    txt_userbirthday.setText(userProfile.getUserbirthday());
+//                    txt_usergender.setText(userProfile.getUsergender());
+//                    txt_userid.setText(userProfile.getUserid());
+//                    txt_selfintroduction.setText(userProfile.getSelfintroduction());
+//                    txt_usergmail.setText(userProfile.getUseremail());
+//                    txt_googlename.setText(userProfile.getUsername());
+//                    txt_userheight.setText(userProfile.getUserheight());
+//                    txt_userweight.setText(userProfile.getUserweight());
+//                    //imageView
+//                    Glide.with(MyProfile.this)
+//                            .load(userProfile.getUserphoto())
+//                            .into(userImageView);
+//                    Log.d("userid", userProfile.getUserid());
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
 
         Button post = (Button) findViewById(R.id.post_button);
         post.setOnClickListener(new View.OnClickListener() {

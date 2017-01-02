@@ -164,7 +164,7 @@ public class Home extends AppCompatActivity {
         sendNotification.subscribeFriend(userProfile.getUserid());
 
         //search今天是否有join行程 有則顯示button 沒有則隱藏
-        final Button btn_todayJoin = (Button) findViewById(R.id.btn_todayJoin);
+        final ImageButton btn_todayJoin = (ImageButton) findViewById(R.id.btn_todayJoin);
         btn_todayJoin.setVisibility(View.INVISIBLE);
         is_todayJoin = false;
         final ValueEventListener Listener = new ValueEventListener() {
@@ -217,7 +217,7 @@ public class Home extends AppCompatActivity {
                 showDate.setText(Join.getJdate());
                 showTime.setText(Join.getJtime());
                 showPos.setText(Join.getJpos());
-                showtype.setText(Join.getText());
+                showtype.setText(Join.getTitle());
                 new AlertDialog.Builder(Home.this)
                         .setTitle("Today Join")
                         .setView(v)
@@ -296,6 +296,10 @@ public class Home extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 4:
+                        ScheduleIO schedule = new ScheduleIO(Home.this);
+                        schedule.DeleteFile();
+                        ProfileIO profile = new ProfileIO(Home.this);
+                        profile.DeleteFile();
                         mFirebaseAuth.signOut();
                         startActivity(new Intent(Home.this, SignInActivity.class));
                         break;

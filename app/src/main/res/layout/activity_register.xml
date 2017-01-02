@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0dp"
-    android:background="#202128"
+    android:background="#ffffffff"
     tools:context="com.google.firebase.codelab.friendlychat.Register">
 
     <!-- Fill in Userprofile -->
@@ -255,7 +255,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#ffffffff"
-        android:padding="60dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:paddingTop="15dp"
         android:layout_below="@+id/my_toolbar"
         android:layout_alignParentEnd="true"
         >
@@ -408,21 +410,22 @@
                 <!--android:textColor="#ffffff"-->
                 <!--android:textSize="20dp" />-->
 
-            <Button
-                android:text="Set up"
-                android:textColor="#737373"
-                android:textSize="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/btn_setProfile"
-                android:background="@drawable/button_style_register"
-                android:layout_marginBottom="20dp" />
+
 
         </RelativeLayout>
-    </ScrollView>
 
+    </ScrollView>
+    <Button
+        android:text="Set up"
+        android:textColor="#737373"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_setProfile"
+        android:background="@drawable/button_style_register"
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>
 
