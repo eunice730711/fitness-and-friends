@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -48,7 +49,7 @@ public class Join_Detail extends AppCompatActivity {
     private Button Send;
     private CheckBox Will_Go;
     private UserProfile userProfile;
-    private DatabaseReference FirebaseDatabaseRef;
+    private DatabaseReference user_profile_ref;
     private DatabaseReference mem_ref ;
     private DatabaseReference JoinRef;
     private RecyclerView mRecyclerView;
@@ -113,6 +114,7 @@ public class Join_Detail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_detail);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         Intent intent = this.getIntent();
         join_ref = intent.getStringExtra("ref");
         // 從file取 使用者資料
@@ -136,7 +138,7 @@ public class Join_Detail extends AppCompatActivity {
 
 
         JoinRef = FirebaseDatabase.getInstance().getReferenceFromUrl(join_ref);
-        FirebaseDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        user_profile_ref = FirebaseDatabase.getInstance().getReferenceFromUrl(userProfile.getUserref());
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -212,6 +214,7 @@ public class Join_Detail extends AppCompatActivity {
                                 ,userProfile.getUsername(),userProfile.getUserphoto());
                         JoinRef.child("Member").push().setValue(New_member);
                         join.setJoin_num(join.getJoin_num()+1);
+                        user_profile_ref.child("Join_list").child(JoinRef.getKey()).setValue("1");
                         //資料庫有新增或刪減需通知adapter!!!!!!!不然會crash
                         mFirebaseAdapter.notifyItemInserted(user_position);
                         mFirebaseAdapter.notifyDataSetChanged();
@@ -222,6 +225,7 @@ public class Join_Detail extends AppCompatActivity {
                 {
                     mem_ref.removeValue();
                     join.setJoin_num(join.getJoin_num()-1);
+                    user_profile_ref.child("Join_list").child(JoinRef.getKey()).removeValue();
                     mFirebaseAdapter.notifyItemRemoved(user_position);
                     mFirebaseAdapter.notifyDataSetChanged();
                     mFirebaseAdapter.notifyItemRangeChanged(user_position,mFirebaseAdapter.getItemCount());

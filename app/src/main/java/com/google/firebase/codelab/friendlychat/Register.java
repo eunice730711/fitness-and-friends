@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +31,7 @@ public class Register extends AppCompatActivity {
 
     public static final String ANONYMOUS = "anonymous";
     private Button btn_send, btn_setProfile;
-    private EditText txt_userid, txt_username, txt_searchId, txt_usercity, txt_userbirthday, txt_selfintroduction;
+    private EditText txt_userid, txt_username, txt_searchId, txt_usercity, txt_userbirthday, txt_selfintroduction, txt_userheight, txt_userweight;
     private TextView txt_usergender;
     private String personEmail, personId, PhotoUrl, personName;
     private RadioGroup usergender;
@@ -38,6 +39,7 @@ public class Register extends AppCompatActivity {
     public UserProfile userProfile;
     private String refreshedToken;
     private ProfileIO profileIO;
+    private String userid;
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
@@ -98,61 +100,103 @@ public class Register extends AppCompatActivity {
         btn_setProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userid = txt_userid.getText().toString();
-                //String username= txt_username.getText().toString();
-                String usercity = txt_usercity.getText().toString();
-                String userbirthday = txt_userbirthday.getText().toString();
-                String usergender = txt_usergender.getText().toString();
-                String selfintroduction = txt_selfintroduction.getText().toString();
-                String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
-                Log.i("DEBUG ", "2");
+                userid = txt_userid.getText().toString();
 
-                // Throw data to UserProfile
-                final UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl, "");
+                // CHECK USER ID UNIQUE
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("UserProfile").orderByChild("userid").equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            Toast.makeText(
+                                    Register.this,
+                                    "This ID is being used, please enter another one, thank you :)",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        else if(userid.equals("")){
+                            Toast.makeText(
+                                    Register.this,
+                                    "Please input Nickname/ID",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        else {
 
-                // Upload data on firebase
-                mDatabase.child("UserProfile").push().setValue(test);
-
-                mDatabase.child("UserProfile")
-                        .orderByChild("userid")
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-
-                            @Override
-                            public void onDataChange(DataSnapshot snapshot) {
-                                String ref = "";
-
-                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                    Object o  = dataSnapshot.getValue(Object.class);
-                                    String userid = ((HashMap<String,String>)o).get("userid");
-                                    if( userid.equals(userid)) {
-                                        ref = dataSnapshot.getRef().toString();
-                                        break;
-                                    }
-                                }
-                                //Log.e(TAG, ref);
-
-                                // Write file in local
-                                test.setUserref(ref);
-                                profileIO = new ProfileIO(Register.this);
-                                profileIO.WriteFile(test);
-                                // Read user profile from file!
-                                // UserProfile read = new UserProfile();
-                                // read = profileIO.ReadFile();
+                            //String username= txt_username.getText().toString();
+                            String usercity = txt_usercity.getText().toString();
+                            String userbirthday = txt_userbirthday.getText().toString();
+                            String usergender = txt_usergender.getText().toString();
+                            String userheight = txt_userheight.getText().toString();
+                            String userweight = txt_userweight.getText().toString();
+                            String selfintroduction = txt_selfintroduction.getText().toString();
+                            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
 
-                                // Move on to the next page(Home)
-                                Intent intent2 = new Intent();
-                                intent2.setClass(Register.this, Home.class);
-                                startActivity(intent2);
-                                Register.this.finish();
+                            Log.i("DEBUG ", "2");
 
-                            }
+                            // Throw data to UserProfile
+                            final UserProfile test = new UserProfile(personName, userid,refreshedToken, usercity, userbirthday, usergender, selfintroduction, personEmail, PhotoUrl, "", userheight, userweight);
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {}
-                        });
+                            // Upload data on firebase
+                            mDatabase.child("UserProfile").push().setValue(test);
+
+                            mDatabase.child("UserProfile")
+                                    .orderByChild("userid")
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot snapshot) {
+                                            String ref = "";
+
+                                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                Object o  = dataSnapshot.getValue(Object.class);
+                                                String userid = ((HashMap<String,String>)o).get("userid");
+                                                if( userid.equals(userid)) {
+                                                    ref = dataSnapshot.getRef().toString();
+                                                    break;
+                                                }
+                                            }
+                                            //Log.e(TAG, ref);
+
+                                            // Write file in local
+                                            test.setUserref(ref);
+                                            profileIO = new ProfileIO(Register.this);
+                                            profileIO.WriteFile(test);
+                                            // Read user profile from file!
+                                            // UserProfile read = new UserProfile();
+                                            // read = profileIO.ReadFile();
+
+
+                                            // Move on to the next page(Home)
+                                            Intent intent2 = new Intent();
+                                            intent2.setClass(Register.this, Home.class);
+                                            startActivity(intent2);
+                                            Register.this.finish();
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {}
+                                    });
+
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+//                Toast.makeText(
+//                        Register.this,
+//                        String.valueOf(exist)+ " OUT",
+//                        Toast.LENGTH_LONG).show();
+
+
+
             }
+
+
         });
 
     }
@@ -167,6 +211,8 @@ public class Register extends AppCompatActivity {
         txt_usercity = (EditText) findViewById(R.id.txt_usercity);
         txt_userbirthday = (EditText) findViewById(R.id.txt_userbirthday);
         txt_selfintroduction = (EditText) findViewById(R.id.txt_selfintroduction);
+        txt_userheight = (EditText) findViewById(R.id.txt_userheight);
+        txt_userweight = (EditText) findViewById(R.id.txt_userweight);
         usergender = (RadioGroup) findViewById(R.id.usergender);
         txt_usergender = (TextView) findViewById(R.id.showgender);
         checkedRadioButton = (RadioButton)usergender.findViewById(usergender.getCheckedRadioButtonId());

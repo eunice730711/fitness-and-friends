@@ -298,23 +298,10 @@
 
 
                 <EditText
-                    android:id="@+id/txt_selfintroduction"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_usercity"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:hint="Brief introduction"
-                    android:inputType="text"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
-
-                <EditText
                     android:id="@+id/txt_userbirthday"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_selfintroduction"
+                    android:layout_below="@+id/txt_usercity"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="25dp"
                     android:gravity="center"
@@ -323,11 +310,50 @@
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
+                <EditText
+                    android:id="@+id/txt_userheight"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_userbirthday"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:hint="Height(optional)"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_userweight"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_userheight"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:hint="Weight(optional)"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_selfintroduction"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_userweight"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:hint="Brief Introduction"
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/showgender"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_userbirthday"
+                    android:layout_below="@+id/txt_selfintroduction"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="25dp"
                     android:gravity="center"
@@ -350,20 +376,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:paddingLeft="100px"
+                android:paddingLeft="90px"
                 android:id="@+id/usergender"
-                android:layout_below="@+id/txt_userbirthday" >
+                android:layout_below="@+id/txt_selfintroduction" >
 
                 <RadioButton
 
-                android:id="@+id/yes_radio_button"
+                android:id="@+id/male_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="M"  />
 
+                    <RadioButton
+                        android:id="@+id/optional_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="O" />
+
 
                 <RadioButton
-                android:id="@+id/no_radio_button"
+                android:id="@+id/female_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F" />

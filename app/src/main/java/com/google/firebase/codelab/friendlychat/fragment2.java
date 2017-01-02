@@ -61,7 +61,11 @@ public class fragment2 extends Fragment {
         date_pick = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                J_date.setText(year + "/" +monthOfYear + "/" + dayOfMonth);
+                J_date.setText(year + "/");
+                if((monthOfYear+1) < 10) J_date.append("0"+(monthOfYear+1)+"/");
+                else J_date.append((monthOfYear+1)+"/");
+                if(dayOfMonth < 10) J_date.append("0"+dayOfMonth);
+                else J_date.append(dayOfMonth+"");
             }
         },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
@@ -69,7 +73,10 @@ public class fragment2 extends Fragment {
         time_pick = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                J_time.setText(hourOfDay + ":" + minute);
+                if(hourOfDay < 10) J_time.setText("0"+hourOfDay+":");
+                else J_time.setText(hourOfDay+":");
+                if(minute < 10) J_time.append("0"+minute);
+                else J_time.append(minute+"");
                 // J_time.setText((hourOfDay > 12 ? hourOfDay- 12 :hourOfDay) + ":" +minute + " "+(hourOfDay > 12 ? "PM": "AM"));
             }
         },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),

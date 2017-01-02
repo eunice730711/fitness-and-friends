@@ -2,8 +2,10 @@ package com.google.firebase.codelab.friendlychat;
 
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,9 +82,13 @@ public class Loading extends AppCompatActivity {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         // User do exist on firebase --> get user information on firebase
                         UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                        userProfile.setUserref(dataSnapshot.getRef().toString());
+
+                        Log.e("ref", dataSnapshot.getRef().toString());
+
                         // write user information to file
-                        //profileIO = new ProfileIO(Loading.this);
-                        //profileIO.WriteFile(userProfile);
+                        profileIO = new ProfileIO(Loading.this);
+                        profileIO.WriteFile(userProfile);
                         Intent intent = new Intent();
                         intent.setClass(Loading.this, Home.class);
                         startActivity(intent);

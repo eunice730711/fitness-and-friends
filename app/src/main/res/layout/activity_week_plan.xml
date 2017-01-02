@@ -21,7 +21,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
-        <TextView
+        <com.google.firebase.codelab.friendlychat.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"

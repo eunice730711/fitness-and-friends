@@ -28,7 +28,7 @@ public class MyProfile extends AppCompatActivity {
     public static final String PROFILE_CHILD = "UserProfile";
     private static final int RC_SIGN_IN = 9001;
     private UserProfile userProfile;
-    private TextView txt_usergmail, txt_googlename, txt_usercity, txt_userbirthday, txt_userid, txt_usergender, txt_selfintroduction;
+    private TextView txt_usergmail, txt_googlename, txt_usercity, txt_userbirthday, txt_userid, txt_usergender, txt_selfintroduction, txt_userheight, txt_userweight;
     private CircleImageView userImageView;
 
 //
@@ -49,6 +49,8 @@ public class MyProfile extends AppCompatActivity {
         txt_selfintroduction = (TextView) findViewById(R.id.txt_selfintroduction);
         txt_usergmail = (TextView) findViewById(R.id.txt_usergmail);
         txt_googlename = (TextView) findViewById(R.id.txt_googlename);
+        txt_userheight = (TextView) findViewById(R.id.txt_userheight);
+        txt_userweight = (TextView) findViewById(R.id.txt_userweight);
         userImageView = (CircleImageView) findViewById(R.id.userImageView);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -69,6 +71,8 @@ public class MyProfile extends AppCompatActivity {
                     txt_selfintroduction.setText(userProfile.getSelfintroduction());
                     txt_usergmail.setText(userProfile.getUseremail());
                     txt_googlename.setText(userProfile.getUsername());
+                    txt_userheight.setText(userProfile.getUserheight());
+                    txt_userweight.setText(userProfile.getUserweight());
                     //imageView
                     Glide.with(MyProfile.this)
                             .load(userProfile.getUserphoto())

@@ -1,18 +1,5 @@
 package com.google.firebase.codelab.friendlychat;
 
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.concurrent.CountDownLatch;
-
-import static android.R.attr.id;
-import static android.R.attr.userVisible;
-
 /**
  * Created by user on 2016/11/18.
  */
@@ -29,11 +16,13 @@ public class UserProfile {
     public String useremail;
     public String userphoto;
     public String userref;
+    public String userheight;
+    public String userweight;
 
 
     public UserProfile(){}
 
-    public UserProfile(String username, String userid, String instanceid, String usercity, String userbirthday, String usergender, String selfintroduction, String useremail, String photo, String userref){
+    public UserProfile(String username, String userid, String instanceid, String usercity, String userbirthday, String usergender, String selfintroduction, String useremail, String photo, String userref, String userheight, String userweight){
         this.username = username;
         this.userid = userid;
         this.instanceid = instanceid;
@@ -45,6 +34,8 @@ public class UserProfile {
         this.useremail = useremail;
         this.userphoto = photo;
         this.userref = userref;
+        this.userheight = userheight;
+        this.userweight = userweight;
     }
 
     public String getUsername(){return username;}
@@ -78,6 +69,10 @@ public class UserProfile {
     public String getUserphoto(){return userphoto;}
 
     public String getUserref(){return userref;}
+
+    public String getUserheight(){return userheight;}
+
+    public String getUserweight(){return userweight;}
 
 
 }

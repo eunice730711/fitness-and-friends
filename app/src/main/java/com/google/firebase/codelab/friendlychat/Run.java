@@ -32,6 +32,7 @@ public class Run extends AppCompatActivity implements DataCommunication{
     //要共享的變數
     private double totalDistance;
     private boolean start;
+    private boolean firstLocate;
     private UserProfile userProfile;
     public DatabaseReference mDatabase;
 
@@ -47,7 +48,7 @@ public class Run extends AppCompatActivity implements DataCommunication{
     }
 
     @Override
-    public boolean isStart() {
+    public boolean getStart() {
         return this.start;
     }
 
@@ -55,6 +56,12 @@ public class Run extends AppCompatActivity implements DataCommunication{
     public void setStart(boolean start) {
         this.start = start;
     }
+
+    @Override
+    public boolean getFirstLocate() { return firstLocate; }
+
+    @Override
+    public void setFirstLocate(boolean firstLocate) { this.firstLocate = firstLocate; }
 
     @Override
     public UserProfile getUserProfile() {
@@ -127,6 +134,7 @@ public class Run extends AppCompatActivity implements DataCommunication{
         mDatabase = FirebaseDatabase.getInstance().getReference();
         totalDistance = 0;
         start = false;
+        firstLocate = true;
 
         //今日目標提醒
         android.app.AlertDialog alertDialog = GoalAlertDialog();
