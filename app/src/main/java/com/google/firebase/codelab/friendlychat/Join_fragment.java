@@ -71,12 +71,11 @@ public class Join_fragment extends Fragment {
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<JoinMessage,JoinViewHolder> mFirebaseAdapter;
-    public JoinMessage j ;
     public JsAdapter adapter;
     private List<String> FriendIdList;
     private List<DatabaseReference>RefList;
     private ArrayList<JoinMessage> FriendJoin_List;
-    private final int limit_join_number = 15;
+    private final int limit_join_number = 30;
     private UserProfile userProfile;
 
     @Override

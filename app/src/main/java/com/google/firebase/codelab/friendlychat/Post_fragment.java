@@ -76,12 +76,10 @@ public class Post_fragment extends Fragment {
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<PostMessage,PostViewHolder> mFirebaseAdapter;
-    public PostMessage p;
-    private List<PostMessage> Post_List = new ArrayList<>();
     private List<String> FriendIdList;
     private List<DatabaseReference>RefList;
     private ArrayList<PostMessage> FriendPost_List;
-    private final int limit_post_number = 15;
+    private final int limit_post_number = 30;
     public JsAdapter adapter;
 
     @Override

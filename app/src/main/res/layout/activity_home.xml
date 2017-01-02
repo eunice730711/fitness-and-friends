@@ -150,6 +150,15 @@
         android:background="@color/transparent"
         android:id="@+id/btn_record" />
 
+    <Button
+        android:text="Today Join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="29dp"
+        android:id="@+id/btn_todayJoin"
+        android:layout_toEndOf="@+id/btn_record" />
+
 
 </RelativeLayout>
 
