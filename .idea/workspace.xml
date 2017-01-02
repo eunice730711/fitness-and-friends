@@ -69,8 +69,8 @@
       <file leaf-file-name="findNearby.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/findNearby.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="197" column="58" selection-start-line="197" selection-start-column="58" selection-end-line="197" selection-end-column="58" />
+            <state relative-caret-position="418">
+              <caret line="189" column="46" selection-start-line="189" selection-start-column="46" selection-end-line="189" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -2777,7 +2777,14 @@
       <option name="project" value="LOCAL" />
       <updated>1483366222670</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="correct the findNearby">
+      <created>1483366289968</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1483366289968</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3318,8 +3325,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/firebase/codelab/friendlychat/findNearby.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="197" column="58" selection-start-line="197" selection-start-column="58" selection-end-line="197" selection-end-column="58" />
+        <state relative-caret-position="418">
+          <caret line="189" column="46" selection-start-line="189" selection-start-column="46" selection-end-line="189" selection-end-column="46" />
           <folding />
         </state>
       </provider>
