@@ -195,6 +195,7 @@ public class findNearby extends FragmentActivity {
                     end = list.size();
                 ArrayList nearby = new ArrayList(list.subList(0,end));
 
+
                 JsAdapter adapter = new JsAdapter(nearby){
                     @Override
                     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
