@@ -27,7 +27,7 @@ public class MyTextView extends TextView {
     }
 
     public void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/BerkshireSwash-Regular.ttf");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/gnuolanerg.ttf");
         setTypeface(tf ,1);
     }
 }
