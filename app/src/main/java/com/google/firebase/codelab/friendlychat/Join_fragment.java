@@ -111,7 +111,7 @@ public class Join_fragment extends Fragment {
                 // 讓自己的Join 也可以在塗鴉牆顯示
                 FriendIdList.add(userProfile.getUserid());
                 //  搜尋好友的文章
-                mFirebaseDatabaseReference.child("Join").orderByChild("id").addValueEventListener(new ValueEventListener() {
+                mFirebaseDatabaseReference.child("Join").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         FriendJoin_List = new ArrayList<>();
