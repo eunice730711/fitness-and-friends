@@ -162,6 +162,12 @@
                 android:textColor="#2b323d"
                 android:textSize="20dp" />
 
+            <View
+                android:background="#DEDEDE"
+                android:layout_below="@+id/Detail_Text"
+                android:layout_height="1dp"
+                android:layout_width="fill_parent" />
+
             <TextView
                 android:id="@+id/Join_num"
                 android:layout_width="wrap_content"
@@ -191,9 +197,9 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/Join_people"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/Detail_Text"
-                    android:paddingLeft="35dp"/>
+                    android:layout_height="40dp"
+                    android:layout_below="@id/Detail_Text" />
+
             <!--</android.support.v7.widget.CardView>-->
 
             <android.support.v7.widget.CardView

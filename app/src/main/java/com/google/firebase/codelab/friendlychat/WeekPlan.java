@@ -145,7 +145,7 @@ public class WeekPlan extends AppCompatActivity implements RecyclerTouchListener
                                                 default:
                                                     break;
                                             }
-                                            Toast.makeText(WeekPlan.this, "Change" ,Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(WeekPlan.this, "Change" ,Toast.LENGTH_SHORT).show();
                                             myplan.get(w_position).getDays().get(position).setChoose(true);
                                             adapter.notifyItemChanged(position);
                                         }
@@ -154,7 +154,7 @@ public class WeekPlan extends AppCompatActivity implements RecyclerTouchListener
                                         @Override
                                         public void onClick(DialogInterface arg0, int arg1) {
                                             // TODO Auto-generated method stub
-                                            Toast.makeText(WeekPlan.this, "Cancel" ,Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(WeekPlan.this, "Cancel" ,Toast.LENGTH_SHORT).show();
                                         }
                                     }).show();
 
@@ -234,7 +234,7 @@ public class WeekPlan extends AppCompatActivity implements RecyclerTouchListener
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id == R.id.plan_editDone){
-            Toast.makeText(WeekPlan.this , "Save" , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(WeekPlan.this , "Save" , Toast.LENGTH_SHORT).show();
             editTitle.setText("");
 
             ScheduleIO fileIO = new ScheduleIO(WeekPlan.this);
@@ -248,7 +248,7 @@ public class WeekPlan extends AppCompatActivity implements RecyclerTouchListener
 
         }
         else if(id == R.id.plan_edit){
-            Toast.makeText(WeekPlan.this , "Edit" , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(WeekPlan.this , "Edit" , Toast.LENGTH_SHORT).show();
             editTitle.setText("Edit Mode");
             invalidateOptionsMenu();
 

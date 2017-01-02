@@ -135,9 +135,9 @@
         android:text="See My Post"
         android:fontFamily="sans-serif-condensed"
         android:id="@+id/post_button"
-        android:layout_below="@+id/txt_selfintroduction"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true" />
 
     <!--<TextView-->
     <!--android:id="@+id/txt_usergmail"-->

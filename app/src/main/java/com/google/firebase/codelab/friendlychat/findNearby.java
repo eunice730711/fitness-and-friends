@@ -157,7 +157,7 @@ public class findNearby extends FragmentActivity {
     }
 
     private void getNearUsers(){
-        mDatabase.child("Nearby").orderByChild("gps").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Nearby").orderByChild("gps").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 list = new ArrayList();
