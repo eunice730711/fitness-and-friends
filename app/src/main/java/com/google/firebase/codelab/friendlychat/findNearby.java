@@ -252,9 +252,10 @@ public class findNearby extends FragmentActivity {
             if (location == null) {
                 location = status.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }
-
-            lat = location.getLatitude();
-            lng = location.getLongitude();
+            else {
+                lat = location.getLatitude();
+                lng = location.getLongitude();
+            }
             Log.e("GPS",lat+", "+lng);
 
             pushGPStoDB();

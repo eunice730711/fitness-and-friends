@@ -79,48 +79,48 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.CustomViewHold
             else if(level == 2){
                 customViewHolder.textView.setText(medium + dayList.get(i).getDist() + "   km ");
             }
-            customViewHolder.done.setVisibility(View.VISIBLE);
-
-
-
-            if(dayList.get(i).getComplete()){
-                customViewHolder.done.setChecked(true);
-            }
-
-            customViewHolder.done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        myplan.get(week_position).getDays().get(p).setComplete(true);
-
-                        if(toast == null){
-                            toast = Toast.makeText(c,"已完成訓練" ,Toast.LENGTH_SHORT);
-                        }
-                        else{
-                            toast.setText("已完成訓練");
-                        }
-                        toast.show();
-
-                    }
-                    else{
-                        myplan.get(week_position).getDays().get(p).setComplete(false);
-
-                        if(toast == null){
-                            toast = Toast.makeText(c,":(" ,Toast.LENGTH_SHORT);
-                        }
-                        else{
-                            toast.setText(":(");
-                        }
-                        toast.show();
-
-                    }
-                }
-            });
+//            customViewHolder.done.setVisibility(View.VISIBLE);
+//
+//
+//
+//            if(dayList.get(i).getComplete()){
+//                customViewHolder.done.setChecked(true);
+//            }
+//
+//            customViewHolder.done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    if(isChecked){
+//                        myplan.get(week_position).getDays().get(p).setComplete(true);
+//
+//                        if(toast == null){
+//                            toast = Toast.makeText(c,"已完成訓練" ,Toast.LENGTH_SHORT);
+//                        }
+//                        else{
+//                            toast.setText("已完成訓練");
+//                        }
+//                        toast.show();
+//
+//                    }
+//                    else{
+//                        myplan.get(week_position).getDays().get(p).setComplete(false);
+//
+//                        if(toast == null){
+//                            toast = Toast.makeText(c,":(" ,Toast.LENGTH_SHORT);
+//                        }
+//                        else{
+//                            toast.setText(":(");
+//                        }
+//                        toast.show();
+//
+//                    }
+//                }
+//            });
 
         }
         else{
             customViewHolder.textView.setText("無");
-            customViewHolder.done.setVisibility(View.GONE);
+            //customViewHolder.done.setVisibility(View.GONE);
         }
 
 
@@ -142,7 +142,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.CustomViewHold
         protected TextView textView;
         protected TextView textView_w;
         protected TextView textView_date;
-        protected CheckBox done;
+        //protected CheckBox done;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -150,7 +150,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.CustomViewHold
             this.textView = (TextView) view.findViewById(R.id.DayRunContent);
             this.textView_w = (TextView) view.findViewById(R.id.Week_x);
             this.textView_date = (TextView) view.findViewById(R.id.plan_date);
-            this.done = (CheckBox) view.findViewById(R.id.Day_done);
+            //this.done = (CheckBox) view.findViewById(R.id.Day_done);
 
 
         }

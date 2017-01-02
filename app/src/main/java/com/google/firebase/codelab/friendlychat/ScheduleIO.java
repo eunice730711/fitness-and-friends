@@ -71,7 +71,7 @@ public class ScheduleIO {
             //Toast.makeText(c, "successful", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e) {
-            Toast.makeText(c, "failed"+e.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(c, "failed"+e.toString(), Toast.LENGTH_SHORT).show();
 
         }
         finally {
@@ -80,7 +80,7 @@ public class ScheduleIO {
                 //Toast.makeText(c, "finish", Toast.LENGTH_SHORT).show();
             }
             catch (Exception e) {
-                Toast.makeText(c, "finish error" + e.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(c, "finish error" + e.toString(), Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -94,7 +94,7 @@ public class ScheduleIO {
         List<WeekContent> list_week = new ArrayList<WeekContent>();
 
         if(!inFile.exists()){
-            Toast.makeText(c, "File does not exist.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(c, "File does not exist.", Toast.LENGTH_SHORT).show();
             return  list_week;
         }
 

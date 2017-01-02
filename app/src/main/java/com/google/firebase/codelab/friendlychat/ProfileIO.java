@@ -58,7 +58,7 @@ public class ProfileIO {
             //Toast.makeText(c, "successful", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e) {
-            Toast.makeText(c, "failed"+e.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(c, "failed"+e.toString(), Toast.LENGTH_SHORT).show();
         }
         finally {
             try {
@@ -66,7 +66,7 @@ public class ProfileIO {
                 //Toast.makeText(c, "finish", Toast.LENGTH_SHORT).show();
             }
             catch (Exception e) {
-                Toast.makeText(c, "finish error" + e.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(c, "finish error" + e.toString(), Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -84,7 +84,7 @@ public class ProfileIO {
         try {
 
             if(!inFile.exists()){
-                Toast.makeText(c, "File does not exist.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(c, "File does not exist.", Toast.LENGTH_SHORT).show();
                 return  null;
             }
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "utf-8"));

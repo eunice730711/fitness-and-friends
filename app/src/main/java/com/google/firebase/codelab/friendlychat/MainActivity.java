@@ -268,47 +268,47 @@ public class MainActivity extends AppCompatActivity implements
         super.onDestroy();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.invite_menu:
-                Intent intent6 = new Intent();
-                intent6.setClass(MainActivity.this, SearchUser.class);
-                startActivity(intent6);
-                return true;
-            case R.id.fresh_config_menu:
-                //fetchConfig();
-                Intent intent2 = new Intent();
-                intent2.setClass(MainActivity.this, MyProfile.class);
-                startActivity(intent2);
-                return true;
-            case R.id.notification_menu:
-                //fetchConfig();
-                Intent intent3 = new Intent();
-                intent3.setClass(MainActivity.this, Notification.class);
-                startActivity(intent3);
-                return true;
-            case R.id.friend_list_menu:
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, FriendList.class);
-                startActivity(intent);
-                return true;
-            case R.id.sign_out_menu:
-                mFirebaseAuth.signOut();
-                mUsername = ANONYMOUS;
-                startActivity(new Intent(this, SignInActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.main_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.invite_menu:
+//                Intent intent6 = new Intent();
+//                intent6.setClass(MainActivity.this, SearchUser.class);
+//                startActivity(intent6);
+//                return true;
+//            case R.id.fresh_config_menu:
+//                //fetchConfig();
+//                Intent intent2 = new Intent();
+//                intent2.setClass(MainActivity.this, MyProfile.class);
+//                startActivity(intent2);
+//                return true;
+//            case R.id.notification_menu:
+//                //fetchConfig();
+//                Intent intent3 = new Intent();
+//                intent3.setClass(MainActivity.this, Notification.class);
+//                startActivity(intent3);
+//                return true;
+//            case R.id.friend_list_menu:
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, FriendList.class);
+//                startActivity(intent);
+//                return true;
+//            case R.id.sign_out_menu:
+//                mFirebaseAuth.signOut();
+//                mUsername = ANONYMOUS;
+//                startActivity(new Intent(this, SignInActivity.class));
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
 
     @Override

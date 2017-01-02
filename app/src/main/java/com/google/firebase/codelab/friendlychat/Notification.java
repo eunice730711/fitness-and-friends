@@ -142,7 +142,7 @@ public class Notification extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent();
-                intent1.setClass(Notification.this, MainActivity.class);
+                intent1.setClass(Notification.this, Home.class);
                 startActivity(intent1);
                 Notification.this.finish();
             }

@@ -78,7 +78,7 @@ public class FriendList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent();
-                intent1.setClass(FriendList.this, MainActivity.class);
+                intent1.setClass(FriendList.this, Home.class);
                 startActivity(intent1);
                 FriendList.this.finish();
             }

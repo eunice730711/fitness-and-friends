@@ -387,11 +387,7 @@
                 android:layout_height="wrap_content"
                 android:text="M"  />
 
-                    <RadioButton
-                        android:id="@+id/optional_radio_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="O" />
+
 
 
                 <RadioButton
@@ -399,6 +395,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F" />
+                    <RadioButton
+                        android:id="@+id/optional_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Optional" />
 
                 </RadioGroup>
 
@@ -413,21 +414,21 @@
                     <!--android:textColor="#ffffff"-->
                     <!--android:textSize="20dp" />-->
 
-
+                <Button
+                    android:text="Set up"
+                    android:textColor="#737373"
+                    android:textSize="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/btn_setProfile"
+                    android:background="@drawable/button_style"
+                    android:layout_marginBottom="20dp" />
 
             </RelativeLayout>
         </ScrollView>
-    <Button
-        android:text="Set up"
-        android:textColor="#737373"
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btn_setProfile"
-        android:background="@drawable/button_style"
-        android:layout_marginBottom="20dp" />
+
 
         <ImageView
             android:id="@+id/view_1"

@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Struct;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -221,7 +224,7 @@ public class Home extends AppCompatActivity {
                         .show();
             }
         });
-        Button btn_delete = (Button) findViewById(R.id.deleteALL);
+//        Button btn_delete = (Button) findViewById(R.id.deleteALL);
 
 //        Button btn_friend = (Button) findViewById(R.id.btn_friend);
 //        btn_friend.setOnClickListener(new View.OnClickListener() {
@@ -259,9 +262,47 @@ public class Home extends AppCompatActivity {
 
 
     private void addDrawerItems() {
-        String[] osArray = {"Android", "iOS", "Windows", "OS X", "Linux"};
+        String[] osArray = {"My Profile", "Friend List", "Invite", "Notification", "Sign out"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view,
+                                    int position,
+                                    long l) {
+
+                switch (position) {
+                    case 0:
+                        Intent intent6 = new Intent();
+                        intent6.setClass(Home.this, MyProfile.class);
+                        startActivity(intent6);
+                        break;
+                    case 1:
+                        //fetchConfig();
+                        Intent intent2 = new Intent();
+                        intent2.setClass(Home.this, FriendList.class);
+                        startActivity(intent2);
+                        break;
+                    case 2:
+                        //fetchConfig();
+                        Intent intent3 = new Intent();
+                        intent3.setClass(Home.this, SearchUser.class);
+                        startActivity(intent3);
+                        break;
+                    case 3:
+                        Intent intent = new Intent();
+                        intent.setClass(Home.this, Notification.class);
+                        startActivity(intent);
+                        break;
+                    case 4:
+                        mFirebaseAuth.signOut();
+                        startActivity(new Intent(Home.this, SignInActivity.class));
+                        break;
+                    default:
+                }
+            }
+        });
     }
 
 
