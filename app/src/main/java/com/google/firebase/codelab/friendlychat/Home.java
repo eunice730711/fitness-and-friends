@@ -160,7 +160,7 @@ public class Home extends AppCompatActivity {
         SendNotification sendNotification = new SendNotification();
         sendNotification.subscribeFriend(userProfile.getUserid());
 
-        //
+        //search今天是否有join行程 有則顯示button 沒有則隱藏
         final Button btn_todayJoin = (Button) findViewById(R.id.btn_todayJoin);
         btn_todayJoin.setVisibility(View.INVISIBLE);
         is_todayJoin = false;
@@ -182,7 +182,6 @@ public class Home extends AppCompatActivity {
                 // Getting Post failed, log a message
             }
         };
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
         myprofile_ref = FirebaseDatabase.getInstance().getReferenceFromUrl(userProfile.getUserref());
         myprofile_ref.child("Join_list").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -202,6 +201,7 @@ public class Home extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+        //彈跳視窗顯示今日join
         btn_todayJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v2) {
