@@ -151,6 +151,9 @@
             android:layout_alignBottom="@+id/Content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="23dp"
-            android:text="Button" />
+            android:text="Send"
+            android:fontFamily="sans-serif-condensed"
+            android:background="#00000000"
+            android:textColor="@color/colorPrimaryDark"/>
     </RelativeLayout>
 </RelativeLayout>

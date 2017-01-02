@@ -110,7 +110,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="POST"
+        android:text="See My Post"
+        android:fontFamily="sans-serif-condensed"
         android:id="@+id/post_button"
         android:layout_below="@+id/txt_selfintroduction"
         android:layout_centerHorizontal="true"

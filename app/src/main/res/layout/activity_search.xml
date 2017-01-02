@@ -36,6 +36,9 @@
 
     <Button
         android:text="search"
+        android:fontFamily="sans-serif-condensed"
+        android:background="#00000000"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
@@ -55,12 +58,17 @@
 
     <Button
         android:text="Find friends nearby"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="30dp"
+        android:textColor="#737373"
+        android:textSize="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_below="@+id/btn_search_send"
-        android:id="@+id/btn_findnearby" />
+        android:id="@+id/btn_findnearby"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_style"/>
 
     <LinearLayout
         android:id="@+id/fragment_container"
