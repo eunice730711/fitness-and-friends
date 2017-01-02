@@ -2,11 +2,14 @@ package com.google.firebase.codelab.friendlychat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -50,6 +53,8 @@ public class findNearby extends FragmentActivity {
     private LinearLayoutManager mLinearLayoutManager;
     private final double nearDist = 500000;
     private final double EARTH_RADIUS = 6378137.0;
+    private boolean first = true;
+    private static final int REQUEST_FINE_LOCATION_PERMISSION = 102;
 
     public static class NearbyViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_friendid, txt_friendname, txt_dist;
@@ -136,14 +141,26 @@ public class findNearby extends FragmentActivity {
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+        requestAccess();
+    }
+
+    private void requestAccess(){
+        int permission = ContextCompat.checkSelfPermission(findNearby.this, android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if(permission != PackageManager.PERMISSION_GRANTED){
+            //如果未授權，則請求授權
+            ActivityCompat.requestPermissions(findNearby.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION_PERMISSION);
+        }
+        else {
+            status = (LocationManager) (findNearby.this.getSystemService(Context.LOCATION_SERVICE));
+        }
     }
 
     private void getNearUsers(){
-         list = new ArrayList();
         mDatabase.child("Nearby").orderByChild("gps").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
+                list = new ArrayList();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     HashMap map = (HashMap<String, String>) dataSnapshot.getValue(Object.class);
                     //  過濾自己
@@ -301,7 +318,10 @@ public class findNearby extends FragmentActivity {
 
     }
     public void onResume() {
-        pushGPStoDB();
+        if(first)
+            first = false;
+        else
+            pushGPStoDB();
         super.onResume();
 
     }
