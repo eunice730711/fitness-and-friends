@@ -93,9 +93,7 @@ public class Post_fragment extends Fragment {
 
         mMessageRecyclerView = (RecyclerView) v.findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mLinearLayoutManager.setStackFromEnd(true);
-        mLinearLayoutManager.setReverseLayout(true);
-        mLinearLayoutManager.setAutoMeasureEnabled(false);
+
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         // 從file取得 使用者資料
@@ -117,7 +115,7 @@ public class Post_fragment extends Fragment {
                 // 讓自己的po文也可以在塗鴉牆顯示
                 FriendIdList.add(userProfile.getUserid());
                 //  搜尋好友的文章
-                mFirebaseDatabaseReference.child("messages").orderByChild("id").addValueEventListener(new ValueEventListener() {
+                mFirebaseDatabaseReference.child("messages").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         FriendPost_List = new ArrayList<>();
@@ -166,6 +164,9 @@ public class Post_fragment extends Fragment {
                             }
                         };
                         mMessageRecyclerView.setAdapter(adapter);
+                        mLinearLayoutManager.setStackFromEnd(true);
+                        mLinearLayoutManager.setReverseLayout(true);
+                        mLinearLayoutManager.setAutoMeasureEnabled(false);
 
                     }
                     @Override
