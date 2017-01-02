@@ -231,18 +231,6 @@
             android:layout_gravity="center" />
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-            android:id="@+id/Register_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textColor="#29e5b6"
-            android:text="Register"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-condensed" />
 
 
 
@@ -253,184 +241,7 @@
             android:layout_alignParentTop="true" />
 
 
-
-        <ScrollView
-            android:id="@+id/ScrollView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/my_toolbar"
-            android:layout_centerHorizontal="true"
-            android:background="#ffffffff"
-            android:padding="60dp"
-            android:layout_alignParentBottom="true">
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-
-                <EditText
-                    android:id="@+id/txt_id"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="0dp"
-                    android:gravity="center"
-                    android:hint="Nickname/ID"
-                    android:inputType="text"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txt_usercity"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_id"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:hint="Living city"
-                    android:inputType="text"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
-
-
-                <EditText
-                    android:id="@+id/txt_userbirthday"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_usercity"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:hint="Birthday"
-                    android:inputType="text"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txt_userheight"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_userbirthday"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:hint="Height(optional)"
-                    android:inputType="text"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txt_userweight"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_userheight"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:hint="Weight(optional)"
-                    android:inputType="text"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txt_selfintroduction"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_userweight"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:hint="Brief Introduction"
-                    android:inputType="text"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/showgender"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_selfintroduction"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:visibility="invisible"
-                    android:textStyle="bold" />
-
-                <!--<TextView-->
-                <!--android:text="None"-->
-                <!--android:paddingLeft="10px"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_toRightOf="@+id/txt_userbirthday"-->
-                <!--android:layout_below="@id/txt_userbirthday"-->
-                <!--android:id="@+id/showgender" />-->
-
-                <RadioGroup
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingLeft="90px"
-                android:id="@+id/usergender"
-                android:layout_below="@+id/txt_selfintroduction" >
-
-                <RadioButton
-
-                android:id="@+id/male_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="M"  />
-
-
-
-
-                <RadioButton
-                android:id="@+id/female_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="F" />
-                    <RadioButton
-                        android:id="@+id/optional_radio_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Optional" />
-
-                </RadioGroup>
-
-                <!--<Button-->
-                    <!--android:id="@+id/register_button"-->
-                    <!--android:layout_width="fill_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/cnfpasswd_edtext"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="25dp"-->
-                    <!--android:text="REGISTER"-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:textSize="20dp" />-->
-
-                <Button
-                    android:text="Set up"
-                    android:textColor="#737373"
-                    android:textSize="30dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/btn_setProfile"
-                    android:background="@drawable/button_style"
-                    android:layout_marginBottom="20dp" />
-
-            </RelativeLayout>
-        </ScrollView>
-
-
-        <ImageView
+    <ImageView
             android:id="@+id/view_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -439,9 +250,181 @@
             android:layout_marginTop="15dp"
              />
 
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffffff"
+        android:padding="60dp"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_alignParentEnd="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
 
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/txt_id"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:hint="Nickname/ID"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txt_usercity"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_id"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:hint="Living city"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/txt_userbirthday"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_usercity"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:hint="Birthday"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txt_userheight"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_userbirthday"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:hint="Height(optional)"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txt_userweight"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_userheight"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:hint="Weight(optional)"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txt_selfintroduction"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_userweight"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:hint="Brief Introduction"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/showgender"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_selfintroduction"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:visibility="invisible"
+                android:textStyle="bold" />
+
+            <!--<TextView-->
+            <!--android:text="None"-->
+            <!--android:paddingLeft="10px"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toRightOf="@+id/txt_userbirthday"-->
+            <!--android:layout_below="@id/txt_userbirthday"-->
+            <!--android:id="@+id/showgender" />-->
+
+            <RadioGroup
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingLeft="90px"
+            android:id="@+id/usergender"
+            android:layout_below="@+id/txt_selfintroduction" >
+
+            <RadioButton
+
+            android:id="@+id/male_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"  />
+
+
+
+
+            <RadioButton
+            android:id="@+id/female_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="F" />
+                <RadioButton
+                    android:id="@+id/optional_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Optional" />
+
+            </RadioGroup>
+
+            <!--<Button-->
+                <!--android:id="@+id/register_button"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/cnfpasswd_edtext"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="25dp"-->
+                <!--android:text="REGISTER"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="20dp" />-->
+
+            <Button
+                android:text="Set up"
+                android:textColor="#737373"
+                android:textSize="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btn_setProfile"
+                android:background="@drawable/button_style_register"
+                android:layout_marginBottom="20dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
 
 
 

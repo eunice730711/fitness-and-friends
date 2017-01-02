@@ -232,7 +232,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="b978d25e28ea7354e342249c237097158861c40e">
+        sha1="059680cc46206b0a957a6c0f704059413d70e519">
         <dex dex="C:\Users\Andersen\StudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_5f5638bf7631084a8ef427f5c12e9cd14e81ee21\classes.dex" />
     </item>
     <item
@@ -286,7 +286,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="a16945ed8b0825da389753e255b4e3706d4d9dc2">
+        sha1="fad0138e0d3b703f0dcfbf7bc5e93c9fd90541b6">
         <dex dex="C:\Users\Andersen\StudioProjects\fitness-and-friends\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_57967409305bf5b103ffb880f6268ce4c4d938b8\classes.dex" />
     </item>
     <item
