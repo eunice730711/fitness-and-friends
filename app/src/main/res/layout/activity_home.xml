@@ -152,7 +152,10 @@
         android:layout_alignParentEnd="true"
         android:paddingTop="15dp"
         android:paddingRight="10dp"
-        android:background="#00000000"/>
+        android:paddingLeft="50dp"
+        android:paddingBottom="50dp"
+        android:background="#00000000"
+        />
 
 
 
