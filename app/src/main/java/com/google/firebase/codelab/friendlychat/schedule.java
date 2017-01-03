@@ -45,6 +45,7 @@ public class schedule extends AppCompatActivity {
         setContentView(R.layout.activity_schedule);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Intent intent = this.getIntent();
         r = (Result) intent.getSerializableExtra("schedule");

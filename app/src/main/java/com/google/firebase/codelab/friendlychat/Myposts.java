@@ -68,6 +68,7 @@ public class Myposts extends AppCompatActivity implements
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         //tab
         TabLayout tabLayout = (TabLayout)findViewById(R.id.m_tab);
         tabLayout.addTab(tabLayout.newTab().setText("Post"));

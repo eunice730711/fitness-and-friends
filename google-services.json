@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1096465139471-pg07edu34bqbf9d9p1gtu65c4bsp9gsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.codelab.friendlychat",
+            "certificate_hash": "AC020A46396097F34F65D7E4096489EEEB50AE37"
+          }
+        },
+        {
           "client_id": "1096465139471-576bk34752gubnaog47h81kjmvtfa9cf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

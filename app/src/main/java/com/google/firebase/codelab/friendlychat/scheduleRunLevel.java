@@ -23,6 +23,7 @@ public class scheduleRunLevel extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
